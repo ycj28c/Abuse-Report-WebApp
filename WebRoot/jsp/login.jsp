@@ -36,7 +36,6 @@
 		}
 		}
 	%>
-	dddddd
 	<form action="LoginServlet" method="post" onsubmit="return validate(this)">
 		UserID：<input type="text" name="userid"><br> 
 		Password： <input type="password" name="userpass"><br> <input type="submit" value="login"> <input type="reset" value="reset">
