@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <servlet>
+  <servlet-name>MVCLogin</servlet-name>
+  <servlet-class>mvc.servlet.LoginServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>MVCReport</servlet-name>
+  <servlet-class>mvc.servlet.ReportListServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>MVCNewRep</servlet-name>
+  <servlet-class>mvc.servlet.NewReportServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>MVCDelRep</servlet-name>
+  <servlet-class>mvc.servlet.DeleteReportServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>MVCMutiDelRep</servlet-name>
+  <servlet-class>mvc.servlet.MutiDelReportServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>MVCLogin</servlet-name>
+  <url-pattern>/jsp/LoginServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCReport</servlet-name>
+  <url-pattern>/jsp/ReportListServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCNewRep</servlet-name>
+  <url-pattern>/jsp/NewReportServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCDelRep</servlet-name>
+  <url-pattern>/jsp/DeleteReportServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCMutiDelRep</servlet-name>
+  <url-pattern>/jsp/MutiDelReportServlet</url-pattern>
+ </servlet-mapping>
+ <welcome-file-list>
+  <welcome-file>index.jsp</welcome-file>
+ </welcome-file-list>
+ <login-config>
+  <auth-method>BASIC</auth-method>
+ </login-config>
+</web-app>
