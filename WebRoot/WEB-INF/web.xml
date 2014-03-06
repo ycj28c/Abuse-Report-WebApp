@@ -21,6 +21,10 @@
   <servlet-name>MVCMutiDelRep</servlet-name>
   <servlet-class>mvc.servlet.MutiDelReportServlet</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>MVCGoUpRep</servlet-name>
+  <servlet-class>mvc.servlet.GoUpdateReportServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>MVCLogin</servlet-name>
   <url-pattern>/jsp/LoginServlet</url-pattern>
@@ -40,6 +44,10 @@
  <servlet-mapping>
   <servlet-name>MVCMutiDelRep</servlet-name>
   <url-pattern>/jsp/MutiDelReportServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCGoUpRep</servlet-name>
+  <url-pattern>/jsp/GoUpdateReportServlet</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>

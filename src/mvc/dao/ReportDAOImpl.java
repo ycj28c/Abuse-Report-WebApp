@@ -153,4 +153,30 @@ public class ReportDAOImpl implements IReportDAO {
 		return flag;
 	}
 
+	public Report readReportById(Report report) throws Exception {
+		//boolean flag = false;
+		try {
+			String sql = "select name,time,discript from report where reportid = ?";
+			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
+			this.pstmt.setInt(1, report.getreportid());
+			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
+			while (rs.next()) {
+				report.setdiscript(rs.getString("discript"));
+				report.setName(rs.getString("name"));
+				report.settime(rs.getDate("time"));
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();// 关闭操作
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return report;
+	}
+
 }

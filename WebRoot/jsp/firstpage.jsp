@@ -90,7 +90,7 @@ if(session.getAttribute("userid")==null){
 					<td><%=report.getName()%></td>
 					<td><%=report.gettime()%></td>
 					<td><a href="/jsp/DeleteReportServlet?reportid=<%=report.getreportid() %>">delete</a></td>
-					<td><a>modify</a></td>
+					<td><a href="/jsp/GoUpdateReportServlet?reportid=<%=report.getreportid() %>">modify</a></td>
 				</tr>
 				<%
 					}

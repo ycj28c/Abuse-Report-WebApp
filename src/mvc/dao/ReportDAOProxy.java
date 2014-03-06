@@ -66,6 +66,17 @@ public class ReportDAOProxy implements IReportDAO {
 		return flag;
 	}
 
+	public Report readReportById(Report report) throws Exception {
+		try {
+			report = this.dao.readReportById(report);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return report;
+	}
+
 
 
 
