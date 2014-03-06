@@ -154,8 +154,8 @@ public class ReportDAOImpl implements IReportDAO {
 	}
 
 	public Report readReportById(Report report) throws Exception {
-		//boolean flag = false;
 		try {
+			
 			String sql = "select name,time,discript from report where reportid = ?";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
 			this.pstmt.setInt(1, report.getreportid());
@@ -177,6 +177,35 @@ public class ReportDAOImpl implements IReportDAO {
 			}
 		}
 		return report;
+	}
+
+	public boolean updatereport(Report report) throws Exception {
+		boolean flag = false;
+		java.sql.Date trans_time = new java.sql.Date(report.gettime()
+				.getTime()); // 將java.util.Date 轉換为 java.sql.Date
+		try {
+			String sql = "UPDATE report set name = ?,discript=?,time=? where reportid = ?";
+			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
+			this.pstmt.setString(1, report.getName());
+			this.pstmt.setString(2, report.getdiscript());
+			this.pstmt.setDate(3, trans_time);
+			this.pstmt.setInt(4, report.getreportid());
+			int rs = this.pstmt.executeUpdate();
+			if (rs > 0) { // 返回条数
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();// 关闭操作
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return flag;
 	}
 
 }

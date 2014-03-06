@@ -77,6 +77,18 @@ public class ReportDAOProxy implements IReportDAO {
 		return report;
 	}
 
+	public boolean updatereport(Report report) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.updatereport(report);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
 
 
 
