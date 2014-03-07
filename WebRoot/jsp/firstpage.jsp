@@ -38,6 +38,12 @@ if(session.getAttribute("userid")==null){
                  clickobj[i].checked = !clickobj[i].checked ;
              }    
          }
+         function PrintReport(){
+             var clickobj = document.getElementsByName("num");
+             for(var i = 0 ; i<clickobj.length ; i++){
+                 clickobj[i].checked = !clickobj[i].checked ;
+             }    
+         }
      </script>
   </head>
   
@@ -85,7 +91,7 @@ if(session.getAttribute("userid")==null){
 				%>
 				<tr align="center">
 					<td><input type="checkbox" value='<%=report.getreportid()%>' name="num" /></td>
-					<td><%=report.getreportid()%></td>
+					<td><a href="/jsp/ViewReportServlet?reportid=<%=report.getreportid() %>"><%=report.getreportid()%></a></td>
 					<td><%=report.getdiscript()%></td>
 					<td><%=report.getName()%></td>
 					<td><%=report.gettime()%></td>
