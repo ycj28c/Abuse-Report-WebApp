@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form action="/jsp/UpdateReportServlet?reportid=<%=report.getreportid()%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
 			<tr>
-            	<td colspan="2" align = "center">NEW REPORT</td>
+            	<td colspan="2" align = "center">EDIT REPORT</td>
             </tr>
 			<tr>
             	<td>name</td>
