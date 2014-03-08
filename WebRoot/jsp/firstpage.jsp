@@ -51,13 +51,13 @@ if(session.getAttribute("userid")==null){
     welcome to xxx system <%=session.getAttribute("username")%>. 
     <input type="button" value="logout" onclick="location='login.jsp'"/><br>
     ==================================================================<br>
-    <form action="/jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>" method="post" >
+    <form action="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>" method="post" >
    		<input type="submit" value="reportlist"/>
    		<input type="button" value="newreport" onclick="location='newreport.jsp'"/>
 	</form>	
 	==================================================================<br>
 	<div id="main">
-		<form name="form1" action="/jsp/MutiDelReportServlet" method="post">
+		<form name="form1" action="jsp/MutiDelReportServlet" method="post">
 			<table align="left">
 				<tr>
 					<td><input type="button" value="clickall" name="clickall"
@@ -91,12 +91,12 @@ if(session.getAttribute("userid")==null){
 				%>
 				<tr align="center">
 					<td><input type="checkbox" value='<%=report.getreportid()%>' name="num" /></td>
-					<td><a href="/jsp/ViewReportServlet?reportid=<%=report.getreportid() %>"><%=report.getreportid()%></a></td>
+					<td><a href="jsp/ViewReportServlet?reportid=<%=report.getreportid() %>"><%=report.getreportid()%></a></td>
 					<td><%=report.getdiscript()%></td>
 					<td><%=report.getName()%></td>
 					<td><%=report.gettime()%></td>
-					<td><a href="/jsp/DeleteReportServlet?reportid=<%=report.getreportid() %>">delete</a></td>
-					<td><a href="/jsp/GoUpdateReportServlet?reportid=<%=report.getreportid() %>">modify</a></td>
+					<td><a href="jsp/DeleteReportServlet?reportid=<%=report.getreportid() %>">delete</a></td>
+					<td><a href="jsp/GoUpdateReportServlet?reportid=<%=report.getreportid() %>">modify</a></td>
 				</tr>
 				<%
 					}

@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	welcome to xxx system <%=session.getAttribute("username")%>. 
     <input type="button" value="logout" onclick="location='login.jsp'"/><br>
     ==================================================================<br>
-	<form action="/jsp/PrintReportServlet?reportid=<%=report.getreportid()%>" method="post">
+	<form action="jsp/PrintReportServlet?reportid=<%=report.getreportid()%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
 			<tr>
             	<td colspan="2" align = "center">VIEW REPORT</td>
@@ -47,15 +47,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</table>
 	</form>
 	<br><br><br><br><br><br><br><br><br><br>
-	<%
-		request.setCharacterEncoding("utf-8");
-	%>
-	<%
-		String PDFpath = (String)request.getAttribute("PDFpath");//取得属性 
-		if (PDFpath != null) { //判断是否有内容 
-	%>		<script type="text/javascript">       
-       			window.open("http://127.0.0.1:8080/pdfjs/web/viewer.jsp?PDFpath='../../pdf/dispositionletter.pdf'", "win");
-    		</script>
-	<%	}	%>
 </body>
 </html>

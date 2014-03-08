@@ -15,7 +15,8 @@ public class PrintReportServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String path = "printjump.jsp";
-		String letter_path = req.getSession().getServletContext().getRealPath("");
+		String letter_path = req.getSession().getServletContext().getRealPath("/");//tomcat中的位置
+		System.out.println("letter_path:"+letter_path);
 		int reportid = Integer.parseInt(req.getParameter("reportid"));	
 		Report report = new Report();// 实例化VO
 		report.setreportid(reportid);

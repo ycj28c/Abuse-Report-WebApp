@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	welcome to xxx system <%=session.getAttribute("username")%>. 
     <input type="button" value="logout" onclick="location='login.jsp'"/><br>
     ==================================================================<br>
-	<form action="/jsp/UpdateReportServlet?reportid=<%=report.getreportid()%>" method="post">
+	<form action="jsp/UpdateReportServlet?reportid=<%=report.getreportid()%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
 			<tr>
             	<td colspan="2" align = "center">EDIT REPORT</td>

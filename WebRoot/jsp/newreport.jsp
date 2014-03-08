@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	welcome to xxx system <%=session.getAttribute("username")%>. 
     <input type="button" value="logout" onclick="location='login.jsp'"/><br>
     ==================================================================<br>
-	<form action="/jsp/NewReportServlet?userid=<%=session.getAttribute("userid")%>" method="post">
+	<form action="jsp/NewReportServlet?userid=<%=session.getAttribute("userid")%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
 			<tr>
             	<td colspan="2" align = "center">NEW REPORT</td>
@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	</tr>
         	<tr>
             	<td>time</td>
-            	<script type="text/javascript" src="/javascript/calendar.js"></script>
+            	<script type="text/javascript" src="javascript/calendar.js"></script>
               	<td><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly" /></td>
         	</tr>
         	<tr>
