@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td class="tdstyle" colspan="2">
                		<input type="submit" value="submit" />
                		<input type="reset" value="reset" />
-               		 <input type="button" value="cancel" onclick="gopath('firstpage.jsp')"/><br>
+               		 <input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
            		</td>
  			</tr>
 		</table>

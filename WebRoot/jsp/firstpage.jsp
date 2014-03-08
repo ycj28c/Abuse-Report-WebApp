@@ -35,6 +35,12 @@ if(session.getAttribute("userid")==null){
          function UnClickAll(){
              var clickobj = document.getElementsByName("num");
              for(var i = 0 ; i<clickobj.length ; i++){
+                 clickobj[i].checked = !"checked";
+             }    
+         }
+         function InvertClick(){
+             var clickobj = document.getElementsByName("num");
+             for(var i = 0 ; i<clickobj.length ; i++){
                  clickobj[i].checked = !clickobj[i].checked ;
              }    
          }
@@ -65,6 +71,8 @@ if(session.getAttribute("userid")==null){
 						id="clickall" onclick="ClickAll()"/></td>
 					<td><input type="button" value="unclickall" name="unclickall"
 						id="unclickall" onclick="UnClickAll()" /></td>
+						<td><input type="button" value="invertclick" name="invertclick"
+						id="invertclick" onclick="InvertClick()" /></td>
 					<td><input type="submit" value="MutiDelete" /></td>
 				</tr>
 			</table>
