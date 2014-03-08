@@ -21,6 +21,12 @@ public class DispositionLetter implements LetterInterface{
 	private Document document = null;
 	private String path = null;
 	private String PDFpath = null;
+	private String PDFname = null;
+	private static int num = 0;
+	
+	public String description = null;
+	public String name = null;
+	//private date time = null;
 
 	public DispositionLetter() {
 		Rectangle pageSize = new Rectangle(144, 720); // set the pagesize
@@ -29,7 +35,9 @@ public class DispositionLetter implements LetterInterface{
 
 	public void setPath(String path){
 		this.path = path;
-		this.PDFpath = this.path+"/pdf/dispositionletter.pdf";
+		this.PDFname = "dispositionletter"+this.num+".pdf";
+		this.PDFpath = this.path+"/pdf/"+this.PDFname;
+		this.num++;
 		try {
 			PdfWriter.getInstance(this.document, new FileOutputStream(this.PDFpath));
 		} catch (IOException ioe) {
@@ -42,6 +50,10 @@ public class DispositionLetter implements LetterInterface{
 	
 	public String getPDFPath(){
 		return this.PDFpath;	
+	}
+	
+	public String getPDFname(){
+		return this.PDFname;	
 	}
 	
 	public void makeLetter() throws Exception{
@@ -137,7 +149,7 @@ public class DispositionLetter implements LetterInterface{
 
 			// document.add(new Paragraph("\n",font0));
 			document.add(new Paragraph("TO:     Parties to the Complaint",font0));
-			document.add(new Paragraph("FROM:", font0));
+			document.add(new Paragraph("FROM: "+ this.name, font0));
 			document.add(new Paragraph("DATE:", font0));
 			document.add(new Paragraph("RE:     Complaint Log Number:", font0));
 			document.add(new Paragraph("\n", font0));
@@ -169,7 +181,7 @@ public class DispositionLetter implements LetterInterface{
 			document.add(new Paragraph("         This is based on the aSSigned investigator's racommandatton. See below for further explanation.",font0));
 
 			document.add(new Paragraph("Explanation:", font1));
-			document.add(new Paragraph("\n\n\n\n\n\n", font0));
+			document.add(new Paragraph(this.description + "\n\n\n\n\n\n", font0));
 
 			document.add(new Paragraph("Any of the parties aggrieved by Disposition A may file an appeal "
 							+ "within 10 days of receipt of this disposition,using the attached Appeal Form, "

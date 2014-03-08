@@ -16,7 +16,7 @@ public class PrintReportServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String path = "printjump.jsp";
 		String letter_path = req.getSession().getServletContext().getRealPath("/");//tomcat中的位置
-		System.out.println("letter_path:"+letter_path);
+		//System.out.println("letter_path:"+letter_path);
 		int reportid = Integer.parseInt(req.getParameter("reportid"));	
 		Report report = new Report();// 实例化VO
 		report.setreportid(reportid);
@@ -26,14 +26,16 @@ public class PrintReportServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		DispositionLetter letter = new DispositionLetter(); 
+		letter.setPath(letter_path);
+		letter.description = report.getdiscript();
+		letter.name = report.getName();
 		try {
-			letter.setPath(letter_path);
 			letter.makeLetter();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 		req.setAttribute("report", report);
-		req.setAttribute("PDFpath",letter.getPDFPath());
+		req.setAttribute("PDFpath","../../pdf/"+letter.getPDFname());
 		//req.setAttribute("PDFpath","../../pdf/dispositionletter.pdf");
 		req.getRequestDispatcher(path).forward(req, resp);// 跳转
 	}

@@ -190,9 +190,12 @@ limitations under the License.
           <div id="toolbarContainer">
             <div id="toolbarViewer">
               <div id="toolbarViewerLeft">
+              	<button id="return_firstpage" title="return to firstpage" onclick="location.href='../../jsp/firstpage.jsp';">
+                  <span data-l10n-id="toggle_sidebar_label">Return</span>
+                </button>
                 <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="4" data-l10n-id="toggle_sidebar">
                   <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
-                </button>
+                </button>        
                 <div class="toolbarButtonSpacer"></div>
                 <button id="viewFind" class="toolbarButton group hiddenSmallView" title="Find in Document" tabindex="5" data-l10n-id="findbar">
                    <span data-l10n-id="findbar_label">Find</span>
