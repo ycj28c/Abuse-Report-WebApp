@@ -33,6 +33,10 @@
   <servlet-name>MVCViewRep</servlet-name>
   <servlet-class>mvc.servlet.ViewReportServlet</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>MVCPrintRep</servlet-name>
+  <servlet-class>mvc.servlet.PrintReportServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>MVCLogin</servlet-name>
   <url-pattern>/jsp/LoginServlet</url-pattern>
@@ -64,6 +68,10 @@
  <servlet-mapping>
   <servlet-name>MVCViewRep</servlet-name>
   <url-pattern>/jsp/ViewReportServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCPrintRep</servlet-name>
+  <url-pattern>/jsp/PrintReportServlet</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>
