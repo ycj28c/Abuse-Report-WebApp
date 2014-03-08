@@ -26,16 +26,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
 			<tr>
             	<td>name</td>
-              	<td><input type="text" name="username" value='<%=report.getName()%>' readonly/></td>
+              	<td><input type="text" name="username" value='<%=report.getName()%>' disabled/></td>
         	</tr>
         	<tr>
             	<td>time</td>
-              	<td><input name="time" type="text" id="en_date" value='<%=report.gettime()%>' readonly/></td>
+              	<td><input name="time" type="text" id="en_date" value='<%=report.gettime()%>' disabled/></td>
         	</tr>
         	<tr>
             	<td>description</td>
             	<td>
-              		<textarea cols="17" rows="6" name="description" readonly><%=report.getdiscript()%></textarea>
+              		<textarea cols="17" rows="6" name="description" disabled><%=report.getdiscript()%></textarea>
               	</td>
         	</tr>  	
         	<tr>

@@ -29,6 +29,10 @@
   <servlet-name>MVCUpRep</servlet-name>
   <servlet-class>mvc.servlet.UpdateReportServlet</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>MVCViewRep</servlet-name>
+  <servlet-class>mvc.servlet.ViewReportServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>MVCLogin</servlet-name>
   <url-pattern>/jsp/LoginServlet</url-pattern>
@@ -56,6 +60,10 @@
  <servlet-mapping>
   <servlet-name>MVCUpRep</servlet-name>
   <url-pattern>/jsp/UpdateReportServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCViewRep</servlet-name>
+  <url-pattern>/jsp/ViewReportServlet</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>
