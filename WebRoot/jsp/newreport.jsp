@@ -14,8 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>
+	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
 	welcome to xxx system <%=session.getAttribute("username")%>. 
-    <input type="button" value="logout" onclick="location='login.jsp'"/><br>
+    <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
     ==================================================================<br>
 	<form action="jsp/NewReportServlet?userid=<%=session.getAttribute("userid")%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
@@ -41,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td class="tdstyle" colspan="2">
                		<input type="submit" value="submit" />
                		<input type="reset" value="reset" />
-               		 <input type="button" value="cancel" onclick="location='firstpage.jsp'"/><br>
+               		 <input type="button" value="cancel" onclick="gopath('firstpage.jsp')"/><br>
            		</td>
  			</tr>
 		</table>

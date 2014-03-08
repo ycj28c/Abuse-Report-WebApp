@@ -8,11 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
+    <script type="text/javascript" src="javascript/browsercompatible.js"></script>
     <%String PDFpath = (String)request.getAttribute("PDFpath"); %>
     <script type="text/javascript"> 
     function jump(){
-    	location.href("../pdfjs/web/viewer.jsp?PDFpath='<%=PDFpath%>'");
+    	gopath("../pdfjs/web/viewer.jsp?PDFpath='<%=PDFpath%>'");
     }      
 	</script>
     

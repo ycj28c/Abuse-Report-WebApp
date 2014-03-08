@@ -15,9 +15,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>
-<% Report report = (Report)request.getAttribute("report"); %>
+	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
+	<% Report report = (Report)request.getAttribute("report"); %>
 	welcome to xxx system <%=session.getAttribute("username")%>. 
-    <input type="button" value="logout" onclick="location='login.jsp'"/><br>
+    <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
     ==================================================================<br>
 	<form action="jsp/PrintReportServlet?reportid=<%=report.getreportid()%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
@@ -41,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<tr>
             	<td class="tdstyle" colspan="2">
                		<input type="submit" value="print" />
-               		 <input type="button" value="return" onclick="location='firstpage.jsp'"/><br>
+               		 <input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
            		</td>
  			</tr>
 		</table>

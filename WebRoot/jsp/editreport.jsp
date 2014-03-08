@@ -10,14 +10,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>edit report</title>
 <base href="<%=basePath%>">
 
 </head>
 <body>
-<% Report report = (Report)request.getAttribute("report"); %>
+	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
+	<% Report report = (Report)request.getAttribute("report"); %>
 	welcome to xxx system <%=session.getAttribute("username")%>. 
-    <input type="button" value="logout" onclick="location='login.jsp'"/><br>
+    <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
     ==================================================================<br>
 	<form action="jsp/UpdateReportServlet?reportid=<%=report.getreportid()%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
@@ -30,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	</tr>
         	<tr>
             	<td>time</td>
-            	<script type="text/javascript" src="/javascript/calendar.js"></script>
+            	<script type="text/javascript" src="javascript/calendar.js"></script>
               	<td><input name="time" type="text" id="en_date" value='<%=report.gettime()%>' 
               	onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly" /></td>
         	</tr>
@@ -44,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td class="tdstyle" colspan="2">
                		<input type="submit" value="update" />
                		<input type="reset" value="reset" />
-               		 <input type="button" value="cancel" onclick="location='firstpage.jsp'"/><br>
+               		 <input type="button" value="cancel" onclick="gopath('firstpage.jsp')"/><br>
            		</td>
  			</tr>
 		</table>

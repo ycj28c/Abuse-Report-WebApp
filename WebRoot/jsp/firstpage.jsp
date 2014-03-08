@@ -25,7 +25,7 @@ if(session.getAttribute("userid")==null){
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<script type="text/javascript">       
+<script type="text/javascript">     
          function ClickAll(){
              var clickobj = document.getElementsByName("num");
              for(var i = 0 ; i<clickobj.length ; i++){
@@ -48,12 +48,13 @@ if(session.getAttribute("userid")==null){
   </head>
   
   <body>
+  	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
     welcome to xxx system <%=session.getAttribute("username")%>. 
-    <input type="button" value="logout" onclick="location='login.jsp'"/><br>
+    <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
     ==================================================================<br>
     <form action="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>" method="post" >
    		<input type="submit" value="reportlist"/>
-   		<input type="button" value="newreport" onclick="location='newreport.jsp'"/>
+   		<input type="button" value="newreport" onclick="gopath('newreport.jsp')"/>
 	</form>	
 	==================================================================<br>
 	<div id="main">
