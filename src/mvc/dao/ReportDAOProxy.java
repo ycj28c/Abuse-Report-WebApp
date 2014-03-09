@@ -2,6 +2,8 @@ package mvc.dao;
 
 import java.util.ArrayList;
 
+import structure.Page;
+
 import mvc.dbc.DatabaseConnection;
 import mvc.vo.Report;
 
@@ -18,10 +20,10 @@ public class ReportDAOProxy implements IReportDAO {
 		this.dao = new ReportDAOImpl(this.dbc.getConnection());
 	}
 
-	public ArrayList<Report> listreport(Report report) throws Exception {
+	public ArrayList<Report> listAllReport(Report report) throws Exception {
 		ArrayList<Report> reportlist = new ArrayList<Report>();
 		try {
-			reportlist = this.dao.listreport(report);// 调用真实主题
+			reportlist = this.dao.listAllReport(report);// 调用真实主题
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -89,7 +91,29 @@ public class ReportDAOProxy implements IReportDAO {
 		return flag;
 	}
 
+	public ArrayList<Report> listReport(Report report, Page page) throws Exception {
+		ArrayList<Report> reportlist = new ArrayList<Report>();
+		try {
+			reportlist = this.dao.listReport(report, page);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return reportlist;
+	}
 
+	public int getAmount(Report report) throws Exception {
+		int amount = 0;
+		try {
+			amount = this.dao.getAmount(report);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return amount;
+	}
 
 
 }

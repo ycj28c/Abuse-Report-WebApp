@@ -5,6 +5,8 @@ import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import structure.Page;
 import mvc.factory.*;
 import mvc.vo.*;
 
@@ -12,19 +14,24 @@ public class ReportListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String userid = req.getParameter("userid");// 接受userid内容
-		// String userid = "1"; //测试
-		// String path = "report.jsp";
 		String path = "firstpage.jsp";
 		ArrayList<Report> backinfo = new ArrayList<Report>();// 保存所有返回信息
+		int amount = 0;
 
 		Report report = new Report();// 实例化VO
 		report.setuserid(userid);// 设置userid
+		
+		Page page = new Page();
+		page.setPageIndex(1);
+		page.setpageSize(10);
 		try {
-			backinfo = DAOFactory.getIReportDAOInstance().listreport(report);
+			amount = DAOFactory.getIReportDAOInstance().getAmount(report);
+			backinfo = DAOFactory.getIReportDAOInstance().listReport(report,page);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		req.setAttribute("backinfo", backinfo);// 保存错误信息
+		req.setAttribute("backinfo", backinfo);// array report list
+		req.setAttribute("amount", amount);// total number of user's report
 		req.getRequestDispatcher(path).forward(req, resp);// 跳转
 	}
 

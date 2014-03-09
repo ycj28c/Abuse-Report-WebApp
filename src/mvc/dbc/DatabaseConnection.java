@@ -9,9 +9,13 @@ public class DatabaseConnection {
 	//private static final String DBUSER = "cs509"; 
 	//private static final String DBPASS ="509123"; 
 	private static final String DBdriver = "com.mysql.jdbc.Driver";
+	private static final String DBURL = "jdbc:mysql://127.0.0.1:3306/51test";
+	private static final String DBUSER = "root";
+	private static final String DBPASS = "1234";
+	/*private static final String DBdriver = "com.mysql.jdbc.Driver";
 	private static final String DBURL = "jdbc:mysql://cs509.wpilife.org:3306/cs509_team2";
 	private static final String DBUSER = "team2";
-	private static final String DBPASS = "CS509TM2";
+	private static final String DBPASS = "CS509TM2";*/
 	private Connection conn = null;
 
 	public DatabaseConnection() throws Exception { // 在构造方法中进行数据库连接

@@ -49,7 +49,15 @@ if(session.getAttribute("userid")==null){
              for(var i = 0 ; i<clickobj.length ; i++){
                  clickobj[i].checked = !clickobj[i].checked ;
              }    
-         }
+         }     
+		function addoption(num) {      
+		    var obj = document.getElementById("reportpageNumber");
+		    obj.options.length = 0;
+		   	for(var i = 1; i <=11; i++){
+		   		var newitem = new Option(i,i);
+		   		obj.options.add(newitem);
+		   	}     
+		}  
      </script>
   </head>
   
@@ -98,19 +106,30 @@ if(session.getAttribute("userid")==null){
 					for (int i = 0; i < list.size(); i++) {
 						Report report = list.get(i);
 				%>
+						<tr align="center">
+							<td><input type="checkbox" value='<%=report.getreportid()%>' name="num" /></td>
+							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getreportid() %>"><%=report.getreportid()%></a></td>
+							<td><%=report.getdiscript()%></td>
+							<td><%=report.getName()%></td>
+							<td><%=report.gettime()%></td>
+							<td><a href="jsp/DeleteReportServlet?reportid=<%=report.getreportid() %>">delete</a></td>
+							<td><a href="jsp/GoUpdateReportServlet?reportid=<%=report.getreportid() %>">modify</a></td>
+						</tr>
+				<% } %>
 				<tr align="center">
-					<td><input type="checkbox" value='<%=report.getreportid()%>' name="num" /></td>
-					<td><a href="jsp/ViewReportServlet?reportid=<%=report.getreportid() %>"><%=report.getreportid()%></a></td>
-					<td><%=report.getdiscript()%></td>
-					<td><%=report.getName()%></td>
-					<td><%=report.gettime()%></td>
-					<td><a href="jsp/DeleteReportServlet?reportid=<%=report.getreportid() %>">delete</a></td>
-					<td><a href="jsp/GoUpdateReportServlet?reportid=<%=report.getreportid() %>">modify</a></td>
-				</tr>
-				<%
-					}
-				}
-				%>
+					 <td colspan="7"> 
+					 	<a href="Posts?pageNumber=1">First Page</a>
+        				<a href="Posts?pageNumber=${pageNumber-1}">Previous Page</a> 
+        				<select name="reportpageNumber" id="reportpageNumber" onactivate = "addoption(<%=request.getAttribute("amount") %>)">
+        					<option value="1" selected>1</option>
+        				</select>
+        				<a>/<%=request.getAttribute("amount") %></a>
+        				<a href="Posts?pageNumber=${pageNumber+1}">Next Page</a> 
+        				<a href="Posts?pageNumber=${totalPages}">Last Page</a>  
+					 </td>
+				</tr>	
+				<% } %>
+				
 			</table>
 		</form>
 	</div>

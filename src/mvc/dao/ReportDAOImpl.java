@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import structure.Page;
+
 import mvc.vo.Report;
 
 public class ReportDAOImpl implements IReportDAO {
@@ -17,13 +19,45 @@ public class ReportDAOImpl implements IReportDAO {
 		this.conn = conn;
 	}
 
-	public ArrayList<Report> listreport(Report report) throws Exception {
+	public ArrayList<Report> listAllReport(Report report) throws Exception {
 		ArrayList<Report> reportlist = new ArrayList<Report>();
 		try {
 			String sql = "select reportid,discript,name,time from report where userid=?";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
 			this.pstmt.setString(1, report.getuserid());// 设置id
 			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
+			while (rs.next()) {
+				Report rep = new Report();
+				rep.setreportid(rs.getInt("reportid"));
+				rep.setdiscript(rs.getString("discript"));
+				rep.setName(rs.getString("name"));
+				rep.settime(rs.getDate("time"));
+				reportlist.add(rep);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();// 关闭操作
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return reportlist;
+	}
+	
+	public ArrayList<Report> listReport(Report report, Page page) throws Exception {
+		ArrayList<Report> reportlist = new ArrayList<Report>();
+		try {
+			String sql = "select reportid,discript,name,time from report where userid=?";
+			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
+			this.pstmt.setString(1, report.getuserid());// 设置id
+			this.pstmt.setMaxRows(page.getPageIndex()*page.getpageSize());//查询的最大行数 
+			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
+			rs.absolute((page.getPageIndex()-1)*page.getpageSize());//利用绝对定位定位到结果集的每页第二条数
+			//rs.relative(-1);//利用结果集的相对定位定位到每页的第一条数据 
 			while (rs.next()) {
 				Report rep = new Report();
 				rep.setreportid(rs.getInt("reportid"));
@@ -206,6 +240,30 @@ public class ReportDAOImpl implements IReportDAO {
 			}
 		}
 		return flag;
+	}
+
+	public int getAmount(Report report) throws Exception {
+		int amout = 0;
+		try {
+			String sql = "select count(*) as total from report where userid=?";
+			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
+			this.pstmt.setString(1, report.getuserid());// 设置id
+			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
+			if (rs.next()) {
+				amout = rs.getInt("total");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();// 关闭操作
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return amout;
 	}
 
 }
