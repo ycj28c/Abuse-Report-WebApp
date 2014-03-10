@@ -1,6 +1,4 @@
 @CHARSET "UTF-8";
-table, td{border:1px solid green;}
-th{background-color:green;color:white;}
 .myButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
@@ -40,9 +38,57 @@ th{background-color:green;color:white;}
 	position:relative;
 	top:1px;
 }
-
-
-
+.myInput{ 
+	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+	box-shadow:inset 0px 1px 0px 0px #54a3f7;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1', endColorstr='#0061a7',GradientType=0);
+	background-color:#FFFFFF;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	border:1px solid #124d77;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #154682;
+}
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+.fonttwo{
+	font-family: impact, sans-serif;
+	color: #854242;
+	font-size: 50px;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: line-through;
+	letter-spacing: 6pt;
+	line-height: 1.5;
+}
 
 
 

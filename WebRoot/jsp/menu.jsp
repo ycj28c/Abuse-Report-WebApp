@@ -25,9 +25,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 	<h2>Menu</h2>
-		<ul>
-			<li><a href = "jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=1">Your List</a></li>
-			<li><a href="javascript:void(0)" onclick ="gopath('newreport.jsp')">New report</a></li>
-		</ul>
+	<ul class = "fontthree">
+		<li><a href = "jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=1">Your List</a></li>
+		<li><a href="javascript:void(0)" onclick ="gopath('newreport.jsp')">New report</a></li>
+	</ul>
   </body>
 </html>

@@ -48,31 +48,31 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 		<form name="form1" action="jsp/MutiDelReportServlet" method="post">
 			<table align="left">
 				<tr>
-					<td href="#" class="myButton" onclick="ClickAll()">ClickAll</td>
-					<td href="#" class="myButton" onclick="UnClickAll()">UnClickAll</td>
-					<td href="#" class="myButton" onclick="InvertClick()">InvertClick</td>
+					<td><input type="button" class="myButton" value="ClickAll" onclick="ClickAll()"/></td>
+					<td><input type="button" class="myButton" value="UnClickAll" onclick="UnClickAll()"/></td>
+					<td><input type="button" class="myButton" value="InvertClick" onclick="InvertClick()"/></td>
 					<td><input type="submit" class="myButton" value="MutiDelete" /></td>
-					<td><input type="text" class="myButton"/></td>
-					<td href="#" class="myButton">Search</td>
+					<td><input type="text" class="myInput" value="input your text here"/></td>
+					<td><input type="button" class="myButton" value="Search"/></td>
 				</tr>
 			</table>
 			<br><br>
-			<table border="1" align="left" width="874" style="border-collapse:collapse;">
-				<tr align="center">
-					<th>box</th>
-					<th>Reportid</th>
-					<th>Description</th>
-					<th>Name</th>
-					<th>Time</th>
-					<th colspan="3">Operation</th>
-				</tr>
+			<table class = "gridtable" border="1" align="left" width="874" style="border-collapse:collapse;">
 				<%
 					ArrayList<Report> list = (ArrayList<Report>) (request.getAttribute("backinfo"));
 					Page pagex = (Page)(request.getAttribute("reportpage"));
 				%>
 				<%
-				if (list != null) {
-					for (int i = 0; i < list.size(); i++) {
+				if (list != null) {%>
+					<tr align="center">
+						<th>box</th>
+						<th>Reportid</th>
+						<th>Description</th>
+						<th>Name</th>
+						<th>Time</th>
+						<th colspan="3">Operation</th>
+					</tr>
+				<% 	for (int i = 0; i < list.size(); i++) {
 						Report report = list.get(i);
 				%>
 						<tr align="center">
@@ -138,7 +138,25 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
         				<%} %>
 					 </th>
 				</tr>	
-				<% } %>
+				<% } 
+				else{
+					String[] yan = {
+						"He who has health has hope. ",
+						"Never put off till tomorrow what may be done today. ",
+						"Empty vessels make the most sound. ",
+						"It is never too late to mend. ",
+						"Keep something for a rainy day.",
+						"The longest day must have an end. ",
+						"A young idler, an old beggar.",
+						"Experience is the mother of wisdom.",
+						"One is never too old to learn.",
+						"A crooked stick will have a crooked shadow.",
+					};
+					Random random = new Random();
+				%>
+					<br><br><br><br><br><br><br><br><br>
+				 	<a class = "fonttwo" ><%=yan[random.nextInt(5)] %></a>
+				<% }%>
 				
 			</table>
 		</form>
