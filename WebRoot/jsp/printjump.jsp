@@ -11,12 +11,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="javascript/browsercompatible.js"></script>
     <%String PDFpath = (String)request.getAttribute("PDFpath"); %>
     <script type="text/javascript"> 
-    function jump(){
-    	gopath("../pdfjs/web/viewer.jsp?PDFpath='<%=PDFpath%>'");
-    }      
+	    function jump(){
+	    	gopath("../pdfjs/web/viewer.jsp?PDFpath='<%=PDFpath%>'");
+	    }      
 	</script>
-    
-    
+      
     <title>My JSP 'printjump.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -24,9 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 
   </head>
   

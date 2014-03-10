@@ -13,14 +13,14 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 
 	<title>My JSP 'report.jsp' starting page</title>
 	
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/report.css"/>
+	
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-		<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	
 	<script type="text/javascript">       
          function ClickAll(){
              var clickobj = document.getElementsByName("num");
@@ -48,27 +48,23 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 		<form name="form1" action="jsp/MutiDelReportServlet" method="post">
 			<table align="left">
 				<tr>
-					<td><input type="button" value="clickall" name="clickall"
-						id="clickall" onclick="ClickAll()"/></td>
-					<td><input type="button" value="unclickall" name="unclickall"
-						id="unclickall" onclick="UnClickAll()" /></td>
-						<td><input type="button" value="invertclick" name="invertclick"
-						id="invertclick" onclick="InvertClick()" /></td>
-					<td><input type="submit" value="MutiDelete" /></td>
+					<td href="#" class="myButton" onclick="ClickAll()">ClickAll</td>
+					<td href="#" class="myButton" onclick="UnClickAll()">UnClickAll</td>
+					<td href="#" class="myButton" onclick="InvertClick()">InvertClick</td>
+					<td><input type="submit" class="myButton" value="MutiDelete" /></td>
+					<td><input type="text" class="myButton"/></td>
+					<td href="#" class="myButton">Search</td>
 				</tr>
 			</table>
 			<br><br>
 			<table border="1" align="left" width="874" style="border-collapse:collapse;">
 				<tr align="center">
-					<td colspan="8">Report List</td>
-				</tr>
-				<tr align="center">
-					<td></td>
-					<td>Reportid</td>
-					<td>Description</td>
-					<td>Name</td>
-					<td>Time</td>
-					<td colspan="3">Operation</td>
+					<th>box</th>
+					<th>Reportid</th>
+					<th>Description</th>
+					<th>Name</th>
+					<th>Time</th>
+					<th colspan="3">Operation</th>
 				</tr>
 				<%
 					ArrayList<Report> list = (ArrayList<Report>) (request.getAttribute("backinfo"));
@@ -91,7 +87,7 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 						</tr>
 				<% } %>
 				<tr align="center">
-					 <td colspan="8"> 
+					 <th colspan="8"> 
 					 	<%if(pagex.currentPage>1){ %>
         					<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.previousPage %>">Previous Page</a> 
         				<%}else{%>
@@ -140,7 +136,7 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
         				<%}else{%>
         					<a>Next Page</a>
         				<%} %>
-					 </td>
+					 </th>
 				</tr>	
 				<% } %>
 				

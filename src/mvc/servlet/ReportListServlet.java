@@ -28,7 +28,7 @@ public class ReportListServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int pagesize = 20;
+		int pagesize = 31;
 		Page page = new Page(reportamount,pagesize,pageindex);
 		page.generatepage();
 		

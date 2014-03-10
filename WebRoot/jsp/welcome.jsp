@@ -16,16 +16,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 	
 	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/welcome.css"/>
 	
   </head>
   
   <body>
-    <%=session.getAttribute("username")%>, welcome come back! 
-    <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
+    <font color="#FFFFFF"><%=session.getAttribute("username")%>, welcome come back! </font>
+    <input type="button" class="myButtontwo" value="logout" onclick="gopath('login.jsp')"/><br>
   </body>
 </html>

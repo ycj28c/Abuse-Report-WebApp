@@ -8,29 +8,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <style type="text/css">
-		div#container{width:1024px}
-		div#header {background-color:#99bbbb;}
-		div#menu {background-color:#ffff99;height:600px;width:150px;float:left;}
-		div#content {background-color:#EEEEEE;height:600px;width:874px;float:left;}
-		div#footer {background-color:#99bbbb;clear:both;text-align:center;}
-		h1 {margin-bottom:0;}
-		h2 {margin-bottom:0;font-size:18px;}
-		ul {margin:0;}
-		li {list-style:none;}
-	</style>
 	
     <title>My JSP 'functionlist.jsp' starting page</title>
+    
+   <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/menu.css"/>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 	
 	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
 	
