@@ -14,24 +14,33 @@ public class ReportListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String userid = req.getParameter("userid");// 接受userid内容
+		int pageindex = Integer.parseInt(req.getParameter("pageindex"));//当前page
+		int totalpage = 0;
+		int reportamount = 0;
 		String path = "firstpage.jsp";
-		ArrayList<Report> backinfo = new ArrayList<Report>();// 保存所有返回信息
-		int amount = 0;
-
+		ArrayList<Report> backinfo = new ArrayList<Report>();// 保存所有返回信息		
 		Report report = new Report();// 实例化VO
 		report.setuserid(userid);// 设置userid
 		
-		Page page = new Page();
-		page.setPageIndex(1);
-		page.setpageSize(10);
+		//set page
 		try {
-			amount = DAOFactory.getIReportDAOInstance().getAmount(report);
+			reportamount = DAOFactory.getIReportDAOInstance().getAmount(report);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int pagesize = 15;
+		Page page = new Page(reportamount,15,pageindex);
+		page.generatepage();
+		
+		//set report
+		try {
 			backinfo = DAOFactory.getIReportDAOInstance().listReport(report,page);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		req.setAttribute("backinfo", backinfo);// array report list
-		req.setAttribute("amount", amount);// total number of user's report
+		req.setAttribute("reportamount", reportamount);// total number of user's report
+		req.setAttribute("reportpage", page);// total page of user's report
 		req.getRequestDispatcher(path).forward(req, resp);// 跳转
 	}
 

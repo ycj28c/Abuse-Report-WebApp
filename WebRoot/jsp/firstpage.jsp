@@ -4,6 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ page import="mvc.vo.*"%>
+<%@ page import="structure.*"%>
 <% 
 if(session.getAttribute("userid")==null){
 	session.setAttribute("userid", request.getAttribute("userid"));
@@ -50,14 +51,6 @@ if(session.getAttribute("userid")==null){
                  clickobj[i].checked = !clickobj[i].checked ;
              }    
          }     
-		function addoption(num) {      
-		    var obj = document.getElementById("reportpageNumber");
-		    obj.options.length = 0;
-		   	for(var i = 1; i <=11; i++){
-		   		var newitem = new Option(i,i);
-		   		obj.options.add(newitem);
-		   	}     
-		}  
      </script>
   </head>
   
@@ -66,7 +59,7 @@ if(session.getAttribute("userid")==null){
     welcome to xxx system <%=session.getAttribute("username")%>. 
     <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
     ==================================================================<br>
-    <form action="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>" method="post" >
+    <form action="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=1" method="post" >
    		<input type="submit" value="reportlist"/>
    		<input type="button" value="newreport" onclick="gopath('newreport.jsp')"/>
 	</form>	
@@ -98,8 +91,8 @@ if(session.getAttribute("userid")==null){
 					<td colspan="2">Operation</td>
 				</tr>
 				<%
-					ArrayList<Report> list = (ArrayList<Report>) (request
-							.getAttribute("backinfo"));
+					ArrayList<Report> list = (ArrayList<Report>) (request.getAttribute("backinfo"));
+					Page pagex = (Page)(request.getAttribute("reportpage"));
 				%>
 				<%
 				if (list != null) {
@@ -118,14 +111,54 @@ if(session.getAttribute("userid")==null){
 				<% } %>
 				<tr align="center">
 					 <td colspan="7"> 
-					 	<a href="Posts?pageNumber=1">First Page</a>
-        				<a href="Posts?pageNumber=${pageNumber-1}">Previous Page</a> 
-        				<select name="reportpageNumber" id="reportpageNumber" onactivate = "addoption(<%=request.getAttribute("amount") %>)">
-        					<option value="1" selected>1</option>
-        				</select>
-        				<a>/<%=request.getAttribute("amount") %></a>
-        				<a href="Posts?pageNumber=${pageNumber+1}">Next Page</a> 
-        				<a href="Posts?pageNumber=${totalPages}">Last Page</a>  
+					 	<%if(pagex.currentPage>1){ %>
+        					<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.previousPage %>">Previous Page</a> 
+        				<%}else{%>
+        					<a>Previous Page</a>
+        				<%} %>
+        				<%if(pagex.getTotalPage()<6) {
+        					for(int indexx=1;indexx<=pagex.getTotalPage();indexx++){%>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
+        				<% }
+        				}
+        				else{
+        					if(pagex.currentPage<3){
+								for(int indexx=1;indexx<=3;indexx++){%>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
+        				<%  	}%>
+        						<a>...</a>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
+        				<%	}
+        					else if(pagex.currentPage==3){
+								for(int indexx=1;indexx<=4;indexx++){%>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
+        				<%  	}%>
+        						<a>...</a>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
+        				<%	}
+        					else if(pagex.currentPage>pagex.getTotalPage()-3){%>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=1">1</a>
+        						<a>...</a>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.getTotalPage()-3%>"><%=pagex.getTotalPage()-3%></a>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.getTotalPage()-2%>"><%=pagex.getTotalPage()-2%></a>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.getTotalPage()-1%>"><%=pagex.getTotalPage()-1%></a>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
+        				<%	}
+        					else{%>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=1">1</a>
+        						<a>...</a>
+        				<%		for(int indexx=pagex.currentPage-1;indexx<=pagex.currentPage+1;indexx++){%>
+        							<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
+        				<%		}%>
+        						<a>...</a>
+        						<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
+        				<%	}
+        				}%>
+        				<%if(pagex.nextPage<=pagex.getTotalPage()) {%>
+        					<a href="jsp/ReportListServlet?userid=<%=session.getAttribute("userid")%>&pageindex=<%=pagex.nextPage%>">Next Page</a> 
+        				<%}else{%>
+        					<a>Next Page</a>
+        				<%} %>
 					 </td>
 				</tr>	
 				<% } %>

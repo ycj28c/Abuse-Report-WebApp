@@ -1,39 +1,51 @@
 package structure;
 
 public class Page {
-	private int pageIndex;
 	private int pageSize;
 	private int totalNum;
+	private int totalPage;
+	public int currentPage;
+	public int nextPage;
+	public int previousPage;
 	
 	public Page() {  
-		this.pageIndex = 0;  
-		this.pageSize = 0;  
-		this.totalNum = 0;  
+		this.pageSize = 0;
+		this.totalNum = 0;
+		this.totalPage = 0;
+		this.currentPage = 0;  
+		this.nextPage = 0;  
+		this.previousPage = 0;  
 	} 
 	
-	public Page(int pageIndex, int pageSize, int totalNum) {  
-		this.pageIndex = pageIndex;  
-		this.pageSize = pageSize;  
+	public Page(int totalNum, int pageSize, int currentPage) {  
+		this.currentPage = currentPage;  
 		this.totalNum = totalNum;  
+		this.pageSize = pageSize;  
 	} 
 	 
-	public int getPageIndex(){
-		return pageIndex;
+	public void generatepage(){
+		this.previousPage = this.currentPage - 1;
+		this.nextPage = this.currentPage + 1;
+		this.totalPage = this.totalNum/this.pageSize+(this.totalNum%this.pageSize> 0 ? 1 : 0);
 	}
-	public int getpageSize(){
-		return pageSize;
+	
+	public int getPageSize(){
+		return this.pageSize;
 	}
-	public int gettotalNum(){
-		return totalNum;
+	public int getTotalNum(){
+		return this.totalNum;
 	}
-	public void setPageIndex(int pageIndex){
-		this.pageIndex = pageIndex;
+	public int getTotalPage(){
+		return this.totalPage;
 	}
-	public void setpageSize(int pageSize){
+	public void setPageSize(int pageSize){
 		this.pageSize = pageSize;
 	}
-	public void settotalNum(int totalNum){
+	public void setTotalNum(int totalNum){
 		this.totalNum = totalNum;
+	}
+	public void setTotalPage(int totalPage){
+		this.totalPage = totalPage;
 	}
 	
 }

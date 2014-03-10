@@ -54,9 +54,9 @@ public class ReportDAOImpl implements IReportDAO {
 			String sql = "select reportid,discript,name,time from report where userid=?";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
 			this.pstmt.setString(1, report.getuserid());// 设置id
-			this.pstmt.setMaxRows(page.getPageIndex()*page.getpageSize());//查询的最大行数 
+			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//查询的最大行数 
 			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
-			rs.absolute((page.getPageIndex()-1)*page.getpageSize());//利用绝对定位定位到结果集的每页第二条数
+			rs.absolute((page.currentPage-1)*page.getPageSize());//利用绝对定位定位到结果集的每页第二条数
 			//rs.relative(-1);//利用结果集的相对定位定位到每页的第一条数据 
 			while (rs.next()) {
 				Report rep = new Report();
