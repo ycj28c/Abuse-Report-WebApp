@@ -28,8 +28,8 @@ public class ReportListServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int pagesize = 15;
-		Page page = new Page(reportamount,15,pageindex);
+		int pagesize = 20;
+		Page page = new Page(reportamount,pagesize,pageindex);
 		page.generatepage();
 		
 		//set report

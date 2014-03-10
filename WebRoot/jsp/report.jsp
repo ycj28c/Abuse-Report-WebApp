@@ -58,7 +58,7 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 				</tr>
 			</table>
 			<br><br>
-			<table border="1" align="left" style="border-collapse:collapse;">
+			<table border="1" align="left" width="874" style="border-collapse:collapse;">
 				<tr align="center">
 					<td colspan="8">Report List</td>
 				</tr>
