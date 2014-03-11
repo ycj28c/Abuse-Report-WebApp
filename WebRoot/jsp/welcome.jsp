@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <font color="#FFFFFF"><%=session.getAttribute("username")%>, welcome come back! </font>
-    <input type="button" class="myButtontwo" value="logout" onclick="gopath('login.jsp')"/><br>
+    <input type="button" class="myButtontwo" value="logout" onclick="gopath('login.jsp')"/>
+    <input type="button" class="myButtontwo" value="edit" />
   </body>
 </html>

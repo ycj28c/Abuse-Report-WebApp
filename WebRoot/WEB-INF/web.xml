@@ -37,6 +37,18 @@
   <servlet-name>MVCPrintRep</servlet-name>
   <servlet-class>mvc.servlet.PrintReportServlet</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>FileUploadServlet</servlet-name>
+  <servlet-class>mvc.servlet.FileUploadServlet</servlet-class>
+  <init-param>
+   <param-name>fileSizeLimit</param-name>
+   <param-value>50</param-value>
+  </init-param>
+ </servlet>
+ <servlet>
+  <servlet-name>DeleteFileServlet</servlet-name>
+  <servlet-class>mvc.servlet.DeleteFileServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>MVCLogin</servlet-name>
   <url-pattern>/jsp/LoginServlet</url-pattern>
@@ -72,6 +84,14 @@
  <servlet-mapping>
   <servlet-name>MVCPrintRep</servlet-name>
   <url-pattern>/jsp/PrintReportServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>FileUploadServlet</servlet-name>
+  <url-pattern>/jsp/FileUploadServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>DeleteFileServlet</servlet-name>
+  <url-pattern>/jsp/DeleteFileServlet</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>

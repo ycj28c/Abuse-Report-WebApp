@@ -9,7 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>attachjump</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,14 +19,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
-  
-  <body onload = "jump()">
-    This is my JSP page. <br>
-  </body>
+
+  <body>
+    <div style="color: red; background-color: orange;">	
+		<jsp:include  page="/jsp/attachment.jsp"/>
+	</div>
+  </body>  
+ 
 </html>
-<script language="javaScript">
-	function jump() {
-		location.href='jsp/login.jsp';
-	}
-</script>

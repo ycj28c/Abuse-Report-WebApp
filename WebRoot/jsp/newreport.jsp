@@ -8,13 +8,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<base href="<%=basePath%>">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Insert title here</title>
+	<base href="<%=basePath%>">
+	
+	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
+	<script type="text/javascript"> 
+	
+	function openattach()
+	{
+		var newpath = getpath("attachjump.jsp");
+		var str=window.showModalDialog(newpath,"dialogWidth=450px;dialogHeight=450px;");
+        if(str!=null)  
+        {              
+        	alert("1");
+        	//picobj.innerHTML+=str;      
+			attachment.innerHTML+=str;  
+       	}
+    }
+	</script> 
 
 </head>
 <body>
-	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
 	welcome to xxx system <%=session.getAttribute("username")%>. 
     <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
     ==================================================================<br>
@@ -37,17 +52,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td>
               		<textarea cols="17" rows="6" name="description"></textarea>
               	</td>
+        	</tr>  
+        	<tr>
+            	<td>attachment
+            		<br>
+            		<a href="javascript:void(0)" onclick="openattach()">ADD</a>
+            	</td>
+            	<td>
+              		<div align="left"  id ="attachment">
+					<tr>
+						<td>attachment1</td>
+						<td><input type="button" class="myButton" value="delete" onclick="ClickAll()"/></td>
+					</tr>
+					<tr>
+						<<td>attachment2</td>
+						<td><input type="button" class="myButton" value="delete" onclick="ClickAll()"/></td>
+					</tr>
+					<tr>
+						<td>attachment3</td>
+						<td><input type="button" class="myButton" value="delete" onclick="ClickAll()"/></td>
+					</tr>
+					</div>         		
+              	</td>
         	</tr>  	
         	<tr>
             	<td class="tdstyle" colspan="2">
                		<input type="submit" value="submit" />
                		<input type="reset" value="reset" />
-               		 <input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
+               		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
            		</td>
  			</tr>
 		</table>
 	</form>
-	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<%
 		request.setCharacterEncoding("utf-8");
 	%>
