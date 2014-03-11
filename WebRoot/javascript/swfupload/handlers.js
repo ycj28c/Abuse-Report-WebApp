@@ -105,7 +105,8 @@ function uploadSuccess(file, serverData) {
 		var progress = new FileProgress(file,  this.customSettings.upload_target);
 		addFileInfo(file.id,"upload file sucessfully!");
 		addFileId(file.id,serverData);
-//		alert(serverData);
+		//alert(file.id);
+		//alert(serverData);
 	} catch (ex) {
 		this.debug(ex);
 	}

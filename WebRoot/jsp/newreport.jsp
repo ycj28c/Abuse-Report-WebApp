@@ -13,20 +13,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	
 	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
-	<script type="text/javascript"> 
+	<script type="text/javascript" src="javascript/swfupload/swfupload.js"></script>
+  	<script type="text/javascript" src="javascript/swfupload/handlers.js"></script>
+  	<script type="text/javascript" src="javascript/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript">
+			var swfu;
+			window.onload = function () {
+				swfu = new SWFUpload({
+					upload_url: "FileUploadServlet",
+					
+					// File Upload Settings
+					file_size_limit : "50 MB",	// 1000MB
+					file_types : "*.*",//设置可上传的类型
+					file_types_description : "所有文件",
+					file_upload_limit : "10",
+									
+					file_queue_error_handler : fileQueueError,//选择文件后出错
+					file_dialog_complete_handler : fileDialogComplete,//选择好文件后提交
+					file_queued_handler : fileQueued,
+					upload_progress_handler : uploadProgress,
+					upload_error_handler : uploadError,
+					upload_success_handler : uploadSuccess,
+					upload_complete_handler : uploadComplete,
 	
-	function openattach()
-	{
-		var newpath = getpath("attachjump.jsp");
-		var str=window.showModalDialog(newpath,"dialogWidth=450px;dialogHeight=450px;");
-        if(str!=null)  
-        {              
-        	alert("1");
-        	//picobj.innerHTML+=str;      
-			attachment.innerHTML+=str;  
-       	}
-    }
-	</script> 
+					// Button Settings
+					//button_image_url : "image/SmallSpyGlassWithTransperancy_17x18.png",
+					button_placeholder_id : "spanButtonPlaceholder",
+					button_width: 450,
+					button_height: 24,
+					button_text : '<span class="button">add attachment</span>',
+					button_text_style : '.button { font-family: Helvetica, Arial, sans-serif; font-size: 14pt; } .buttonSmall { font-size: 14pt; }',
+					button_text_top_padding: 5,
+					button_text_left_padding: 20,
+					button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+					button_cursor: SWFUpload.CURSOR.HAND,
+					
+					// Flash Settings
+					flash_url : "javascript/swfupload/swfupload.swf",
+	
+					custom_settings : {
+						upload_target : "divFileProgressContainer"
+					},
+					// Debug Settings
+					debug: false  //是否显示调试窗口
+				});
+			};
+			function startUploadFile(){
+				swfu.startUpload();
+			}
+	</script>
 
 </head>
 <body>
@@ -54,24 +89,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               	</td>
         	</tr>  
         	<tr>
-            	<td>attachment
-            		<br>
-            		<a href="javascript:void(0)" onclick="openattach()">ADD</a>
-            	</td>
             	<td>
-              		<div align="left"  id ="attachment">
-					<tr>
-						<td>attachment1</td>
-						<td><input type="button" class="myButton" value="delete" onclick="ClickAll()"/></td>
-					</tr>
-					<tr>
-						<<td>attachment2</td>
-						<td><input type="button" class="myButton" value="delete" onclick="ClickAll()"/></td>
-					</tr>
-					<tr>
-						<td>attachment3</td>
-						<td><input type="button" class="myButton" value="delete" onclick="ClickAll()"/></td>
-					</tr>
+              	<span id="spanButtonPlaceholder"></span>
+		  			<div id="divFileProgressContainer" style="width:450;display:none;"></div>
+					<div id="thumbnails">
+						<table id="infoTable" border="0" width="100%" style="border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;margin-top:8px;">
+						</table>
 					</div>         		
               	</td>
         	</tr>  	
