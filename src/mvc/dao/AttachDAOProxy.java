@@ -43,4 +43,28 @@ public class AttachDAOProxy implements IAttachDAO{
 		return flag;
 	}
 
+	public boolean deleteEmptyReportId(Attach attach, String prjPath) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.deleteEmptyReportId(attach, prjPath);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
+	public boolean setReportId(Report report) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.setReportId(report);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
 }

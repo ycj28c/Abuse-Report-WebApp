@@ -13,7 +13,7 @@ import mvc.vo.*;
 public class NewReportServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		boolean flag = false;
+		boolean flag = false, flag2 = false;
 		String info = new String();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date time = new Date();
@@ -36,14 +36,30 @@ public class NewReportServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//add the reportid for attachment
+		try {
+			flag2 = DAOFactory.getIAttachDAOInstance().setReportId(report);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//jump to page
 		if(flag){
-			info  = "Add report successfully!";		
+			info  = "Add report successfully!";	
+			if(flag2)
+				info += " Set reportid for attachment successfully!";
+			else
+				info += " No attachment were seted!";
 		}
 		else{
 			info  = "Fail when adding report!";
+			if(flag2)
+				info += " Set reportid for attachment successfully!";
+			else
+				info += " No attachment were seted!";
 		}
-		req.setAttribute("info", info);// 保存错误信息
-		req.getRequestDispatcher(path).forward(req, resp);// 跳转
+		req.setAttribute("info", info);// back message
+		req.getRequestDispatcher(path).forward(req, resp);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)

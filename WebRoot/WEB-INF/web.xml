@@ -49,6 +49,10 @@
   <servlet-name>DeleteFileServlet</servlet-name>
   <servlet-class>mvc.servlet.DeleteFileServlet</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>MVCPreNewRep</servlet-name>
+  <servlet-class>mvc.servlet.PrepareNewReport</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>MVCLogin</servlet-name>
   <url-pattern>/jsp/LoginServlet</url-pattern>
@@ -92,6 +96,10 @@
  <servlet-mapping>
   <servlet-name>DeleteFileServlet</servlet-name>
   <url-pattern>/jsp/DeleteFileServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCPreNewRep</servlet-name>
+  <url-pattern>/jsp/PrepareNewReport</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>
