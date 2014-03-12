@@ -150,6 +150,15 @@ function addReadyFileInfo(fileid,fileName,message,status){
 	    	col4 = row.insertCell(-1);
 	    	col5 = row.insertCell(-1);
 	        break;
+	    case "chrome": //fix for chrome 2014-3-12
+	    	row = infoTable.insertRow(-1);
+	    	row.id = fileid;
+	    	col1 = row.insertCell(-1);
+	    	col2 = row.insertCell(-1);
+	    	col3 = row.insertCell(-1);
+	    	col4 = row.insertCell(-1);
+	    	col5 = row.insertCell(-1);
+	        break;
 	    default:
 	    	row = infoTable.insertRow();
 	    	row.id = fileid;
