@@ -96,9 +96,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               	</td>
         	</tr> 
         	<tr>
-        	<input type = "button" onclick = "addReadyFileInfo('SWFUpload_0_9','ff','ddd','already in disk');" value="aaaa"></>
-        	</tr>
-        	<tr>
             	<td>attachment</td>
             	<td>
               		<span id="spanButtonPlaceholder"></span>
