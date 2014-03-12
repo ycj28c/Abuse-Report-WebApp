@@ -46,13 +46,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td>attachment</td>
             	<td>
 	            	<div align="center">
-						<table id="infoTable" border="0" width="100%" style="border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;margin-top:8px;">
+						<table id="showattach" border="0" width="100%" style="border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;margin-top:8px;">
 		            	<%for(int i = 0;i<list.size();i++){ 
 		             		Attach attach = list.get(i);%> 	
-		             		<tr>      	        		
-		             			<a>ddd<%=attach.getId()%></a>
-		             			<a>aaa<%=attach.getOldName()%></a>
-		             			<a>ddcccd<%=attach.getPath()%></a> 
+		             		<tr>              		
+		             			<td><%=attach.getId()%></td>
+		             			<td><a href = "<%=attach.getPath()%>"><%=attach.getOldName()%></a></td>
 		             		</tr>
 		             	<%} %>          	
 		            	</table>		            

@@ -164,13 +164,13 @@ public class AttachDAOImpl implements IAttachDAO {
 				Attach att = new Attach();
 				att.setId(rs.getInt("id"));
 				att.setNewName(rs.getString("newname"));
-				att.setOldName("oldname");
-				att.setPath("path");
+				att.setOldName(rs.getString("oldname"));
+				att.setPath(rs.getString("path"));
 				att.setReportid(attach.getReportid());
 				att.setUserId(attach.getUserId());
 				arraylist.add(att);
 			}
-			System.out.println("arraylist-reportid 0:"+arraylist.get(0).getReportid());
+			//System.out.println("arraylist-reportid 0:"+arraylist.get(0).getReportid());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

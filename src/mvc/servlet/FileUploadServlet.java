@@ -55,10 +55,8 @@ public class FileUploadServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("--- BEGIN DOPOST ---");
 		HttpSession session = request.getSession();
-		//int reportid = Integer.parseInt(request.getParameter("reportid"));
-		//System.out.println("reportid:"+request.getParameter("reportid"));
 		String userid = session.getAttribute("userid").toString();
-		System.out.println("userid:"+userid);
+		//System.out.println("userid:"+userid);
 		boolean flag = false;
 		//文件保存位置，当前项目下的upload/mail
 		String uploadDir = "upload" + File.separatorChar + File.separatorChar;

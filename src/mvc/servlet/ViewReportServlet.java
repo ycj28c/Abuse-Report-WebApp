@@ -33,7 +33,7 @@ public class ViewReportServlet extends HttpServlet {
 		attach.setUserId(userid);
 		try {
 			attachlist = DAOFactory.getIAttachDAOInstance().readAttachByReportId(attach);
-			System.out.println("ViewReportServlet-attachlist-reportid 0:"+attachlist.get(0).getReportid());
+			//System.out.println("ViewReportServlet-attachlist-reportid 0:"+attachlist.get(0).getReportid());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
