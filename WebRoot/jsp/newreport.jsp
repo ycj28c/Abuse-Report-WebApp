@@ -12,6 +12,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>Insert title here</title>
 	<base href="<%=basePath%>">
 	
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/reset.css"/>
+	
 	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
 	<script type="text/javascript" src="javascript/swfupload/swfupload.js"></script>
   	<script type="text/javascript" src="javascript/swfupload/handlers.js"></script>
@@ -65,32 +67,118 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>
-	welcome to xxx system <%=session.getAttribute("username")%>. 
-    <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
-    ==================================================================<br>
 	<form action="jsp/NewReportServlet?userid=<%=session.getAttribute("userid")%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
 			<tr>
-            	<td colspan="2" align = "center">NEW REPORT</td>
+            	<td colspan="5" align = "center">NEW REPORT</td>
+            	<td class="tdstyle" align ="right" colspan="1">
+               		<input type="submit" value="submit" />
+               		<input type="reset" value="reset" />
+               		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
+           		</td>
             </tr>
 			<tr>
-            	<td>name</td>
-              	<td><input type="text" name="username" /></td>
-        	</tr>
-        	<tr>
-            	<td>time</td>
+            	<td>Alleged Abuser:</td>    
+            	<td><input type ="text"></td> 
+            	<td>Alleged Victim:</td>
+        		<td><input type ="text"></td>
+        		<td>Date of last incident:</td>
             	<script type="text/javascript" src="javascript/calendar.js"></script>
               	<td><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly" /></td>
         	</tr>
+        	<tr>     		 
+            	<td>Types of Abuse:</td>
+            	<td><input type ="text"></td>
+        		<td>Frequency of Abuse:</td>
+        		<td>
+            		<select name="abusetype" id="abusetype">  
+				        <option value="1">Daily</option>  
+				        <option value="2">Weeking</option>  
+				        <option value="3">Episodic</option> 	          
+			      	</select> 
+			      	<select name="abusetype" id="abusetype">  
+				        <option value="1">Increasing</option>  
+				        <option value="2">Decreasing</option>  
+				        <option value="3">Constant</option> 
+				        <option value="4">unknown</option> 	          
+			      	</select>
+			    </td> 
+        		<td>Is victim aware of report?</td>
+        		<td>
+            		<label><input name="Fruit" type="radio" value="" />no</label> 
+					<label><input name="Fruit" type="radio" value="" />yes</label>
+				</td>
+        	</tr>
         	<tr>
-            	<td>description</td>
-            	<td>
-              		<textarea cols="17" rows="6" name="description" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
-              	</td>
+        		<td colspan="3">Was an oral report filed with the DPPC Hotline?</td> 		
+            	<td colspan="3">Is there any risk to the investigator?</td>	
+        	</tr>
+        	<tr>
+        		<td colspan="3">
+            		<label><input name="Fruit" type="radio" value="" />no</label> 
+					<label><input name="Fruit" type="radio" value="" />yes</label> 
+					<label><input name="Fruit" type="text"  style="width:60%" value="Please note date and time of call" /></label> 
+				</td> 
+				<td colspan="3">
+            		<label><input name="Fruit" type="radio" value="" />no</label> 
+					<label><input name="Fruit" type="radio" value="" />yes</label> 
+					<label><input name="Fruit" type="text"  style="width:60%" value="If yes, please specify" /></label> 
+				</td>
+        	</tr>
+        	<tr>
+            	<tr>
+            		<td colspan="6">In narrative form, please describe the alleged abuse:</td>
+            	</tr>
+            	<tr>
+            		<td colspan="6">
+              			<textarea style="width:100%" rows="6" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              		</td>
+              	</tr>
+        	</tr>  
+        	<tr>
+            	<tr>
+            		<td colspan="6">Please describe the level of risk to the alleged victim, including his/her currentphysical and emotional state:</td>
+            	</tr>
+            	<tr>
+            		<td colspan="6">
+              			<textarea style="width:100%" rows="6" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              		</td>
+              	</tr>
+        	</tr> 
+        	<tr>
+            	<tr>
+            		<td colspan="6">Please list any resulting injuries:</td>
+            	</tr>
+            	<tr>
+            		<td colspan="6">
+              			<textarea style="width:100%" rows="6" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              		</td>
+              	</tr>
+        	</tr> 
+        	<tr>
+            	<tr>
+            		<td colspan="6">Please list witnesses, if any, including daytime phone numbers:</td>
+            	</tr>
+            	<tr>
+            		<td colspan="6">
+              			<textarea style="width:100%" rows="5" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              		</td>
+              	</tr>
+        	</tr> 
+        	<tr>
+            	<tr>
+            		<td colspan="6">Please describe caregiver relationship between the alleged abuser and the alleged victim.<br>
+					(What assistance, if any, does the alleged abuser provide to the person with the disability?)</td>
+            	</tr>
+            	<tr>
+            		<td colspan="6">
+              			<textarea style="width:100%" rows="5" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              		</td>
+              	</tr>
         	</tr>  
         	<tr>
             	<td>attachment</td>
-            	<td>
+            	<td colspan="3">
               		<span id="spanButtonPlaceholder"></span>
 		  			<div id="divFileProgressContainer" style="width:450;display:none;"></div>
 					<div id="thumbnails">
@@ -98,27 +186,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</table>
 					</div>         		
               	</td>
-        	</tr>  	
-        	<tr>
-            	<td class="tdstyle" colspan="2">
+            	<td class="tdstyle" colspan="2" align = "right">
                		<input type="submit" value="submit" />
                		<input type="reset" value="reset" />
-               		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
-           		</td>
- 			</tr>
+               		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/>             	
+           		</td>	
+        	</tr>  	      	
 		</table>
 	</form>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<%
-		request.setCharacterEncoding("utf-8");
-	%>
-	<%
-		String info = (String)request.getAttribute("info");//取得属性 
-		if (info != null) { //判断是否有内容 
-	%>
-	<h4><%=info%></h4>
-	<%
-		}
-	%>
 </body>
 </html>

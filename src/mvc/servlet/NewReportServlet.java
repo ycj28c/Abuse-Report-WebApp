@@ -18,7 +18,7 @@ public class NewReportServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String userid = session.getAttribute("userid").toString();
 		boolean flag = false;
-		String info = new String();
+		//String info = new String();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date time = new Date();
 		String path = "newreport.jsp";	
@@ -50,7 +50,7 @@ public class NewReportServlet extends HttpServlet {
 		}
 		
 		//jump to page
-		if(reportid!=0){
+		/*if(reportid!=0){
 			info  = "Add report successfully!";	
 			if(flag)
 				info += " Set reportid for attachment successfully!";
@@ -64,7 +64,7 @@ public class NewReportServlet extends HttpServlet {
 			else
 				info += " No attachment were seted!";
 		}
-		req.setAttribute("info", info);// back message
+		req.setAttribute("info", info);// back message*/
 		req.getRequestDispatcher(path).forward(req, resp);
 	}
 
