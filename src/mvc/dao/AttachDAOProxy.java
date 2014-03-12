@@ -1,6 +1,7 @@
 package mvc.dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import mvc.dbc.DatabaseConnection;
 import mvc.vo.Attach;
@@ -65,6 +66,18 @@ public class AttachDAOProxy implements IAttachDAO{
 			this.dbc.close();
 		}
 		return flag;
+	}
+
+	public ArrayList<Attach> readAttachByReportId(Attach attach) throws Exception {
+		ArrayList<Attach> attachlist = new ArrayList<Attach>();
+		try {
+			attachlist = this.dao.readAttachByReportId(attach);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return attachlist;
 	}
 
 }

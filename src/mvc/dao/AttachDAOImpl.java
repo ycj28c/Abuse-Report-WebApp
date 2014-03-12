@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import mvc.factory.DAOFactory;
 import mvc.vo.Attach;
@@ -128,7 +129,7 @@ public class AttachDAOImpl implements IAttachDAO {
 	public boolean setReportId(Report report) throws Exception {
 		boolean flag = false;
 		try {
-			String sql = "UPDATE attachment set reportid =? where userid=? and id!=''";
+			String sql = "UPDATE attachment set reportid =? where userid=? and id!='' and reportid is null";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
 			this.pstmt.setInt(1, report.getreportid());
 			this.pstmt.setString(2, report.getuserid());
@@ -149,6 +150,39 @@ public class AttachDAOImpl implements IAttachDAO {
 			}
 		}
 		return flag;
+	}
+	
+	public ArrayList<Attach> readAttachByReportId(Attach attach) throws Exception {
+		ArrayList<Attach> arraylist = new ArrayList<Attach>();
+		try {
+			String sql = "select id,newname,oldname,path from attachment where reportid =? and userid =? and id!=''";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setInt(1, attach.getReportid());
+			this.pstmt.setString(2, attach.getUserId());
+			ResultSet rs = this.pstmt.executeQuery();
+			while (rs.next()) {
+				Attach att = new Attach();
+				att.setId(rs.getInt("id"));
+				att.setNewName(rs.getString("newname"));
+				att.setOldName("oldname");
+				att.setPath("path");
+				att.setReportid(attach.getReportid());
+				att.setUserId(attach.getUserId());
+				arraylist.add(att);
+			}
+			System.out.println("arraylist-reportid 0:"+arraylist.get(0).getReportid());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();// 关闭操作
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return arraylist;
 	}
 
 }

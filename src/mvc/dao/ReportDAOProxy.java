@@ -32,16 +32,16 @@ public class ReportDAOProxy implements IReportDAO {
 		return reportlist;
 	}
 
-	public boolean addreport(Report report) throws Exception {
-		boolean flag = false;
+	public int addreport(Report report) throws Exception {
+		int reportid = 0;
 		try {
-			flag = this.dao.addreport(report);// 调用真实主题
+			reportid = this.dao.addreport(report);// 调用真实主题
 		} catch (Exception e) {
 			throw e;
 		} finally {
 			this.dbc.close();
 		}
-		return flag;
+		return reportid;
 	}
 
 	public boolean delReportById(Report report) throws Exception {

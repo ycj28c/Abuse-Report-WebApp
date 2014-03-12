@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<tr>
             	<td>description</td>
             	<td>
-              		<textarea cols="17" rows="6" name="description"></textarea>
+              		<textarea cols="17" rows="6" name="description" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
               	</td>
         	</tr>  
         	<tr>

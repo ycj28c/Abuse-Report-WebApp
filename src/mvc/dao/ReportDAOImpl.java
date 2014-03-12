@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.Statement;
+
 import structure.Page;
 
 import mvc.vo.Report;
@@ -95,8 +97,8 @@ public class ReportDAOImpl implements IReportDAO {
 		return reportlist;
 	}
 
-	public boolean addreport(Report report) throws Exception {
-		boolean flag = false;
+	public int addreport(Report report) throws Exception {
+		int reportid = 0;
 		try {
 			java.sql.Date trans_time = new java.sql.Date(report.gettime()
 					.getTime()); // 將java.util.Date 轉換为 java.sql.Date
@@ -109,16 +111,19 @@ public class ReportDAOImpl implements IReportDAO {
 			 */
 			// java.sql.Date date = new java.sql.Date(new
 			// java.util.Date().getTime());
-			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
+			this.pstmt = this.conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);// 实例化操作
 			this.pstmt.setString(1, report.getdiscript());
 			this.pstmt.setString(2, report.getName());
 			this.pstmt.setDate(3, trans_time);
 			this.pstmt.setString(4, report.getuserid());
 			// ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
-			int rs = this.pstmt.executeUpdate();
-			if (rs > 0) { // 返回条数
-				flag = true;
-			}
+			this.pstmt.executeUpdate();
+			ResultSet rs = this.pstmt.getGeneratedKeys(); 
+			if(rs.next()){
+	            reportid = rs.getInt(1);
+	        }else {
+	        	reportid = 0;
+	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getErrorCode());
@@ -132,7 +137,7 @@ public class ReportDAOImpl implements IReportDAO {
 				}
 			}
 		}
-		return flag;
+		return reportid;
 	}
 
 	public boolean delReportById(Report report) throws Exception {

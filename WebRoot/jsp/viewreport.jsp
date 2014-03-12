@@ -16,7 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
-	<% Report report = (Report)request.getAttribute("report"); %>
+	<% 
+	   Report report = (Report)request.getAttribute("report"); 
+	   ArrayList<Attach> list = (ArrayList<Attach>)(request.getAttribute("attachlist"));
+	%>
 	welcome to xxx system <%=session.getAttribute("username")%>. 
     <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
     ==================================================================<br>
@@ -38,7 +41,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td>
               		<textarea cols="17" rows="6" name="description" disabled><%=report.getdiscript()%></textarea>
               	</td>
-        	</tr>  	
+        	</tr> 
+			<tr>
+            	<td>attachment</td>
+            	<td>
+	            	<div align="center">
+						<table id="infoTable" border="0" width="100%" style="border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;margin-top:8px;">
+		            	<%for(int i = 0;i<list.size();i++){ 
+		             		Attach attach = list.get(i);%> 	
+		             		<tr>      	        		
+		             			<a>ddd<%=attach.getId()%></a>
+		             			<a>aaa<%=attach.getOldName()%></a>
+		             			<a>ddcccd<%=attach.getPath()%></a> 
+		             		</tr>
+		             	<%} %>          	
+		            	</table>		            
+	            	</div>
+            	</td>
+        	</tr> 	
         	<tr>
             	<td class="tdstyle" colspan="2">
                		<input type="submit" value="print" />
