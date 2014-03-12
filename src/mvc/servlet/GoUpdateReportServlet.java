@@ -16,6 +16,7 @@ public class GoUpdateReportServlet extends HttpServlet {
 		//set varible
 		HttpSession session = req.getSession();
 		String userid = session.getAttribute("userid").toString();	
+		String prjPath = req.getSession().getServletContext().getRealPath("/");
 		String path = "editreport.jsp";
 		int reportid = Integer.parseInt(req.getParameter("reportid"));	
 		ArrayList<Attach> attachlist = new ArrayList<Attach>();
@@ -25,6 +26,14 @@ public class GoUpdateReportServlet extends HttpServlet {
 		report.setuserid(userid);
 		try {
 			DAOFactory.getIReportDAOInstance().readReportById(report);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//delete the useless attachment	
+		Attach attach_del = new Attach();
+		attach_del.setUserId(userid);
+		try {
+			DAOFactory.getIAttachDAOInstance().deleteEmptyReportId(attach_del,prjPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

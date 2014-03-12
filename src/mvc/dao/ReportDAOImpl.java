@@ -223,12 +223,13 @@ public class ReportDAOImpl implements IReportDAO {
 		java.sql.Date trans_time = new java.sql.Date(report.gettime()
 				.getTime()); // 將java.util.Date 轉換为 java.sql.Date
 		try {
-			String sql = "UPDATE report set name = ?,discript=?,time=? where reportid = ?";
+			String sql = "UPDATE report set name =?,discript =?,time =? where reportid =? and userid =?";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
 			this.pstmt.setString(1, report.getName());
 			this.pstmt.setString(2, report.getdiscript());
 			this.pstmt.setDate(3, trans_time);
 			this.pstmt.setInt(4, report.getreportid());
+			this.pstmt.setString(5,report.getuserid());
 			int rs = this.pstmt.executeUpdate();
 			if (rs > 0) { // 返回条数
 				flag = true;
