@@ -12,4 +12,7 @@ public class DAOFactory {
 	public static IAttachDAO getIAttachDAOInstance() {// 取得DAO实例
 		return new AttachDAOProxy();// 返回代理实例
 	}
+	public static IPatientDAO getIPatientDAOInstance() {// 取得DAO实例
+		return new PatientDAOProxy();// 返回代理实例
+	}
 }

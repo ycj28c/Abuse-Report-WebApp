@@ -18,13 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	
 	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
-	<script type="text/javascript" src="javascript/select_autocomplete.js">
-	function start(){
-		autoComplete.source ='222ssfd|13825646464|13412236054|13012348564|13012345564|13012365564|ddd33232'.split('|');
-		autoComplete.init().bind(document.getElementById('comm_need'));
-	}
-	</script>
-	
+
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/select_autocomplete.css"/>
 
@@ -38,62 +32,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
 			<tr>
             	<td>Name:</td>    
-            	<td><input type ="text" style="width:100%"></td> 
+            	<td><input type ="text" name = "name" style="width:100%"></td> 
             	<td>Address:</td>
-        		<td colspan="3"><input type ="text" style="width:100%"></td>
+        		<td colspan="3"><input type ="text" name="address" style="width:100%"></td>
         	</tr>
         	<tr>     	
         		<td>Age:</td>
-        		<td><input type ="text" style="width:100%"></td>
+        		<td><input type ="text" name="age" style="width:100%"></td>
         		<td>Sex:</td>
             	<td>
 					<label><input name="Fruit" type="radio" value="" />Male</label> 
 					<label><input name="Fruit" type="radio" value="" />Female</label>
 				</td> 
         	    <td>Telephone:</td>
-            	<td><input type ="text" style="width:100%"></td>	 
+            	<td><input type ="text" name ="telephone" style="width:100%"></td>	 
         	</tr>
         	<tr>
         		<td>DOB:</td>
-        		<td><input type ="text" style="width:100%"></td>
+        		<td><input type ="text" name="dob" style="width:100%"></td>
         		<td>Marital status</td> 		
-        		<td><input type ="text" style="width:100%"></td> 
+        		<td><input type ="text" name="marstat" style="width:100%"></td> 
             	
             	<td>Communication Needs:</td> 
-            	<td><input id ="comm_need" type ="text" style="width:100%"></td> 	
+            	<td><input type ="text" name ="commneed" style="width:100%"></td> 	
             	
         	</tr>
         	<tr>
         		<td>Currently Served By:</td> 
-        		<td><input type ="text" style="width:100%"></td> 
+        		<td><input type ="text" name="servby" style="width:100%"></td> 
         		<td>Type of Service:</td> 
-        		<td><input type ="text" style="width:100%"></td> 
+        		<td><input type ="text" name="servtype" style="width:100%"></td> 
 				<td>Client's Ethnicity:</td> 
-        		<td><input type ="text" style="width:100%"></td> 
+        		<td><input type ="text" name="ethnicity" style="width:100%"></td> 
         	</tr>
         	<tr>
         		<td>Disability:</td>	
             	<td colspan="2" >
             		<table style="width:100%">
             		<tr>
-            			<td><input type="checkbox" name="director[]" value="Mobility">Mobility</td>  
-            			<td><input type="checkbox" name="director[]" value="Mental Retardation">Mental Retardation</td>
-				   		<td><input type="checkbox" name="director[]" value="Multiple Sclerosis">Multiple Sclerosis 
+            			<td><input type="checkbox" name="disability" value="Mobility">Mobility</td>  
+            			<td><input type="checkbox" name="disability" value="Mental Retardation">Mental Retardation</td>
+				   		<td><input type="checkbox" name="disability" value="Multiple Sclerosis">Multiple Sclerosis 
 				   		 
 				   	</tr>
 				   	<tr>
-					   	<td><input type="checkbox" name="director[]" value="Seizures">Seizures</td> 
-				   		<td><input type="checkbox" name="director[]" value="Cerebral Palsy">Cerebral Palsy</td>   	   	
-				   		<td><input type="checkbox" name="director[]" value="Mental Illness">Mental Illness</td>
+					   	<td><input type="checkbox" name="disability" value="Seizures">Seizures</td> 
+				   		<td><input type="checkbox" name="disability" value="Cerebral Palsy">Cerebral Palsy</td>   	   	
+				   		<td><input type="checkbox" name="disability" value="Mental Illness">Mental Illness</td>
 				   	</tr>
 				   	<tr>  
-				   		<td><input type="checkbox" name="director[]" value="Visual">Visual</td>			   		 
-				   		<td><input type="checkbox" name="director[]" value="Head Injury">Head Injury  	   		 
-				   		<td><input type="checkbox" name="director[]" value="Deaf / Hard of Hearing">Deaf / Hard of Hearing	
+				   		<td><input type="checkbox" name="disability" value="Visual">Visual</td>			   		 
+				   		<td><input type="checkbox" name="disability" value="Head Injury">Head Injury  	   		 
+				   		<td><input type="checkbox" name="disability" value="Deaf / Hard of Hearing">Deaf / Hard of Hearing	
 				   	</tr>
 				   	<tr>
-				   		<td><input type="checkbox" name="director[]" value="other">other</td>
-				   		<td><input type ="text" colspan="2"></td>
+				   		<td><input type="checkbox" name="disability" value="other">other</td>
+				   		<td><input type ="text" name="disabilityother" colspan="2"></td>
 				   	</tr>
 				   	</table>
 				</td> 
@@ -103,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            			<td>Collateral contacts or notifications:(Please list, including telephone numbers.)</td>	   		 
 					   	</tr>
 					   	<tr>
-						   <td><textarea style="width:100%" rows="4" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea></td>
+						   <td><textarea style="width:100%" rows="4" name="collcontact" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea></td>
 					   	</tr> 
 				   	</table>          		
             	</td>	

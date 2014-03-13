@@ -70,6 +70,6 @@ public class NewReportServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		this.doGet(req, resp);// µ÷ÓÃdoGet()²Ù×÷
+		this.doGet(req, resp);
 	}
 }

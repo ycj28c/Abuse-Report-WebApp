@@ -53,6 +53,10 @@
   <servlet-name>MVCPreNewRep</servlet-name>
   <servlet-class>mvc.servlet.PrepareNewReport</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>MVCNewPatient</servlet-name>
+  <servlet-class>mvc.servlet.NewPatientServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>MVCLogin</servlet-name>
   <url-pattern>/jsp/LoginServlet</url-pattern>
@@ -100,6 +104,10 @@
  <servlet-mapping>
   <servlet-name>MVCPreNewRep</servlet-name>
   <url-pattern>/jsp/PrepareNewReport</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCNewPatient</servlet-name>
+  <url-pattern>/jsp/NewPatientServlet</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>
