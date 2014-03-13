@@ -79,16 +79,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
 			<tr>
             	<td>Alleged Abuser:</td>    
-            	<td><input type ="text"></td> 
+            	<td><input type ="text" style="width:100%"></td> 
             	<td>Alleged Victim:</td>
         		<td><input type ="text"></td>
-        		<td>Date of last incident:</td>
-            	<script type="text/javascript" src="javascript/calendar.js"></script>
-              	<td><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly" /></td>
+        		<td colspan="2">Is victim aware of report?
+            		<label><input name="Fruit" type="radio" value="" />yes</label> 
+					<label><input name="Fruit" type="radio" value="" />no</label>		
+				</td>
         	</tr>
-        	<tr>     		 
-            	<td>Types of Abuse:</td>
-            	<td><input type ="text"></td>
+        	<tr>
         		<td>Frequency of Abuse:</td>
         		<td>
             		<select name="abusetype" id="abusetype">  
@@ -103,26 +102,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <option value="4">unknown</option> 	          
 			      	</select>
 			    </td> 
-        		<td>Is victim aware of report?</td>
-        		<td>
-            		<label><input name="Fruit" type="radio" value="" />no</label> 
-					<label><input name="Fruit" type="radio" value="" />yes</label>
-				</td>
+        		<td>Date of last incident:</td>
+            	<script type="text/javascript" src="javascript/calendar.js"></script>
+              	<td><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly" /></td>
+        	</tr>
+        	<tr>     		 
+            	<td>Types of Abuse:</td>
+            	<td colspan="5">
+            		<input type="checkbox" name="director[]" value="Physical">Physical 
+            		<input type="checkbox" name="director[]" value="Omission">Omission
+            		<input type="checkbox" name="director[]" value="Sexual">Sexual
+            		<input type="checkbox" name="director[]" value="Emotional">Emotional	
+            		<input type="checkbox" name="director[]" value="other">other:
+            		<input type ="text" style="width:51%">
+            </tr>  
+        	<tr>
+        		<td colspan="2">Was an oral report filed with the DPPC Hotline?</td>
+        		<td colspan="4">
+	            	<label><input name="Fruit" type="radio" value="" />no</label> 
+					<label><input name="Fruit" type="radio" value="" />yes</label> 
+					<label><input name="Fruit" type="text"  style="width:85%" value="Please note date and time of call" /></label> 
+				</td> 		
         	</tr>
         	<tr>
-        		<td colspan="3">Was an oral report filed with the DPPC Hotline?</td> 		
-            	<td colspan="3">Is there any risk to the investigator?</td>	
-        	</tr>
-        	<tr>
-        		<td colspan="3">
-            		<label><input name="Fruit" type="radio" value="" />no</label> 
-					<label><input name="Fruit" type="radio" value="" />yes</label> 
-					<label><input name="Fruit" type="text"  style="width:60%" value="Please note date and time of call" /></label> 
-				</td> 
-				<td colspan="3">
-            		<label><input name="Fruit" type="radio" value="" />no</label> 
-					<label><input name="Fruit" type="radio" value="" />yes</label> 
-					<label><input name="Fruit" type="text"  style="width:60%" value="If yes, please specify" /></label> 
+        		<td colspan="2">Is there any risk to the investigator?</td>	
+				<td colspan="4">
+	            	<label><input name="Fruit" type="radio" value="" />no</label> 
+					<label><input name="Fruit" type="radio" value="" />yes</label> 	
+					<label><input name="Fruit" type="text"  style="width:85%" value="If yes, please specify" /></label> 
 				</td>
         	</tr>
         	<tr>
