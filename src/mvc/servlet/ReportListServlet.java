@@ -13,7 +13,8 @@ import mvc.vo.*;
 public class ReportListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String userid = req.getParameter("userid");// 接受userid内容
+		HttpSession session = req.getSession();
+		String userid = session.getAttribute("userid").toString();
 		int pageindex = Integer.parseInt(req.getParameter("pageindex"));//当前page
 		int totalpage = 0;
 		int reportamount = 0;

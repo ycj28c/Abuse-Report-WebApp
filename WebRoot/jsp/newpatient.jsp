@@ -9,20 +9,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'newpatient.jsp' starting page</title>
+    <title>New Patient</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	
+	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
+	<script type="text/javascript" src="javascript/select_autocomplete.js">
+	function start(){
+		autoComplete.source ='222ssfd|13825646464|13412236054|13012348564|13012345564|13012365564|ddd33232'.split('|');
+		autoComplete.init().bind(document.getElementById('comm_need'));
+	}
+	</script>
+	
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/select_autocomplete.css"/>
 
   </head>
   
-  <body>
+  <body onload ="start()">
     <form action="jsp/NewPatientServlet" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">
 			<tr>
@@ -52,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		<td><input type ="text" style="width:100%"></td> 
             	
             	<td>Communication Needs:</td> 
-            	<td><input type ="text" style="width:100%"></td> 	
+            	<td><input id ="comm_need" type ="text" style="width:100%"></td> 	
             	
         	</tr>
         	<tr>
