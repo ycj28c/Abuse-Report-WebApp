@@ -12,8 +12,7 @@ import mvc.factory.*;
 import mvc.vo.*;
 
 public class LoginServlet extends HttpServlet {
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String fail_path = "login.jsp";
 		String succ_path = "firstpage.jsp";
 		String userid = req.getParameter("userid");// 接受userid内容
@@ -36,6 +35,7 @@ public class LoginServlet extends HttpServlet {
 					// req.setAttribute("info", info);// 保存错误信息
 					req.setAttribute("userid", user.getUserid());
 					req.setAttribute("username", user.getName());
+					req.setAttribute("user", user);
 					req.getRequestDispatcher(succ_path).forward(req, resp);// 跳转
 				} else {
 					info.add("fail login，wrong user id or password!");

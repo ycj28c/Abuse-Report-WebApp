@@ -8,31 +8,23 @@ import mvc.factory.*;
 import mvc.vo.Report;
 
 public class MutiDelReportServlet extends HttpServlet {
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		//session verify
-		if(req.getSession(false).getAttribute("userid")==null){
-			String errorpath = "sessionloss.jsp";
-			req.getRequestDispatcher(errorpath).forward(req, resp);
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//set variable
+		HttpSession session = req.getSession();
+		String userid = session.getAttribute("userid").toString();
+		boolean flag = false;
+		String path = "firstpage.jsp";
+		String reportIdArrary[] = req.getParameterValues("num");
+		Report report = new Report();
+		report.setuserid(userid);
+		//database operation
+		try {
+			flag = DAOFactory.getIReportDAOInstance().mutiDelReport(reportIdArrary,report);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else{
-			//set variable
-			HttpSession session = req.getSession();
-			String userid = session.getAttribute("userid").toString();
-			boolean flag = false;
-			String path = "firstpage.jsp";
-			String reportIdArrary[] = req.getParameterValues("num");
-			Report report = new Report();
-			report.setuserid(userid);
-			//database operation
-			try {
-				flag = DAOFactory.getIReportDAOInstance().mutiDelReport(reportIdArrary,report);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			//jump to page
-			req.getRequestDispatcher(path).forward(req, resp);
-		}
+		//jump to page
+		req.getRequestDispatcher(path).forward(req, resp);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
