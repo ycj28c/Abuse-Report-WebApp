@@ -166,25 +166,25 @@ public class ReportDAOImpl implements IReportDAO {
 		return flag;
 	}
 
-	public boolean mutiDelReport(String[] reportid) throws Exception {
+	public boolean mutiDelReport(String[] reportid,Report report) throws Exception {
 		boolean flag = false;
 		try {
-			String sql = "DELETE FROM report where reportid = ?";
-			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
+			String userid = report.getuserid();
+			String sql = "DELETE FROM report where reportid =? and userid =?";
+			this.pstmt = this.conn.prepareStatement(sql);
 			for (int i = 0; i < reportid.length; i++) {
 				int id = Integer.parseInt(reportid[i]);
 				this.pstmt.setInt(1, id);
-				int rs = this.pstmt.executeUpdate();
+				this.pstmt.setString(2, userid);
+				this.pstmt.executeUpdate();
 			}
 			flag = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			// System.out.println(e.getErrorCode());
-			// flag = false;
 		} finally {
 			if (this.pstmt != null) {
 				try {
-					this.pstmt.close();// 关闭操作
+					this.pstmt.close();
 				} catch (Exception e) {
 					throw e;
 				}
@@ -196,9 +196,10 @@ public class ReportDAOImpl implements IReportDAO {
 	public Report readReportById(Report report) throws Exception {
 		try {
 			
-			String sql = "select name,time,discript from report where reportid = ?";
+			String sql = "select name,time,discript from report where reportid =? and userid=?";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
 			this.pstmt.setInt(1, report.getreportid());
+			this.pstmt.setString(2, report.getuserid());
 			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
 			while (rs.next()) {
 				report.setdiscript(rs.getString("discript"));

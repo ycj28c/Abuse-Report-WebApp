@@ -56,10 +56,10 @@ public class ReportDAOProxy implements IReportDAO {
 		return flag;
 	}
 
-	public boolean mutiDelReport(String[] reportid) throws Exception {
+	public boolean mutiDelReport(String[] reportid,Report report) throws Exception {
 		boolean flag = false;
 		try {
-			flag = this.dao.mutiDelReport(reportid);// 调用真实主题
+			flag = this.dao.mutiDelReport(reportid,report);// 调用真实主题
 		} catch (Exception e) {
 			throw e;
 		} finally {
