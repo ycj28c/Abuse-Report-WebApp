@@ -36,6 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				sex: "required",
 				servby:"required",
+				servtype:"required",
+				ethnicity:"required",
+				commneed:"required",
 				disability: "required"
 			},
 			messages: {
@@ -49,26 +52,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				sex: "Please choose a sex",
 				servby:"Please choose a service",
+				servtype:"Please choose a service type",
+				ethnicity:"Please choose a ethnicity",
+				commneed:"Please choose a Communication Needs",
 				disability: "Please choose at least one disability"
 			}
 		});
 	
 		//when the select change to value "Other(Specify)",make the text avaliable
 		$("#servby").change(function(){
-			var op = $("#servby").val();
-			if(op=="Other(Specify)"){
-				$("#servbyothertext").attr("disabled",false);
+			var selectValue = $(this).val();
+			if(selectValue =="Other"){
+				//$("#servbyothertext").attr("disabled",false);
+				$("#servbyothertext").show();
 			}	
 			else{
-				$("#servbyothertext").attr("disabled",true);
+				//$("#servbyothertext").attr("disabled",true);
+				$("#servbyothertext").hide();
 				$("#servbyothertext").val("");
 			}
-		})
+		});
+		
+		$("#servtype").change(function(){
+			var selectValue = $(this).val();
+			if(selectValue =="Other"){
+				$("#servtypeothertext").show();
+			}	
+			else{
+				$("#servtypeothertext").hide();
+				$("#servtypeothertext").val("");
+			}
+		});
+		
+		$("#ethnicity").change(function(){
+			var selectValue = $(this).val();
+			if(selectValue =="Other"){
+				$("#ethnicityothertext").show();
+			}	
+			else{
+				$("#ethnicityothertext").hide();
+				$("#ethnicityothertext").val("");
+			}
+		});
+		
+		$("#commneed").change(function(){
+			var selectValue = $(this).val();
+			if(selectValue =="Other"){
+				$("#commneedothertext").show();
+			}	
+			else{
+				$("#commneedothertext").hide();
+				$("#commneedothertext").val("");
+			}
+		});
+		
+		$("#disabilityother").change(function(){
+			if($(this).is(":checked")){//only is(":checked") works for judge
+				$("#disabilityothertext").attr("disabled",false);
+			}	
+			else{
+				$("#disabilityothertext").attr("disabled",true);
+				$("#disabilityothertext").val("");
+			}
+		});
 			
 	});
 	
 	</script>
-	
 	
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/select_autocomplete.css"/>
@@ -84,7 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <form action="jsp/NewPatientServlet" method="post" name="newpatientform" id="newpatientform">
-		<table align = "left" border="1" name ="newpatienttable" style="border-collapse: collapse;">
+		<table align = "left" border="1" style="border-collapse: collapse;">
 			<tr>
             	<td colspan="6" align = "center">NEW PATIENT</td>
             </tr>
@@ -114,13 +164,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		<td><input type ="text" name="marstat" style="width:100%"></td> 
             	
             	<td>Communication Needs:</td> 
-            	<td><input type ="text" name ="commneed" style="width:100%"></td> 	
-            	
+            	<td>
+            		<select name="commneed" id="commneed" style="width:100%">
+        			  <option></option>
+					  <option value ="TTY">TTY</option>
+					  <option value ="Sign Interpreter">Sign Interpreter</option>
+					  <option value ="other">other</option>
+					</select>
+					<br>
+        			<input type ="text" style="display:none;width:100%" name="commneedothertext" id="commneedothertext"/>
+					<label for="commneed" class="error"></label>
+            	</td> 	
         	</tr>
         	<tr>
         		<td>Currently Served By:</td> 
         		<td>
-        			<select name="servby" id="servby">
+        			<select name="servby" id="servby" style="width:100%">
         			  <option></option>
 					  <option value ="Dept. of Mental Health">Dept. of Mental Health</option>
 					  <option value ="Dept. of Developmental Svcs.">Dept. of Developmental Svcs.</option>
@@ -130,17 +189,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  <option value ="Mass Comm./Blind">Mass Comm./Blind</option>
 					  <option value ="Mass. Comm./Deaf/HH">Mass. Comm./Deaf/HH</option>
 					  <option value ="Unknown">Unknown</option>
-					  <option value ="Other(Specify)">Other(Specify)</option>
+					  <option value ="Other">Other</option>
 					  <option value ="None">None</option>
 					</select>
-        			<input type ="text" name="servbyothertext" id="servbyothertext" disabled/>
-        			<br>
+					<br>
+        			<input type ="text" style="display:none;width:100%" name="servbyothertext" id="servbyothertext"/>
 					<label for="servby" class="error"></label>
         		</td> 
         		<td>Type of Service:</td> 
-        		<td><input type ="text" name="servtype" style="width:100%"></td> 
+        		<td>
+        			<select name="servtype" id="servtype" style="width:100%">
+	        			<option></option>
+						<option value ="Institutional">Institutional</option>
+						<option value ="Residential">Residential</option>
+						<option value ="Day Program">Day Program</option>
+						<option value ="Case Management">Case Management</option>
+						<option value ="Service Coordination">Service Coordination</option>
+						<option value ="Foster / Spec. Home Care">Foster / Spec. Home Care</option>
+						<option value ="Respite">Respite</option>
+						<option value ="Other">Other</option>
+					</select>
+					<br>
+        			<input type ="text" style="width:100%;display:none" name="servtypeothertext" id="servtypeothertext"/>
+					<label for="servtype" class="error"></label>
+        		</td> 
 				<td>Client's Ethnicity:</td> 
-        		<td><input type ="text" name="ethnicity" style="width:100%"></td> 
+        		<td>
+        			<select name="ethnicity" id="ethnicity" style="width:100%">
+	        			<option></option>
+						<option value ="Caucasian">Caucasian</option>
+						<option value ="Hispanic">Hispanic</option>
+						<option value ="Asian">Asian</option>
+						<option value ="African American">African American</option>
+						<option value ="Native American">Native American</option>
+						<option value ="Other">Other</option>
+						<br>
+        				<input type ="text" style="width:100%;display:none" name="ethnicityothertext" id="ethnicityothertext"/>
+						<label for="ethnicity" class="error"></label>
+					</select>	
+        		</td> 
         	</tr>
         	<tr>
         		<td>Disability:</td>	
@@ -163,11 +250,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   		<td><input type="checkbox" name="disability" value="Deaf / Hard of Hearing">Deaf / Hard of Hearing	
 				   	</tr>
 				   	<tr>
-				   		<td><input type="checkbox" name="disability" value="other">other</td>
-				   		<td><input type ="text" name="disabilityothertext" colspan="2"></td>	
+				   		<td><input type="checkbox" name="disability" id="disabilityother" value="other">other:</td>
+				   		<td colspan="2"><input type ="text" name="disabilityothertext" id="disabilityothertext" style="width:90%" disabled></td>	
 				   	</tr>
 				   	<tr>
-				   		<td colspan="2"><label for="disability" class="error"></label></td>
+				   		<td colspan="3"><label for="disability" class="error"></label></td>
 				   	</tr>
 				   	</table>
 				</td> 
@@ -177,7 +264,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            			<td>Collateral contacts or notifications:(Please list, including telephone numbers.)</td>	   		 
 					   	</tr>
 					   	<tr>
-						   <td><textarea style="width:100%" rows="4" name="collcontact" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea></td>
+						   <td><textarea style="width:100%" rows="4" name="collcontact"></textarea></td>
 					   	</tr> 
 				   	</table>          		
             	</td>	

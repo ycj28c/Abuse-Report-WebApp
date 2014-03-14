@@ -48,6 +48,12 @@ public class NewPatientServlet extends HttpServlet {
 			}
 			String collContact = request.getParameter("collcontact");
 			String commNeed = request.getParameter("commneed");
+			if(commNeed=="Other"||commNeed.equals("Other")){
+				if(request.getParameter("commNeedothertext")!=""||!request.getParameter("commNeedothertext").equals(""))
+					commNeed = request.getParameter("commNeedothertext");
+				else
+					commNeed = "Empty";
+			}
 			String dob = request.getParameter("dob");
 			String disabilityArray[] = request.getParameterValues("disability");
 			String disability = "";
@@ -62,16 +68,28 @@ public class NewPatientServlet extends HttpServlet {
 					disability += disabilityArray[i]+",";		
 			}}
 			String ethnicity = request.getParameter("ethnicity");
+			if(ethnicity=="Other"||ethnicity.equals("Other")){
+				if(request.getParameter("ethnicityothertext")!=""||!request.getParameter("ethnicityothertext").equals(""))
+					ethnicity = request.getParameter("ethnicityothertext");
+				else
+					ethnicity = "Empty";
+			}
 			String marStat = request.getParameter("marStat");
 			String name = request.getParameter("name");
 			String servBy = request.getParameter("servby");
-			if(servBy=="Other(Specify)"||servBy.equals("Other(Specify)")){
+			if(servBy=="Other"||servBy.equals("Other")){
 				if(request.getParameter("servbyothertext")!=""||!request.getParameter("servbyothertext").equals(""))
 					servBy = request.getParameter("servbyothertext");
 				else
-					servBy = "None";
+					servBy = "Empty";
 			}
 			String servType = request.getParameter("servtype");
+			if(servType=="Other"||servType.equals("Other")){
+				if(request.getParameter("servtypeothertext")!=""||!request.getParameter("servtypeothertext").equals(""))
+					servBy = request.getParameter("servtypeothertext");
+				else
+					servBy = "Empty";
+			}
 			String sex = request.getParameter("sex");
 			String telephone = request.getParameter("telephone");
 			int patientid = 0;
