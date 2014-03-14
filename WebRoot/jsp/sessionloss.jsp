@@ -25,6 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<h1>ERROR</h1>
   	<br>
-    <h1>Sorry, Your session is expired, please login again!<h1>
+    <h1>Sorry, Your session is invalid, please login again!<h1>
   </body>
 </html>
