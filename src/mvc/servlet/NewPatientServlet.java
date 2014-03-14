@@ -109,7 +109,7 @@ public class NewPatientServlet extends HttpServlet {
 			patient.setSex(sex);
 			patient.setTelephone(telephone);
 			//debug
-			System.out.println("NewPatientServlet-getParameter-address:"+address);
+			/*System.out.println("NewPatientServlet-getParameter-address:"+address);
 			System.out.println("NewPatientServlet-getParameter-age:"+age);
 			System.out.println("NewPatientServlet-getParameter-collContact:"+collContact);
 			System.out.println("NewPatientServlet-getParameter-commNeed:"+commNeed);
@@ -121,7 +121,7 @@ public class NewPatientServlet extends HttpServlet {
 			System.out.println("NewPatientServlet-getParameter-servBy:"+servBy);
 			System.out.println("NewPatientServlet-getParameter-servType:"+servType);
 			System.out.println("NewPatientServlet-getParameter-sex:"+sex);
-			System.out.println("NewPatientServlet-getParameter-telephone:"+telephone);
+			System.out.println("NewPatientServlet-getParameter-telephone:"+telephone);*/
 			//database operation
 			try {
 				patientid = DAOFactory.getIPatientDAOInstance().addPatient(patient);

@@ -6,35 +6,47 @@ import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
+
 import mvc.factory.*;
 import mvc.vo.*;
 
 public class DeleteReportServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		boolean flag = false;
-		//String info = new String();
-		String path = "firstpage.jsp";
-		int reportid = Integer.parseInt(req.getParameter("reportid"));
-		//System.out.println("reportid:" + reportid);		
-		Report report = new Report();// 实例化VO
-		report.setreportid(reportid);
-		try {
-			flag = DAOFactory.getIReportDAOInstance().delReportById(report);
-		} catch (Exception e) {
-			e.printStackTrace();
+		//session verify
+		if(req.getSession(false).getAttribute("userid")==null){
+			String errorpath = "sessionloss.jsp";
+			req.getRequestDispatcher(errorpath).forward(req, resp);
 		}
-		/*if (flag) {
-			info = "delete report successfully!";
-		} else {
-			info = "Fail when deleting report!";
+		else{
+			//set variable
+			HttpSession session = req.getSession();
+			String userid = session.getAttribute("userid").toString();
+			boolean flag = false;
+			//String info = new String();
+			String path = "firstpage.jsp";
+			int reportid = Integer.parseInt(req.getParameter("reportid"));
+			Report report = new Report();
+			report.setreportid(reportid);
+			report.setuserid(userid);
+			try {
+				flag = DAOFactory.getIReportDAOInstance().delReportById(report);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			//jump to page
+			/*if (flag) {
+				info = "delete report successfully!";
+			} else {
+				info = "Fail when deleting report!";
+			}
+			req.setAttribute("info", info);*/		
+			req.getRequestDispatcher(path).forward(req, resp);// 跳转
 		}
-		req.setAttribute("info", info);// 保存错误信息*/
-		req.getRequestDispatcher(path).forward(req, resp);// 跳转
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		this.doGet(req, resp);// 调用doGet()操作
+		this.doGet(req, resp);
 	}
 }

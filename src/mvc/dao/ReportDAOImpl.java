@@ -143,9 +143,10 @@ public class ReportDAOImpl implements IReportDAO {
 	public boolean delReportById(Report report) throws Exception {
 		boolean flag = false;
 		try {
-			String sql = "DELETE FROM report where reportid = ?";
-			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
+			String sql = "DELETE FROM report where reportid = ? and userid=?";
+			this.pstmt = this.conn.prepareStatement(sql);
 			this.pstmt.setInt(1, report.getreportid());
+			this.pstmt.setString(2, report.getuserid());
 			int rs = this.pstmt.executeUpdate();
 			if (rs > 0) { // 返回条数
 				flag = true;
@@ -156,7 +157,7 @@ public class ReportDAOImpl implements IReportDAO {
 		} finally {
 			if (this.pstmt != null) {
 				try {
-					this.pstmt.close();// 关闭操作
+					this.pstmt.close();
 				} catch (Exception e) {
 					throw e;
 				}
