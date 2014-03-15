@@ -26,26 +26,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <h1>MENU</h1>
   <br>
-  	<%
+  		<%
   		ArrayList<Authority> authorityList = (ArrayList<Authority>)(session.getAttribute("authorityList"));
-  		String roleid = authorityList.get(0).getRoleId();
-  		for(int i = 0;i<authorityList.size();i++){
-  			if(i==0){%>
-  			<h2><%=authorityList.get(i).getRoleId()%></h2>
-  			<ul class = "fontthree">
-  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
-  	<%		}
-  			else if(authorityList.get(i).getRoleId()==roleid||authorityList.get(i).getRoleId().equals(roleid)){%>
-  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
-  	<% 		}
-  			else{%>
-  			</ul>
-  			<h2><%=authorityList.get(i).getRoleId()%></h2>
-  			<ul class = "fontthree">
-  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
-  			<% 	roleid = authorityList.get(i).getRoleId();
-  			}
-  		}%>
-  	</ul>
+  		if(authorityList.get(0).getPkAuthority()!=null&&!"".equals(authorityList.get(0).getPkAuthority())){ //if user has no authority
+  			String roleid = authorityList.get(0).getRoleId();
+	  		for(int i = 0;i<authorityList.size();i++){
+	  			if(i==0){%>
+	  			<h2><%=authorityList.get(i).getRoleId()%></h2>
+	  			<ul class = "fontthree">
+	  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
+	  	<%		}
+	  			else if(authorityList.get(i).getRoleId()==roleid||authorityList.get(i).getRoleId().equals(roleid)){%>
+	  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
+	  	<% 		}
+	  			else{%>
+	  			</ul>
+	  			<h2><%=authorityList.get(i).getRoleId()%></h2>
+	  			<ul class = "fontthree">
+	  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
+	  			<% 	roleid = authorityList.get(i).getRoleId();
+	  			}
+	  		}
+	  	}
+	  	else{%>
+	  		<ul>
+	  <%}%>
+  		</ul>
   </body>
 </html>

@@ -33,6 +33,10 @@ public class LoginServlet extends HttpServlet {
 				if (DAOFactory.getIUserDAOInstance().findLogin(user)) {// verify pass
 					//get the user's authority, return to page
 					authorityList = DAOFactory.getIAuthorityMappingDAOInstance().getAuthorityMenu(user);
+					if(authorityList.size()<=0){ //if no authority
+						Authority fake = new Authority();
+						authorityList.add(fake);
+					}
 					//jump to page
 					req.setAttribute("userid", user.getUserid());
 					req.setAttribute("username", user.getName());

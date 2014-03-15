@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Statement;
 
 import mvc.vo.Authority;
+import mvc.vo.AuthorityMapping;
 import mvc.vo.Patient;
 import mvc.vo.Report;
 import mvc.vo.User;
@@ -57,6 +58,31 @@ public class AuthorityMappingDAOImpl implements IAuthorityMappingDAO {
 			}
 		}
 		return authorityList;
+	}
+
+	public boolean verifyUser(AuthorityMapping authorityMapping) throws Exception {
+		boolean flag = false;
+		try {			
+			String sql = "SELECT * FROM authority_mapping where user_id=? and role_id=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, authorityMapping.getUserId());
+			this.pstmt.setString(2, authorityMapping.getRoleId());
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return flag;
 	}
 
 }

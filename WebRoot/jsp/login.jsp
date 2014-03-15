@@ -23,17 +23,14 @@
 <body>
 	<h2>Log in demonstration</h2>
 	<%
-		request.setCharacterEncoding("utf-8");
-	%>
-	<%
-		List<String> info = (List<String>) request.getAttribute("info");//取得属性 
-		if (info != null) { //判断是否有内容 
-			Iterator<String> iter = info.iterator();//  实例化Iterator 
+		List<String> info = (List<String>) request.getAttribute("info");
+		if (info != null) { 
+			Iterator<String> iter = info.iterator(); 
 			while (iter.hasNext()) {
 	%>
-	<h4><%=iter.next()%></h4>
+			<h4><%=iter.next()%></h4>
 	<%
-		}
+			}
 		}
 	%>
 	<form action="LoginServlet" method="post" onsubmit="return validate(this)">

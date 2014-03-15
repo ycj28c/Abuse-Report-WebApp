@@ -1,5 +1,6 @@
 package mvc.servlet;
 
+import java.awt.SystemTray;
 import java.io.*;
 import java.util.*;
 
@@ -23,10 +24,24 @@ public class SupervisorReportListServlet extends HttpServlet {
 		String path = "firstpage.jsp";
 		String contentPage ="/jsp/supervisorRepList.jsp";
 		ArrayList<Report> backinfo = new ArrayList<Report>();	
+		boolean flag = false;
+		//judge if the userid is really has this role
+		AuthorityMapping authorityMapping = new AuthorityMapping();
+		authorityMapping.setUserId(userid);
+		authorityMapping.setRoleId(roleid);
+		try {
+			flag = DAOFactory.getIAuthorityMappingDAOInstance().verifyUser(authorityMapping);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(!flag){
+			System.out.println("the user don't have that role");
+			req.getRequestDispatcher(path).forward(req, resp);
+			return;
+		}
 		//set report
 		Report report = new Report();
-		report.setuserid(userid);
-		
+		report.setuserid(userid);	
 		//set page
 		try {
 			reportamount = DAOFactory.getIReportDAOInstance().getAmountSupervisor(roleid);	//get amount of records the role's group have	

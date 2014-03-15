@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import mvc.dbc.DatabaseConnection;
 import mvc.vo.Authority;
+import mvc.vo.AuthorityMapping;
 import mvc.vo.User;
 
 public class AuthorityMappingDAOProxy implements IAuthorityMappingDAO{
@@ -18,6 +19,7 @@ public class AuthorityMappingDAOProxy implements IAuthorityMappingDAO{
 		}
 		this.dao = new AuthorityMappingDAOImpl(this.dbc.getConnection());
 	}
+	
 	public ArrayList<Authority> getAuthorityMenu(User user) throws Exception {
 		ArrayList<Authority> authorityList = new ArrayList<Authority>();
 		try{
@@ -28,5 +30,17 @@ public class AuthorityMappingDAOProxy implements IAuthorityMappingDAO{
 			this.dbc.close();
 		}
 		return authorityList;
+	}
+	
+	public boolean verifyUser(AuthorityMapping authorityMapping) throws Exception{	
+		boolean flag = false;
+		try{
+			flag = this.dao.verifyUser(authorityMapping);
+		}catch(Exception e){
+			throw e;
+		}finally{
+			this.dbc.close();
+		}
+		return flag;
 	}
 }

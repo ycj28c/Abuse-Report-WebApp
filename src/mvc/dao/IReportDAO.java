@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import structure.Page;
 
+import mvc.vo.AuthorityMapping;
 import mvc.vo.Report;
 
 public interface IReportDAO {

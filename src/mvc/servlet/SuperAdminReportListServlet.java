@@ -23,7 +23,21 @@ public class SuperAdminReportListServlet extends HttpServlet {
 		ArrayList<Report> backinfo = new ArrayList<Report>();	
 		Report report = new Report();
 		report.setuserid(userid);
-		
+		boolean flag = false;
+		//judge if the userid is really has this role
+		AuthorityMapping authorityMapping = new AuthorityMapping();
+		authorityMapping.setUserId(userid);
+		authorityMapping.setRoleId("4"); //super admin authority
+		try {
+			flag = DAOFactory.getIAuthorityMappingDAOInstance().verifyUser(authorityMapping);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(!flag){
+			System.out.println("the user don't have that role");
+			req.getRequestDispatcher(path).forward(req, resp);
+			return;
+		}
 		//set page
 		try {
 			reportamount = DAOFactory.getIReportDAOInstance().getAmountSuperAdmin(); //get amount of records user have	
