@@ -24,16 +24,16 @@ public class AuthorityMappingDAOImpl implements IAuthorityMappingDAO {
 	public ArrayList<Authority> getAuthorityMenu(User user) throws Exception {
 		ArrayList<Authority> authorityList = new ArrayList<Authority>();
 		try {
-			String sql = "select PK_authority,name,group_id,group_name,url from authority where PK_authority in" +
-					"(select authority_id from authority_mapping where user_id=?) order by group_id,PK_authority;";
+			String sql = "select PK_authority,name,role_id,role_name,url from authority where PK_authority in" +
+					"(select authority_id from authority_mapping where user_id=?) order by role_id,PK_authority;";
 			this.pstmt = this.conn.prepareStatement(sql);
 			this.pstmt.setString(1, user.getUserid()); 
 			ResultSet rs = this.pstmt.executeQuery();
 			while (rs.next()) {
 				Authority authority = new Authority();
 				authority.setPkAuthority(rs.getInt("PK_authority"));
-				authority.setGroupId(rs.getString("group_id"));
-				authority.setGroupId(rs.getString("group_name"));
+				authority.setRoleId(rs.getString("role_id"));
+				authority.setRoleId(rs.getString("role_name"));
 				authority.setName(rs.getString("name"));
 				authority.setUrl(rs.getString("url"));
 				authorityList.add(authority);

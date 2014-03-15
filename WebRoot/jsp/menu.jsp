@@ -28,22 +28,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <br>
   	<%
   		ArrayList<Authority> authorityList = (ArrayList<Authority>)(session.getAttribute("authorityList"));
-  		String groupid = authorityList.get(0).getGroupId();
+  		String roleid = authorityList.get(0).getRoleId();
   		for(int i = 0;i<authorityList.size();i++){
   			if(i==0){%>
-  			<h2><%=authorityList.get(i).getGroupId()%></h2>
+  			<h2><%=authorityList.get(i).getRoleId()%></h2>
   			<ul class = "fontthree">
   				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
   	<%		}
-  			else if(authorityList.get(i).getGroupId()==groupid||authorityList.get(i).getGroupId().equals(groupid)){%>
+  			else if(authorityList.get(i).getRoleId()==roleid||authorityList.get(i).getRoleId().equals(roleid)){%>
   				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
   	<% 		}
   			else{%>
   			</ul>
-  			<h2><%=authorityList.get(i).getGroupId()%></h2>
+  			<h2><%=authorityList.get(i).getRoleId()%></h2>
   			<ul class = "fontthree">
   				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
-  			<% 	groupid = authorityList.get(i).getGroupId();
+  			<% 	roleid = authorityList.get(i).getRoleId();
   			}
   		}%>
   	</ul>

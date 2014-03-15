@@ -274,4 +274,124 @@ public class ReportDAOImpl implements IReportDAO {
 		return amout;
 	}
 
+	public ArrayList<Report> supervisorListReport(Page page, String roleid) throws Exception {
+		ArrayList<Report> reportlist = new ArrayList<Report>();
+		try {
+			String sql = "select reportid,discript,name,time from report where groupid in (select groupid from role where PK_role =?)";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, roleid);
+			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
+			ResultSet rs = this.pstmt.executeQuery();
+			rs.absolute((page.currentPage-1)*page.getPageSize());//set location to second record of each page
+			//rs.relative(-1);//back 1 position
+			while (rs.next()) {
+				Report rep = new Report();
+				rep.setreportid(rs.getInt("reportid"));
+				rep.setdiscript(rs.getString("discript"));
+				rep.setName(rs.getString("name"));
+				rep.settime(rs.getDate("time"));
+				reportlist.add(rep);
+
+				//debug
+				/*System.out.println("rsgetreportid:"+rs.getInt("reportid"));
+				System.out.println("rsgetdiscript:"+rs.getString("discript"));
+				System.out.println("rsgetname:"+rs.getString(2));
+				System.out.println("rsgetdate:"+rs.getDate("time"));
+				System.out.println("getreportid:"+rep.getreportid());
+				System.out.println("getdiscript:"+rep.getdiscript());
+				System.out.println("getname:"+rep.getName());
+				System.out.println("getdate:"+rep.gettime());*/	
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return reportlist;
+	}
+
+	public int getAmountSupervisor(String roleid) throws Exception {
+		int amout = 0;
+		try {
+			String sql = "select count(*) as total from report where groupid in (select groupid from role where PK_role =?)";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, roleid);
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				amout = rs.getInt("total");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return amout;
+	}
+
+	public ArrayList<Report> superAdminListReport(Page page) throws Exception {
+		ArrayList<Report> reportlist = new ArrayList<Report>();
+		try {
+			String sql = "select reportid,discript,name,time from report";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
+			ResultSet rs = this.pstmt.executeQuery();
+			rs.absolute((page.currentPage-1)*page.getPageSize());//set location to second record of each page
+			//rs.relative(-1);//back 1 position
+			while (rs.next()) {
+				Report rep = new Report();
+				rep.setreportid(rs.getInt("reportid"));
+				rep.setdiscript(rs.getString("discript"));
+				rep.setName(rs.getString("name"));
+				rep.settime(rs.getDate("time"));
+				reportlist.add(rep);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return reportlist;
+	}
+
+	public int getAmountSuperAdmin() throws Exception {
+		int amout = 0;
+		try {
+			String sql = "select count(*) as total from report";
+			this.pstmt = this.conn.prepareStatement(sql);
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				amout = rs.getInt("total");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return amout;
+	}
+
 }

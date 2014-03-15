@@ -10,23 +10,26 @@ import structure.Page;
 import mvc.factory.*;
 import mvc.vo.*;
 
-public class ReportListServlet extends HttpServlet {
+public class SupervisorReportListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//set variable
 		HttpSession session = req.getSession();
 		String userid = session.getAttribute("userid").toString();
-		int pageindex = Integer.parseInt(req.getParameter("pageindex"));//当前page
+		String roleid = req.getParameter("roleid");
+		//String groupid = "2";
+		int pageindex = Integer.parseInt(req.getParameter("pageindex"));//current page
 		//int totalpage = 0;
 		int reportamount = 0;
 		String path = "firstpage.jsp";
-		String contentPage = "/jsp/report.jsp";
-		ArrayList<Report> backinfo = new ArrayList<Report>();// 保存所有返回信息		
-		Report report = new Report();// 实例化VO
-		report.setuserid(userid);// 设置userid
+		String contentPage ="/jsp/supervisorRepList.jsp";
+		ArrayList<Report> backinfo = new ArrayList<Report>();	
+		//set report
+		Report report = new Report();
+		report.setuserid(userid);
 		
 		//set page
 		try {
-			reportamount = DAOFactory.getIReportDAOInstance().getAmount(report); //get amount of records user have	
+			reportamount = DAOFactory.getIReportDAOInstance().getAmountSupervisor(roleid);	//get amount of records the role's group have	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,7 +39,7 @@ public class ReportListServlet extends HttpServlet {
 		
 		//set report
 		try {
-			backinfo = DAOFactory.getIReportDAOInstance().listReport(report,page);	
+			backinfo = DAOFactory.getIReportDAOInstance().supervisorListReport(page,roleid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -44,6 +47,7 @@ public class ReportListServlet extends HttpServlet {
 		req.setAttribute("backinfo", backinfo);// array report list
 		req.setAttribute("reportamount", reportamount);// total number of user's report
 		req.setAttribute("reportpage", page);// total page of user's report
+		req.setAttribute("roleid", roleid);// total page of user's report
 		req.setAttribute("contentPage", contentPage); //set the content page in the firstpage
 		req.getRequestDispatcher(path).forward(req, resp);
 	}

@@ -40,9 +40,16 @@ if(session.getAttribute("userid")==null){
 		</div>
 		<div id="menu" >
 			<jsp:include  page="/jsp/menu.jsp"/>
-		</div>		
-		<div id="content">
-			<jsp:include  page="/jsp/report.jsp"/>
+		</div>	
+		<div id="content">	
+		<% 
+			String contentPage = (String)request.getAttribute("contentPage");
+			if(contentPage==null||"".equals(contentPage)){%>
+				<jsp:include  page="/jsp/report.jsp"/>
+		<% 	}
+			else{%>
+				<jsp:include  page="<%=contentPage%>"/>
+		<%	}%>
 		</div>
 		<div id="footer">Welcome to xxx system. CS509-Team2</div>
 	</div>

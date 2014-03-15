@@ -65,6 +65,14 @@
   <servlet-name>MVCNewPatient</servlet-name>
   <servlet-class>mvc.servlet.NewPatientServlet</servlet-class>
  </servlet>
+ <servlet>
+  <servlet-name>MVCSupRepList</servlet-name>
+  <servlet-class>mvc.servlet.SupervisorReportListServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>MVCAdminRepList</servlet-name>
+  <servlet-class>mvc.servlet.SuperAdminReportListServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>MVCLogin</servlet-name>
   <url-pattern>/jsp/LoginServlet</url-pattern>
@@ -116,6 +124,14 @@
  <servlet-mapping>
   <servlet-name>MVCNewPatient</servlet-name>
   <url-pattern>/jsp/NewPatientServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCSupRepList</servlet-name>
+  <url-pattern>/jsp/SupervisorReportListServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>MVCAdminRepList</servlet-name>
+  <url-pattern>/jsp/SuperAdminReportListServlet</url-pattern>
  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>/index.html</welcome-file>

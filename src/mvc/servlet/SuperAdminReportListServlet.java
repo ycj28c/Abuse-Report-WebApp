@@ -10,33 +10,33 @@ import structure.Page;
 import mvc.factory.*;
 import mvc.vo.*;
 
-public class ReportListServlet extends HttpServlet {
+public class SuperAdminReportListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//set variable
 		HttpSession session = req.getSession();
 		String userid = session.getAttribute("userid").toString();
-		int pageindex = Integer.parseInt(req.getParameter("pageindex"));//当前page
+		int pageindex = Integer.parseInt(req.getParameter("pageindex"));//current page
 		//int totalpage = 0;
 		int reportamount = 0;
 		String path = "firstpage.jsp";
-		String contentPage = "/jsp/report.jsp";
-		ArrayList<Report> backinfo = new ArrayList<Report>();// 保存所有返回信息		
-		Report report = new Report();// 实例化VO
-		report.setuserid(userid);// 设置userid
+		String contentPage = "/jsp/superAdminRepList.jsp";
+		ArrayList<Report> backinfo = new ArrayList<Report>();	
+		Report report = new Report();
+		report.setuserid(userid);
 		
 		//set page
 		try {
-			reportamount = DAOFactory.getIReportDAOInstance().getAmount(report); //get amount of records user have	
+			reportamount = DAOFactory.getIReportDAOInstance().getAmountSuperAdmin(); //get amount of records user have	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int pagesize = 17;
+		int pagesize = 17; //each page display 17 record
 		Page page = new Page(reportamount,pagesize,pageindex);
 		page.generatepage();
 		
 		//set report
 		try {
-			backinfo = DAOFactory.getIReportDAOInstance().listReport(report,page);	
+			backinfo = DAOFactory.getIReportDAOInstance().superAdminListReport(page);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

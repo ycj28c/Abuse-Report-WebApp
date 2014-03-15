@@ -2,7 +2,7 @@ package mvc.vo;
 
 public class AuthorityMapping {
 	private Integer pkAuthorityMapping;
-	private String groupId;
+	private String roleId;
 	private String authorityId;
 	private String userId;
 
@@ -14,12 +14,12 @@ public class AuthorityMapping {
 		this.pkAuthorityMapping = pkAuthorityMapping;
 	}
 
-	public String getGroupId() {
-		return this.groupId;
+	public String getRoleId() {
+		return this.roleId;
 	}
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getAuthorityId() {

@@ -8,6 +8,7 @@ public class Report {
 	private String name;
 	private Date time;
 	private String userid;
+	private String groupid;
 
 	public int getreportid() {
 		return reportid;
@@ -46,6 +47,14 @@ public class Report {
 	}
 	public void setuserid(String userid) {
 		this.userid = userid;
+		
+	}
+	
+	public String getGroupId() {
+		return groupid;
+	}
+	public void setGroupId(String groupid) {
+		this.groupid = groupid;
 		
 	}
 }

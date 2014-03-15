@@ -3,9 +3,9 @@ package mvc.vo;
 public class Authority {
 	private Integer pkAuthority;
 	private String name;
-	private String groupId;
+	private String roleId;
 	private String url;
-	private String groupName;
+	private String roleName;
 	
 	public Integer getPkAuthority() {
 		return this.pkAuthority;
@@ -23,12 +23,12 @@ public class Authority {
 		this.name = name;
 	}
 
-	public String getGroupId() {
-		return this.groupId;
+	public String getRoleId() {
+		return this.roleId;
 	}
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getUrl() {
@@ -39,12 +39,12 @@ public class Authority {
 		this.url = url;
 	}
 	
-	public String getGroupName() {
-		return this.groupName;
+	public String getRoleName() {
+		return this.roleName;
 	}
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 }
