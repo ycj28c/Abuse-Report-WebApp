@@ -15,32 +15,33 @@ public class LoginServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String fail_path = "login.jsp";
 		String succ_path = "firstpage.jsp";
-		String userid = req.getParameter("userid");// 接受userid内容
-		String userpass = req.getParameter("userpass");// 接受password内容
-		List<String> info = new ArrayList<String>();// 保存所有返回信息
+		String userid = req.getParameter("userid");
+		String userpass = req.getParameter("userpass");
+		List<String> info = new ArrayList<String>();
+		ArrayList<Authority> authorityList = new ArrayList<Authority>();
 		if (userid == null || "".equals(userid)) {
 			info.add("User id can not be empty!");
 		}
 		if (userpass == null || "".equals(userpass)) {
 			info.add("Password can not be empty!");
 		}
-		if (info.size() == 0) {// 用户名和密码验证通过
-			User user = new User();// 实例化VO
-			user.setUserid(userid);// 设置userid
-			user.setPassword(userpass);// 设置password
+		if (info.size() == 0) {// if the userid and password pass
+			User user = new User();
+			user.setUserid(userid);
+			user.setPassword(userpass);
 			try {
-				if (DAOFactory.getIUserDAOInstance().findLogin(user)) {// 验证通过
-					// info.add("login in successful " + user.getName()+
-					// " welcome!");
-					// req.setAttribute("info", info);// 保存错误信息
+				if (DAOFactory.getIUserDAOInstance().findLogin(user)) {// verify pass
+					//get the user's authority, return to page
+					authorityList = DAOFactory.getIAuthorityMappingDAOInstance().getAuthorityMenu(user);
+					//jump to page
 					req.setAttribute("userid", user.getUserid());
 					req.setAttribute("username", user.getName());
-					req.setAttribute("user", user);
-					req.getRequestDispatcher(succ_path).forward(req, resp);// 跳转
+					req.setAttribute("authorityList", authorityList);
+					req.getRequestDispatcher(succ_path).forward(req, resp);
 				} else {
 					info.add("fail login，wrong user id or password!");
-					req.setAttribute("info", info);// 保存错误信息
-					req.getRequestDispatcher(fail_path).forward(req, resp);// 跳转
+					req.setAttribute("info", info);// return error message
+					req.getRequestDispatcher(fail_path).forward(req, resp);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@ page import="mvc.vo.*"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -24,16 +24,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-	<h2>Menu</h2>
-	<ul class = "fontthree">
-		<li><a href = "jsp/ReportListServlet?pageindex=1">All List</a></li>
-		<li><a href = "jsp/PrepareNewReport">New report</a></li>
-		<li><a href = "javascript:void(0)" >Waiting List</a></li>
-		<li><a href = "javascript:void(0)" >Finish List</a></li>
-	</ul>
-	<h2>Manager</h2>
-	<ul class = "fontthree">
-		<li><a href = "jsp/newpatient.jsp">New patient</a></li>
-	</ul>
+  <h1>MENU</h1>
+  <br>
+  	<%
+  		ArrayList<Authority> authorityList = (ArrayList<Authority>)(session.getAttribute("authorityList"));
+  		String groupid = authorityList.get(0).getGroupId();
+  		for(int i = 0;i<authorityList.size();i++){
+  			if(i==0){%>
+  			<h2><%=authorityList.get(i).getGroupId()%></h2>
+  			<ul class = "fontthree">
+  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
+  	<%		}
+  			else if(authorityList.get(i).getGroupId()==groupid||authorityList.get(i).getGroupId().equals(groupid)){%>
+  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
+  	<% 		}
+  			else{%>
+  			</ul>
+  			<h2><%=authorityList.get(i).getGroupId()%></h2>
+  			<ul class = "fontthree">
+  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
+  			<% 	groupid = authorityList.get(i).getGroupId();
+  			}
+  		}%>
+  	</ul>
   </body>
 </html>

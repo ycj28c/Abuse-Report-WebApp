@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
-h1 {margin-bottom:0;}
-h2 {margin-bottom:0;font-size:18px;}
+h1 {margin-bottom:0;font-size:25px; font-weight:bold;}
+h2 {margin-bottom:0;font-size:18px;background-color:#99bbbb;}
 ul {margin:0;}
 li {list-style:none;}
 .fontthree{

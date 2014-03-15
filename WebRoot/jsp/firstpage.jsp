@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 if(session.getAttribute("userid")==null){
 	session.setAttribute("userid", request.getAttribute("userid"));
 	session.setAttribute("username", request.getAttribute("username"));
-	session.setAttribute("user", request.getAttribute("user"));
+	session.setAttribute("authorityList", request.getAttribute("authorityList"));
 }
 %>
 
@@ -19,7 +19,6 @@ if(session.getAttribute("userid")==null){
     <base href="<%=basePath%>">
     
     <title>My JSP 'MyJsp.jsp' starting page</title>
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    

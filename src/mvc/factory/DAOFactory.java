@@ -15,4 +15,7 @@ public class DAOFactory {
 	public static IPatientDAO getIPatientDAOInstance() {// 取得DAO实例
 		return new PatientDAOProxy();// 返回代理实例
 	}
+	public static IAuthorityMappingDAO getIAuthorityMappingDAOInstance() {// 取得DAO实例
+		return new AuthorityMappingDAOProxy();// 返回代理实例
+	}
 }
