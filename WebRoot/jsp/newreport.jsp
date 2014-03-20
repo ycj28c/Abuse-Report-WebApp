@@ -13,11 +13,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/select_autocomplete.css"/>
+	<style type="text/css">
+		#newreport label.error {
+			width: auto;
+			color: red;
+			display: inline;
+		}
+	</style>
 	
 	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
 	<script type="text/javascript" src="javascript/swfupload/swfupload.js"></script>
   	<script type="text/javascript" src="javascript/swfupload/handlers.js"></script>
-  	<script type="text/javascript" src="javascript/jquery-1.4.2.min.js"></script>
+  	<!-- script type="text/javascript" src="javascript/jquery-1.4.2.min.js"></script-->
+	<script type="text/javascript" src="javascript/jquery-1.9.0.js"></script>
+	<script type="text/javascript" src="javascript/jquery.validate.js"></script>
 	<script type="text/javascript">
 			var swfu;
 			window.onload = function () {
@@ -64,10 +74,90 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				swfu.startUpload();
 			}
 	</script>
-
+	<script type="text/javascript">
+	$().ready(function() {
+		// validate signup form on keyup and submit
+		$("#newreport").validate({
+			rules: {
+				allegedabuser: {
+					required: true,
+					minlength: 2
+				},
+				allegedvictim: {
+					required: true,
+					minlength: 2
+				},
+				awareof: "required",
+				abusetype:"required",
+				time:"required",
+				abusefrequency:"required",
+				dppchotline:"required",
+				investigatorrisk: "required",
+				narrativeform: "required",
+				risklevel:"required",
+				resultinginjure:"required",
+			},
+			messages: {
+				allegedabuser: {
+					required: "Please enter a name",
+					minlength: "Your name must consist of at least 2 characters"
+				},
+				allegedvictim: {
+					required: "Please provide a name",
+					minlength: "Your name must be at least 2 characters long"
+				},
+				awareof: "Please choose a option",
+				abusetype:"Please choose a abuse type",
+				time:"Please choose a time",
+				abusefrequency:"Please choose a abuse frequency",
+				dppchotline:"Please choose a dppchotline",
+				investigatorrisk: "Please choose a investigator risk",
+				narrativeform: "(please write)",
+				risklevel: "(please write)",
+				resultinginjure: "(please write)",
+			}
+		});
+	
+		$("#abusetypeother").change(function(){
+			if($(this).is(":checked")){//only is(":checked") works for judge
+				$("#abusetypeothertext").attr("disabled",false);
+			}	
+			else{
+				$("#abusetypeothertext").attr("disabled",true);
+				$("#abusetypeothertext").val("");
+			}
+		});
+		
+		$("input:radio[name='dppchotline']").change(function(){
+			var selectValue = $(this).val();
+			if(selectValue =="yes"){
+				//alert(selectValue);
+				$("#dppchotlinetext").attr("disabled",false);
+			}	
+			else{
+				//alert(selectValue);
+				$("#dppchotlinetext").attr("disabled",true);
+				$("#dppchotlinetext").val("");
+			}
+		});
+		
+		$("input:radio[name='investigatorrisk']").change(function(){
+			var selectValue = $(this).val();
+			if(selectValue =="yes"){
+				$("#investigatorrisktext").attr("disabled",false);
+			}	
+			else{
+				$("#investigatorrisktext").attr("disabled",true);
+				$("#investigatorrisktext").val("");
+			}
+		});
+			
+	});
+	</script>
+	
 </head>
 <body>
-	<form action="jsp/NewReportServlet?userid=<%=session.getAttribute("userid")%>" method="post">
+	<form action="jsp/NewReportServlet?userid=<%=session.getAttribute("userid")%>" method="post" name="newreport" id="newreport">
 		<table align = "left" border="1" style="border-collapse: collapse;">
 			<tr>
             	<td colspan="5" align = "center">NEW REPORT</td>
@@ -79,86 +169,113 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
 			<tr>
             	<td>Alleged Abuser:</td>    
-            	<td><input type ="text" style="width:100%"></td> 
-            	<td>Alleged Victim:</td>
-        		<td><input type ="text"></td>
-        		<td colspan="2">Is victim aware of report?
-            		<label><input name="Fruit" type="radio" value="" />yes</label> 
-					<label><input name="Fruit" type="radio" value="" />no</label>		
-				</td>
+            	<td colspan="2"><input type ="text" name = "allegedabuser" style="width:100%"></td> 
+            	<td>Date of last incident:</td>
+            	<script type="text/javascript" src="javascript/calendar.js"></script>
+              	<td colspan="2"><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly" />
+	        		<br>
+	        		<label for="time" class="error"></label>	
+        		</td>
         	</tr>
         	<tr>
+        		<td>Alleged Victim:</td>
+        		<td colspan="2"><input type ="text"name = "allegedvictim" style="width:100%"></td>
         		<td>Frequency of Abuse:</td>
-        		<td>
-            		<select name="abusetype" id="abusetype">  
+        		<td colspan="2">
+            		<select name="abusefrequency" id="abusefrequency"> 
+            			<option></option>  
 				        <option value="1">Daily</option>  
 				        <option value="2">Weeking</option>  
 				        <option value="3">Episodic</option> 	          
 			      	</select> 
-			      	<select name="abusetype" id="abusetype">  
+			      	<select name="abusefrequency" id="abusefrequency">  
+			      		<option></option>  
 				        <option value="1">Increasing</option>  
 				        <option value="2">Decreasing</option>  
 				        <option value="3">Constant</option> 
 				        <option value="4">unknown</option> 	          
 			      	</select>
+			      	<br>
+					<label for="abusefrequency" class="error"></label>	
 			    </td> 
-        		<td>Date of last incident:</td>
-            	<script type="text/javascript" src="javascript/calendar.js"></script>
-              	<td><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly" /></td>
+        		
         	</tr>
         	<tr>     		 
             	<td>Types of Abuse:</td>
-            	<td colspan="5">
-            		<input type="checkbox" name="director[]" value="Physical">Physical 
-            		<input type="checkbox" name="director[]" value="Omission">Omission
-            		<input type="checkbox" name="director[]" value="Sexual">Sexual
-            		<input type="checkbox" name="director[]" value="Emotional">Emotional	
-            		<input type="checkbox" name="director[]" value="other">other:
-            		<input type ="text" style="width:51%">
+            	<td colspan="2">
+            		<input type="checkbox" name="abusetype" value="Physical">Physical 
+            		<input type="checkbox" name="abusetype" value="Omission">Omission
+            		<input type="checkbox" name="abusetype" value="Sexual">Sexual
+            		<input type="checkbox" name="abusetype" value="Emotional">Emotional	
+            		<br>
+            		<input type="checkbox" name="abusetype" id="abusetypeother" value="other">other:
+            		<input type ="text" name="abusetypeothertext" id="abusetypeothertext" style="width:80%" disabled>
+            		<br>
+					<label for="abusetype" class="error"></label>
+				</td>
+				<td>Is victim aware of report?</td>
+				<td colspan="2">
+            		<label><input name="awareof" type="radio" value="" />yes</label> 
+					<label><input name="awareof" type="radio" value="" />no</label>	
+					<br>
+					<label for="awareof" class="error"></label>	
+				</td>
             </tr>  
         	<tr>
-        		<td colspan="2">Was an oral report filed with the DPPC Hotline?</td>
+        		<td colspan="2">Was an oral report filed with the DPPC Hotline?
+					<br>
+					<label for="dppchotline" class="error"></label>	
+        		</td>
         		<td colspan="4">
-	            	<label><input name="Fruit" type="radio" value="" />no</label> 
-					<label><input name="Fruit" type="radio" value="" />yes</label> 
-					<label><input name="Fruit" type="text"  style="width:85%" value="Please note date and time of call" /></label> 
-				</td> 		
+	            	<label><input name="dppchotline" type="radio" value="no" />no</label> 
+					<label><input name="dppchotline" type="radio" value="yes" />yes</label> 
+					<label><input name="dppchotlinetext" id="dppchotlinetext" type="text"  style="width:70%" value="" disabled></label> 
+				</td> 	
         	</tr>
         	<tr>
-        		<td colspan="2">Is there any risk to the investigator?</td>	
+        		<td colspan="2">Is there any risk to the investigator?      		
+					<br>
+					<label for="investigatorrisk" class="error"></label>
+        		</td>
 				<td colspan="4">
-	            	<label><input name="Fruit" type="radio" value="" />no</label> 
-					<label><input name="Fruit" type="radio" value="" />yes</label> 	
-					<label><input name="Fruit" type="text"  style="width:85%" value="If yes, please specify" /></label> 
-				</td>
+	            	<label><input name="investigatorrisk" type="radio" value="no" />no</label> 
+					<label><input name="investigatorrisk" type="radio" value="yes" />yes</label> 	
+					<label><input name="investigatorrisktext" id="investigatorrisktext" type="text"  style="width:70%" value="" disabled></label> 
+				</td>	
         	</tr>
         	<tr>
             	<tr>
-            		<td colspan="6">In narrative form, please describe the alleged abuse:</td>
+            		<td colspan="6">In narrative form, please describe the alleged abuse:
+            			<label for="narrativeform" class="error"></label>
+            		</td>
             	</tr>
             	<tr>
             		<td colspan="6">
-              			<textarea style="width:100%" rows="6" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              			<textarea style="width:100%" name="narrativeform" rows="6" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
               		</td>
               	</tr>
         	</tr>  
         	<tr>
             	<tr>
-            		<td colspan="6">Please describe the level of risk to the alleged victim, including his/her currentphysical and emotional state:</td>
+            		<td colspan="6">Please describe the level of risk to the alleged victim, including his/her currentphysical and emotional state:
+            			<label for="risklevel" class="error"></label>
+            		</td>
             	</tr>
             	<tr>
             		<td colspan="6">
-              			<textarea style="width:100%" rows="6" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              			<textarea style="width:100%" rows="6" name="risklevel" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
               		</td>
               	</tr>
         	</tr> 
         	<tr>
             	<tr>
-            		<td colspan="6">Please list any resulting injuries:</td>
+            		<td colspan="6">Please list any resulting injuries:
+            			<label for="resultinginjure" class="error"></label>
+            		</td>
             	</tr>
             	<tr>
             		<td colspan="6">
-              			<textarea style="width:100%" rows="6" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              			<textarea style="width:100%" rows="6" name="resultinginjure" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
               		</td>
               	</tr>
         	</tr> 
