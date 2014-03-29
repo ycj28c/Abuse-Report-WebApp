@@ -20,10 +20,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	
 	<script type="text/javascript" src="javascript/browsercompatible.js"></script>
-	
+	<script type="text/javascript">
+	function sm(tname){ //extend and shrink the menu function
+		if(tname.style.display=='none') 
+		{ 
+			tname.style.display=''; 
+		} 
+		else 
+		{ 
+			tname.style.display='none'; 
+		} 
+	}
+	</script>
   </head>
   
-  <body>
+  <body onload=sm(dd0)>
   <h1>MENU</h1>
   <br>
   		<%
@@ -32,8 +43,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			String roleid = authorityList.get(0).getRoleId();
 	  		for(int i = 0;i<authorityList.size();i++){
 	  			if(i==0){%>
-	  			<h2><%=authorityList.get(i).getRoleId()%></h2>
-	  			<ul class = "fontthree">
+	  			<h2 style="border-style: outset"><a href="Javascript:sm(dd<%=i%>)"><%=authorityList.get(i).getRoleId()%></a></h2>
+	  			<ul class = "fontthree" id="dd<%=i%>" style="display:none;">
 	  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
 	  	<%		}
 	  			else if(authorityList.get(i).getRoleId()==roleid||authorityList.get(i).getRoleId().equals(roleid)){%>
@@ -41,8 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	<% 		}
 	  			else{%>
 	  			</ul>
-	  			<h2><%=authorityList.get(i).getRoleId()%></h2>
-	  			<ul class = "fontthree">
+	  			<h2 style="border-style: outset"><a href="Javascript:sm(dd<%=i%>)"><%=authorityList.get(i).getRoleId()%></a></h2>
+	  			<ul class = "fontthree" id="dd<%=i%>" style="display:none;">
 	  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
 	  			<% 	roleid = authorityList.get(i).getRoleId();
 	  			}
