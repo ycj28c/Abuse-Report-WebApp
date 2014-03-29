@@ -20,8 +20,8 @@ public class DeleteReportServlet extends HttpServlet {
 		String path = "firstpage.jsp";
 		int reportid = Integer.parseInt(req.getParameter("reportid"));
 		Report report = new Report();
-		report.setreportid(reportid);
-		report.setuserid(userid);
+		report.setReportid(reportid);
+		report.setUserid(userid);
 		try {
 			flag = DAOFactory.getIReportDAOInstance().delReportById(report);
 		} catch (Exception e) {

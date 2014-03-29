@@ -22,7 +22,7 @@ public class SuperAdminReportListServlet extends HttpServlet {
 		String contentPage = "/jsp/superAdminRepList.jsp";
 		ArrayList<Report> backinfo = new ArrayList<Report>();	
 		Report report = new Report();
-		report.setuserid(userid);
+		report.setUserid(userid);
 		boolean flag = false;
 		//judge if the userid is really has this role
 		AuthorityMapping authorityMapping = new AuthorityMapping();

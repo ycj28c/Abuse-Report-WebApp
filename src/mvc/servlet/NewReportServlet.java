@@ -19,29 +19,78 @@ public class NewReportServlet extends HttpServlet {
 		boolean flag = false;
 		//String info = new String();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date time = new Date();
+		java.util.Date time = new java.util.Date();
+		java.sql.Date trans_time = new java.sql.Date(0);
 		String path = "newreport.jsp";	
-		String name = req.getParameter("username");
-		String description = req.getParameter("description");
+		String allegedabuser = req.getParameter("allegedabuser");
 		int reportid = 0;
 		try {
 			time = sdf.parse(req.getParameter("time"));
+			trans_time = new java.sql.Date(time.getTime()); 
 		} catch (ParseException e1) {
 			 System.out.println(e1.getMessage()); 
 		}
+		String allegedvictim = req.getParameter("allegedvictim");
+		String abusefrequency ="";
+		if(true){
+			String abusefrequencydate = req.getParameter("abusefrequencydate");
+			String abusefrequencytend = req.getParameter("abusefrequencytend");
+			abusefrequency+=abusefrequencydate;
+			abusefrequency+=",";
+			abusefrequency+=abusefrequencytend;
+		}
+		String abusetypeArray[] = req.getParameterValues("abusetype");
+		String abusetype = "";
+		if(abusetypeArray!=null){
+		for(int i=0;i<abusetypeArray.length;i++){
+			if(abusetypeArray[i]=="Other"||abusetypeArray[i].equals("Other")){
+				abusetypeArray[i] = req.getParameter("abusetypeothertext");
+				if(abusetypeArray[i]==""||abusetypeArray[i].equals(""))
+					abusetypeArray[i] = "None";
+			}
+			if(i == abusetypeArray.length-1)
+				abusetype += abusetypeArray[i];
+			else
+				abusetype += abusetypeArray[i]+",";		
+		}}
+		String awareof = req.getParameter("awareof");
+		String dppchotline = req.getParameter("dppchotline");
+		if(dppchotline=="yes"||dppchotline.equals("yes")){
+			dppchotline = req.getParameter("dppchotlinetext");
+		}
+		String investigatorrisk = req.getParameter("investigatorrisk");
+		if(investigatorrisk=="yes"||investigatorrisk.equals("yes")){
+			investigatorrisk = req.getParameter("investigatorrisktext");
+		}
+		String narrativeform = req.getParameter("narrativeform");
+		String risklevel = req.getParameter("risklevel");
+		String resultinginjure = req.getParameter("resultinginjure");
+		String witness = req.getParameter("witness");
+		String caregiverrelationship = req.getParameter("caregiverrelationship");
 		//set report
 		Report report = new Report();
-		report.setuserid(userid);
-		report.setName(name);
-		report.settime(time);
-		report.setdiscript(description);
+		report.setUserid(userid);
+		//report.setName(username);
+		report.setAbusername(allegedabuser);
+		report.setTime(trans_time); 
+		report.setVictimname(allegedvictim);
+		report.setFrequency(abusefrequency);
+		report.setAbusetype(abusetype);
+		report.setAwareof(awareof);
+		report.setDppchotline(dppchotline);
+		report.setInvestigatorrisk(investigatorrisk);
+		report.setNarrativeform(narrativeform);
+		report.setRisklevel(risklevel);
+		report.setResultinginjure(resultinginjure);
+		report.setWitness(witness);
+		report.setCaregiverrelationship(caregiverrelationship);
 		try {
 			reportid = DAOFactory.getIReportDAOInstance().addreport(report);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//add the reportid for attachment
-		report.setreportid(reportid);
+		report.setReportid(reportid);
 		try {
 			flag = DAOFactory.getIAttachDAOInstance().setReportId(report);
 		} catch (Exception e) {

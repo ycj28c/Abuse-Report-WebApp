@@ -19,8 +19,8 @@ public class ViewReportServlet extends HttpServlet {
 		String path = "viewreport.jsp";	
 		//get report
 		Report report = new Report();
-		report.setreportid(reportid);
-		report.setuserid(userid);
+		report.setReportid(reportid);
+		report.setUserid(userid);
 		try {
 			DAOFactory.getIReportDAOInstance().readReportById(report);
 		} catch (Exception e) {

@@ -75,14 +75,14 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 						Report report = list.get(i);
 				%>
 						<tr align="center">
-							<td><input type="checkbox" value='<%=report.getreportid()%>' name="num" /></td>
-							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getreportid() %>"><%=report.getreportid()%></a></td>
-							<td><%=report.getdiscript()%></td>
-							<td><%=report.getName()%></td>
-							<td><%=report.gettime()%></td>
-							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getreportid() %>">View</a></td>
-							<td><a href="jsp/DeleteReportServlet?reportid=<%=report.getreportid() %>">Delete</a></td>
-							<td><a href="jsp/GoUpdateReportServlet?reportid=<%=report.getreportid() %>">Edit</a></td>
+							<td><input type="checkbox" value='<%=report.getReportid()%>' name="num" /></td>
+							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getReportid() %>"><%=report.getReportid()%></a></td>
+							<td><%=report.getNarrativeform()%></td>
+							<td><%=report.getUsername()%></td>
+							<td><%=report.getTime()%></td>
+							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getReportid() %>">View</a></td>
+							<td><a href="jsp/DeleteReportServlet?reportid=<%=report.getReportid() %>">Delete</a></td>
+							<td><a href="jsp/GoUpdateReportServlet?reportid=<%=report.getReportid() %>">Edit</a></td>
 						</tr>
 				<% } %>
 				<tr align="center">

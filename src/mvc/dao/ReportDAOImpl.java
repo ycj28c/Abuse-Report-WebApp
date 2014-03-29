@@ -24,16 +24,15 @@ public class ReportDAOImpl implements IReportDAO {
 	public ArrayList<Report> listAllReport(Report report) throws Exception {
 		ArrayList<Report> reportlist = new ArrayList<Report>();
 		try {
-			String sql = "select reportid,discript,name,time from report where userid=?";
+			String sql = "select reportid,username,time from report where userid=?";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
-			this.pstmt.setString(1, report.getuserid());// 设置id
+			this.pstmt.setString(1, report.getUserid());// 设置id
 			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
 			while (rs.next()) {
 				Report rep = new Report();
-				rep.setreportid(rs.getInt("reportid"));
-				rep.setdiscript(rs.getString("discript"));
-				rep.setName(rs.getString("name"));
-				rep.settime(rs.getDate("time"));
+				rep.setReportid(rs.getInt("reportid"));
+				rep.setUsername(rs.getString("name"));
+				rep.setTime(rs.getDate("time"));
 				reportlist.add(rep);
 			}
 		} catch (Exception e) {
@@ -53,19 +52,32 @@ public class ReportDAOImpl implements IReportDAO {
 	public ArrayList<Report> listReport(Report report, Page page) throws Exception {
 		ArrayList<Report> reportlist = new ArrayList<Report>();
 		try {
-			String sql = "select reportid,discript,name,time from report where userid=?";
-			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
-			this.pstmt.setString(1, report.getuserid());// 设置id
+			String sql = "select reportid,userid,username,time,abuserid,abusername,victimid," +
+					"victimname,frequency,abusetype,awareof,investigatorrisk,dppchotline," +
+					"narrativeform,risklevel,witness,caregiverrelationship,groupid " +
+					"from report where userid =?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, report.getUserid());
 			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//查询的最大行数 
 			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
 			rs.absolute((page.currentPage-1)*page.getPageSize());//利用绝对定位定位到结果集的每页第二条数
 			//rs.relative(-1);//利用结果集的相对定位定位到每页的第一条数据 
 			while (rs.next()) {
 				Report rep = new Report();
-				rep.setreportid(rs.getInt("reportid"));
-				rep.setdiscript(rs.getString("discript"));
-				rep.setName(rs.getString("name"));
-				rep.settime(rs.getDate("time"));
+				rep.setReportid(rs.getInt("reportid"));
+				rep.setUsername(rs.getString("username"));
+				rep.setTime(rs.getDate("time"));
+				rep.setUsername(rs.getString("abusername"));
+				rep.setVictimname(rs.getString("victimname"));
+				rep.setFrequency(rs.getString("frequency"));
+				rep.setAbusetype(rs.getString("abusetype"));
+				rep.setAwareof(rs.getString("awareof"));
+				rep.setInvestigatorrisk(rs.getString("investigatorrisk"));
+				rep.setDppchotline(rs.getString("dppchotline"));
+				rep.setNarrativeform(rs.getString("narrativeform"));
+				rep.setRisklevel(rs.getString("risklevel"));
+				rep.setWitness(rs.getString("witness"));
+				rep.setCaregiverrelationship(rs.getString("caregiverrelationship"));
 
 				reportlist.add(rep);
 
@@ -100,22 +112,31 @@ public class ReportDAOImpl implements IReportDAO {
 	public int addreport(Report report) throws Exception {
 		int reportid = 0;
 		try {
-			java.sql.Date trans_time = new java.sql.Date(report.gettime()
-					.getTime()); // 將java.util.Date 轉換为 java.sql.Date
-
-			String sql = "INSERT INTO report (discript, name, time, userid) VALUES (?, ?, ?, ?)";
+			//java.sql.Date trans_time = new java.sql.Date(report.gettime().getTime()); // 將java.util.Date 轉換为 java.sql.Date
+			String sql = "INSERT INTO report (userid, time, abusername, victimname, " +
+					"frequency, abusetype, awareof, investigatorrisk, dppchotline, " +
+					"narrativeform, risklevel, resultinginjure, witness, caregiverrelationship) " +
+					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			/*
 			 * System.out.println("report.getdiscript():"+report.getdiscript());
 			 * System.out.println("report.getName():"+report.getName());
 			 * System.out.println("report.getuserid():"+report.getuserid());
 			 */
-			// java.sql.Date date = new java.sql.Date(new
-			// java.util.Date().getTime());
 			this.pstmt = this.conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);// 实例化操作
-			this.pstmt.setString(1, report.getdiscript());
-			this.pstmt.setString(2, report.getName());
-			this.pstmt.setDate(3, trans_time);
-			this.pstmt.setString(4, report.getuserid());
+			this.pstmt.setString(1, report.getUserid());
+			this.pstmt.setDate(2, report.getTime());
+			this.pstmt.setString(3, report.getAbusername());
+			this.pstmt.setString(4, report.getVictimname());
+			this.pstmt.setString(5, report.getFrequency());
+			this.pstmt.setString(6, report.getAbusetype());
+			this.pstmt.setString(7, report.getAwareof());
+			this.pstmt.setString(8, report.getInvestigatorrisk());
+			this.pstmt.setString(9, report.getDppchotline());
+			this.pstmt.setString(10, report.getNarrativeform());
+			this.pstmt.setString(11, report.getRisklevel());
+			this.pstmt.setString(12, report.getResultinginjure());
+			this.pstmt.setString(13, report.getWitness());
+			this.pstmt.setString(14, report.getCaregiverrelationship());
 			// ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
 			this.pstmt.executeUpdate();
 			ResultSet rs = this.pstmt.getGeneratedKeys(); 
@@ -145,8 +166,8 @@ public class ReportDAOImpl implements IReportDAO {
 		try {
 			String sql = "DELETE FROM report where reportid = ? and userid=?";
 			this.pstmt = this.conn.prepareStatement(sql);
-			this.pstmt.setInt(1, report.getreportid());
-			this.pstmt.setString(2, report.getuserid());
+			this.pstmt.setInt(1, report.getReportid());
+			this.pstmt.setString(2, report.getUserid());
 			int rs = this.pstmt.executeUpdate();
 			if (rs > 0) { // 返回条数
 				flag = true;
@@ -169,7 +190,7 @@ public class ReportDAOImpl implements IReportDAO {
 	public boolean mutiDelReport(String[] reportid,Report report) throws Exception {
 		boolean flag = false;
 		try {
-			String userid = report.getuserid();
+			String userid = report.getUserid();
 			String sql = "DELETE FROM report where reportid =? and userid =?";
 			this.pstmt = this.conn.prepareStatement(sql);
 			for (int i = 0; i < reportid.length; i++) {
@@ -196,22 +217,41 @@ public class ReportDAOImpl implements IReportDAO {
 	public Report readReportById(Report report) throws Exception {
 		try {
 			
-			String sql = "select name,time,discript from report where reportid =? and userid=?";
-			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
-			this.pstmt.setInt(1, report.getreportid());
-			this.pstmt.setString(2, report.getuserid());
-			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
-			while (rs.next()) {
-				report.setdiscript(rs.getString("discript"));
-				report.setName(rs.getString("name"));
-				report.settime(rs.getDate("time"));
-				}
+			String sql = "select reportid,userid,username,time,abuserid,abusername,victimid," +
+					"victimname,frequency,abusetype,awareof,investigatorrisk,dppchotline," +
+					"narrativeform,risklevel,resultinginjure,witness,caregiverrelationship,groupid " +
+					"from report where reportid=? and userid =?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setInt(1, report.getReportid());
+			this.pstmt.setString(2, report.getUserid());
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				report.setUsername(rs.getString("username"));
+				report.setTime(rs.getDate("time"));
+				report.setAbusername(rs.getString("abusername"));
+				report.setVictimname(rs.getString("victimname"));
+				report.setFrequency(rs.getString("frequency"));
+				report.setAbusetype(rs.getString("abusetype"));
+				report.setAwareof(rs.getString("awareof"));
+				report.setInvestigatorrisk(rs.getString("investigatorrisk"));
+				report.setDppchotline(rs.getString("dppchotline"));
+				report.setNarrativeform(rs.getString("narrativeform"));
+				report.setRisklevel(rs.getString("risklevel"));
+				report.setResultinginjure(rs.getString("resultinginjure"));
+				report.setWitness(rs.getString("witness"));
+				report.setCaregiverrelationship(rs.getString("caregiverrelationship"));
+			}
+			//debug
+			//System.out.println("report.getAbusername():"+report.getAbusername());
+			//System.out.println("report.getVictimname():"+report.getVictimname());
+			//System.out.println("report.getAbusetype():"+report.getAbusetype());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			if (this.pstmt != null) {
 				try {
-					this.pstmt.close();// 关闭操作
+					this.pstmt.close();
 				} catch (Exception e) {
 					throw e;
 				}
@@ -222,18 +262,28 @@ public class ReportDAOImpl implements IReportDAO {
 
 	public boolean updatereport(Report report) throws Exception {
 		boolean flag = false;
-		java.sql.Date trans_time = new java.sql.Date(report.gettime()
-				.getTime()); // 將java.util.Date 轉換为 java.sql.Date
 		try {
-			String sql = "UPDATE report set name =?,discript =?,time =? where reportid =? and userid =?";
-			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
-			this.pstmt.setString(1, report.getName());
-			this.pstmt.setString(2, report.getdiscript());
-			this.pstmt.setDate(3, trans_time);
-			this.pstmt.setInt(4, report.getreportid());
-			this.pstmt.setString(5,report.getuserid());
+			String sql = "UPDATE report set time=?,abusername=?,victimname=?,frequency=?,abusetype=?," +
+					"awareof=?,investigatorrisk=?,dppchotline=?,narrativeform=?,risklevel=?,resultinginjure=?," +
+					"witness=?,caregiverrelationship=? where reportid=? and userid =?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setDate(1, report.getTime());
+			this.pstmt.setString(2, report.getAbusername());
+			this.pstmt.setString(3, report.getVictimname());
+			this.pstmt.setString(4, report.getFrequency());
+			this.pstmt.setString(5, report.getAbusetype());
+			this.pstmt.setString(6, report.getAwareof());
+			this.pstmt.setString(7, report.getInvestigatorrisk());
+			this.pstmt.setString(8, report.getDppchotline());
+			this.pstmt.setString(9, report.getNarrativeform());
+			this.pstmt.setString(10, report.getRisklevel());
+			this.pstmt.setString(11, report.getResultinginjure());
+			this.pstmt.setString(12, report.getWitness());
+			this.pstmt.setString(13, report.getCaregiverrelationship());
+			this.pstmt.setInt(14, report.getReportid());
+			this.pstmt.setString(15, report.getUserid());
 			int rs = this.pstmt.executeUpdate();
-			if (rs > 0) { // 返回条数
+			if (rs > 0) { // return number
 				flag = true;
 			}
 		} catch (SQLException e) {
@@ -241,7 +291,7 @@ public class ReportDAOImpl implements IReportDAO {
 		} finally {
 			if (this.pstmt != null) {
 				try {
-					this.pstmt.close();// 关闭操作
+					this.pstmt.close();
 				} catch (Exception e) {
 					throw e;
 				}
@@ -255,7 +305,7 @@ public class ReportDAOImpl implements IReportDAO {
 		try {
 			String sql = "select count(*) as total from report where userid=?";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
-			this.pstmt.setString(1, report.getuserid());// 设置id
+			this.pstmt.setString(1, report.getUserid());// 设置id
 			ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
 			if (rs.next()) {
 				amout = rs.getInt("total");
@@ -277,7 +327,7 @@ public class ReportDAOImpl implements IReportDAO {
 	public ArrayList<Report> supervisorListReport(Page page, String roleid) throws Exception {
 		ArrayList<Report> reportlist = new ArrayList<Report>();
 		try {
-			String sql = "select reportid,discript,name,time from report where groupid in (select groupid from role where PK_role =?)";
+			String sql = "select reportid,username,time from report where groupid in (select groupid from role where PK_role =?)";
 			this.pstmt = this.conn.prepareStatement(sql);
 			this.pstmt.setString(1, roleid);
 			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
@@ -286,10 +336,10 @@ public class ReportDAOImpl implements IReportDAO {
 			//rs.relative(-1);//back 1 position
 			while (rs.next()) {
 				Report rep = new Report();
-				rep.setreportid(rs.getInt("reportid"));
-				rep.setdiscript(rs.getString("discript"));
-				rep.setName(rs.getString("name"));
-				rep.settime(rs.getDate("time"));
+				rep.setReportid(rs.getInt("reportid"));
+			//	rep.setdiscript(rs.getString("discript"));
+				rep.setUsername(rs.getString("name"));
+				rep.setTime(rs.getDate("time"));
 				reportlist.add(rep);
 
 				//debug
@@ -343,7 +393,7 @@ public class ReportDAOImpl implements IReportDAO {
 	public ArrayList<Report> superAdminListReport(Page page) throws Exception {
 		ArrayList<Report> reportlist = new ArrayList<Report>();
 		try {
-			String sql = "select reportid,discript,name,time from report";
+			String sql = "select reportid,username,time from report";
 			this.pstmt = this.conn.prepareStatement(sql);
 			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
 			ResultSet rs = this.pstmt.executeQuery();
@@ -351,10 +401,10 @@ public class ReportDAOImpl implements IReportDAO {
 			//rs.relative(-1);//back 1 position
 			while (rs.next()) {
 				Report rep = new Report();
-				rep.setreportid(rs.getInt("reportid"));
-				rep.setdiscript(rs.getString("discript"));
-				rep.setName(rs.getString("name"));
-				rep.settime(rs.getDate("time"));
+				rep.setReportid(rs.getInt("reportid"));
+				//rep.setdiscript(rs.getString("discript"));
+				rep.setUsername(rs.getString("name"));
+				rep.setTime(rs.getDate("time"));
 				reportlist.add(rep);
 			}
 		} catch (Exception e) {

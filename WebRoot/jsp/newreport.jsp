@@ -90,7 +90,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				awareof: "required",
 				abusetype:"required",
 				time:"required",
-				abusefrequency:"required",
+				abusefrequencydate:"required",
+				abusefrequencytend:"required",
 				dppchotline:"required",
 				investigatorrisk: "required",
 				narrativeform: "required",
@@ -109,7 +110,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				awareof: "Please choose a option",
 				abusetype:"Please choose a abuse type",
 				time:"Please choose a time",
-				abusefrequency:"Please choose a abuse frequency",
+				abusefrequencydate:"Please choose a abuse frequency",
+				abusefrequencytend:"Please choose a abuse frequency",
 				dppchotline:"Please choose a dppchotline",
 				investigatorrisk: "Please choose a investigator risk",
 				narrativeform: "(please write)",
@@ -172,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td colspan="2"><input type ="text" name = "allegedabuser" style="width:100%"></td> 
             	<td>Date of last incident:</td>
             	<script type="text/javascript" src="javascript/calendar.js"></script>
-              	<td colspan="2"><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly" />
+              	<td colspan="2"><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly">
 	        		<br>
 	        		<label for="time" class="error"></label>	
         		</td>
@@ -182,21 +184,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		<td colspan="2"><input type ="text"name = "allegedvictim" style="width:100%"></td>
         		<td>Frequency of Abuse:</td>
         		<td colspan="2">
-            		<select name="abusefrequency" id="abusefrequency"> 
+            		<select name="abusefrequencydate" id="abusefrequency"> 
             			<option></option>  
-				        <option value="1">Daily</option>  
-				        <option value="2">Weeking</option>  
-				        <option value="3">Episodic</option> 	          
+				        <option value="Daily">Daily</option>  
+				        <option value="Weeking">Weeking</option>  
+				        <option value="Episodic">Episodic</option> 	          
 			      	</select> 
-			      	<select name="abusefrequency" id="abusefrequency">  
+			      	<select name="abusefrequencytend" id="abusefrequency">  
 			      		<option></option>  
-				        <option value="1">Increasing</option>  
-				        <option value="2">Decreasing</option>  
-				        <option value="3">Constant</option> 
-				        <option value="4">unknown</option> 	          
+				        <option value="Increasing">Increasing</option>  
+				        <option value="Decreasing">Decreasing</option>  
+				        <option value="Constant">Constant</option> 
+				        <option value="unknown">unknown</option> 	          
 			      	</select>
 			      	<br>
-					<label for="abusefrequency" class="error"></label>	
+					<label for="abusefrequencydate" class="error"></label>
+					<br>
+					<label for="abusefrequencytend" class="error"></label>	
 			    </td> 
         		
         	</tr>
@@ -208,15 +212,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             		<input type="checkbox" name="abusetype" value="Sexual">Sexual
             		<input type="checkbox" name="abusetype" value="Emotional">Emotional	
             		<br>
-            		<input type="checkbox" name="abusetype" id="abusetypeother" value="other">other:
+            		<input type="checkbox" name="abusetype" id="abusetypeother" value="Other">Other:
             		<input type ="text" name="abusetypeothertext" id="abusetypeothertext" style="width:80%" disabled>
             		<br>
 					<label for="abusetype" class="error"></label>
 				</td>
 				<td>Is victim aware of report?</td>
 				<td colspan="2">
-            		<label><input name="awareof" type="radio" value="" />yes</label> 
-					<label><input name="awareof" type="radio" value="" />no</label>	
+            		<label><input name="awareof" type="radio" value="yes" />yes</label> 
+					<label><input name="awareof" type="radio" value="no" />no</label>	
 					<br>
 					<label for="awareof" class="error"></label>	
 				</td>
@@ -285,7 +289,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	</tr>
             	<tr>
             		<td colspan="6">
-              			<textarea style="width:100%" rows="5" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              			<textarea style="width:100%" rows="5" name="witness" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
               		</td>
               	</tr>
         	</tr> 
@@ -296,7 +300,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	</tr>
             	<tr>
             		<td colspan="6">
-              			<textarea style="width:100%" rows="5" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
+              			<textarea style="width:100%" rows="5" name="caregiverrelationship" onpropertychange= "this.style.posHeight=this.scrollHeight"></textarea>
               		</td>
               	</tr>
         	</tr>  

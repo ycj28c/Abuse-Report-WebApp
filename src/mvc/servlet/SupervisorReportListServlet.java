@@ -41,7 +41,7 @@ public class SupervisorReportListServlet extends HttpServlet {
 		}
 		//set report
 		Report report = new Report();
-		report.setuserid(userid);	
+		report.setUserid(userid);	
 		//set page
 		try {
 			reportamount = DAOFactory.getIReportDAOInstance().getAmountSupervisor(roleid);	//get amount of records the role's group have	

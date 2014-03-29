@@ -54,6 +54,8 @@ public class NewPatientServlet extends HttpServlet {
 		for(int i=0;i<disabilityArray.length;i++){
 			if(disabilityArray[i]=="other"||disabilityArray[i].equals("other")){
 				disabilityArray[i] = request.getParameter("disabilityothertext");
+				if(disabilityArray[i]==""||disabilityArray[i].equals(""))
+					disabilityArray[i] = "None";
 			}
 			if(i == disabilityArray.length-1)
 				disability +=disabilityArray[i];

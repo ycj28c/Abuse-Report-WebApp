@@ -1,60 +1,179 @@
 package mvc.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Report {
-	private int reportid;
-	private String discript;
-	private String name;
-	private Date time;
+
+	private Integer reportid;
 	private String userid;
+	private String username;
+	private Date time;
+	private Integer abuserid;
+	private String abusername;
+	private Integer victimid;
+	private String victimname;
+	private String frequency;
+	private String abusetype;
+	private String awareof;
+	private String investigatorrisk;
+	private String dppchotline;
+	private String narrativeform;
+	private String risklevel;
+	private String resultinginjure;
+	private String witness;
+	private String caregiverrelationship;
 	private String groupid;
 
-	public int getreportid() {
-		return reportid;
+	public Integer getReportid() {
+		return this.reportid;
 	}
 
-	public void setreportid(int reportid) {
+	public void setReportid(Integer reportid) {
 		this.reportid = reportid;
 	}
 
-	public String getdiscript() {
-		return discript;
+	public String getUserid() {
+		return this.userid;
 	}
 
-	public void setdiscript(String discript) {
-		this.discript = discript;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public Date gettime() {
-		return time;
+	public Date getTime() {
+		return this.time;
 	}
 
-	public void settime(Date time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 
-	public String getuserid() {
-		return userid;
+	public Integer getAbuserid() {
+		return this.abuserid;
 	}
-	public void setuserid(String userid) {
-		this.userid = userid;
-		
+
+	public void setAbuserid(Integer abuserid) {
+		this.abuserid = abuserid;
+	}
+
+	public String getAbusername() {
+		return this.abusername;
+	}
+
+	public void setAbusername(String abusername) {
+		this.abusername = abusername;
+	}
+
+	public Integer getVictimid() {
+		return this.victimid;
+	}
+
+	public void setVictimid(Integer victimid) {
+		this.victimid = victimid;
+	}
+
+	public String getVictimname() {
+		return this.victimname;
+	}
+
+	public void setVictimname(String victimname) {
+		this.victimname = victimname;
+	}
+
+	public String getFrequency() {
+		return this.frequency;
+	}
+
+	public void setFrequency(String frequency) {
+		this.frequency = frequency;
+	}
+
+	public String getAbusetype() {
+		return this.abusetype;
+	}
+
+	public void setAbusetype(String abusetype) {
+		this.abusetype = abusetype;
+	}
+
+	public String getAwareof() {
+		return this.awareof;
+	}
+
+	public void setAwareof(String awareof) {
+		this.awareof = awareof;
+	}
+
+	public String getInvestigatorrisk() {
+		return this.investigatorrisk;
+	}
+
+	public void setInvestigatorrisk(String investigatorrisk) {
+		this.investigatorrisk = investigatorrisk;
+	}
+
+	public String getDppchotline() {
+		return this.dppchotline;
+	}
+
+	public void setDppchotline(String dppchotline) {
+		this.dppchotline = dppchotline;
+	}
+
+	public String getNarrativeform() {
+		return this.narrativeform;
+	}
+
+	public void setNarrativeform(String narrativeform) {
+		this.narrativeform = narrativeform;
+	}
+
+	public String getRisklevel() {
+		return this.risklevel;
+	}
+
+	public void setRisklevel(String risklevel) {
+		this.risklevel = risklevel;
 	}
 	
-	public String getGroupId() {
-		return groupid;
+	public String getResultinginjure() {
+		return this.resultinginjure;
 	}
-	public void setGroupId(String groupid) {
+
+	public void setResultinginjure(String resultinginjure) {
+		this.resultinginjure = resultinginjure;
+	}
+
+	public String getWitness() {
+		return this.witness;
+	}
+
+	public void setWitness(String witness) {
+		this.witness = witness;
+	}
+
+	public String getCaregiverrelationship() {
+		return this.caregiverrelationship;
+	}
+
+	public void setCaregiverrelationship(String caregiverrelationship) {
+		this.caregiverrelationship = caregiverrelationship;
+	}
+
+	public String getGroupid() {
+		return this.groupid;
+	}
+
+	public void setGroupid(String groupid) {
 		this.groupid = groupid;
-		
 	}
+
 }

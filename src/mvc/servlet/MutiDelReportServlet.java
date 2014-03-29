@@ -16,7 +16,7 @@ public class MutiDelReportServlet extends HttpServlet {
 		String path = "firstpage.jsp";
 		String reportIdArrary[] = req.getParameterValues("num");
 		Report report = new Report();
-		report.setuserid(userid);
+		report.setUserid(userid);
 		//database operation
 		try {
 			flag = DAOFactory.getIReportDAOInstance().mutiDelReport(reportIdArrary,report);

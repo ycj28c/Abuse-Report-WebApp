@@ -19,7 +19,7 @@ public class PrintReportServlet extends HttpServlet {
 		//System.out.println("letter_path:"+letter_path);
 		int reportid = Integer.parseInt(req.getParameter("reportid"));	
 		Report report = new Report();
-		report.setreportid(reportid);
+		report.setReportid(reportid);
 		//get the report id
 		try {
 			DAOFactory.getIReportDAOInstance().readReportById(report);
@@ -29,8 +29,8 @@ public class PrintReportServlet extends HttpServlet {
 		//make the disposition itext pdf
 		DispositionLetter letter = new DispositionLetter(); 
 		letter.setPath(letter_path);
-		letter.description = report.getdiscript();
-		letter.name = report.getName();
+		//letter.description = report.getdiscript();
+		letter.name = report.getUsername();
 		try {
 			letter.makeLetter();
 		} catch (Exception e) {

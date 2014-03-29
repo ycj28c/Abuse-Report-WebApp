@@ -131,8 +131,8 @@ public class AttachDAOImpl implements IAttachDAO {
 		try {
 			String sql = "UPDATE attachment set reportid =? where userid=? and id!='' and reportid is null";
 			this.pstmt = this.conn.prepareStatement(sql);// 实例化操作
-			this.pstmt.setInt(1, report.getreportid());
-			this.pstmt.setString(2, report.getuserid());
+			this.pstmt.setInt(1, report.getReportid());
+			this.pstmt.setString(2, report.getUserid());
 			int rs = this.pstmt.executeUpdate();
 			if (rs > 0) { // 返回条数
 				flag = true;

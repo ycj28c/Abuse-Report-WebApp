@@ -22,7 +22,7 @@ public class ReportListServlet extends HttpServlet {
 		String contentPage = "/jsp/report.jsp";
 		ArrayList<Report> backinfo = new ArrayList<Report>();// 保存所有返回信息		
 		Report report = new Report();// 实例化VO
-		report.setuserid(userid);// 设置userid
+		report.setUserid(userid);// 设置userid
 		
 		//set page
 		try {
