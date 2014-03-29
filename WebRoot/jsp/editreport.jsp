@@ -200,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             		<select name="abusefrequencydate" id="abusefrequencydate"> 
             			<option></option>  
 				        <option value="Daily" <%=abusefrequencydate.equals("Daily")?"selected='selected'":""%> >Daily</option>  
-				        <option value="Weeking" <%=abusefrequencydate.equals("Weeking")?"selected='selected'":""%> >Weeking</option>  
+				        <option value="Weekly" <%=abusefrequencydate.equals("Weekly")?"selected='selected'":""%> >Weekly</option>  
 				        <option value="Episodic" <%=abusefrequencydate.equals("Episodic")?"selected='selected'":""%> >Episodic</option> 	          
 			      	</select> 
 			      	<select name="abusefrequencytend" id="abusefrequencytend" >  
@@ -208,7 +208,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <option value="Increasing" <%=abusefrequencytend.equals("Increasing")?"selected='selected'":""%> >Increasing</option>  
 				        <option value="Decreasing" <%=abusefrequencytend.equals("Decreasing")?"selected='selected'":""%>>Decreasing</option>  
 				        <option value="Constant" <%=abusefrequencytend.equals("Constant")?"selected='selected'":""%>>Constant</option> 
-				        <option value="unknown" <%=abusefrequencytend.equals("unknown")?"selected='selected'":""%>>unknown</option> 	          
+				        <option value="Unknown" <%=abusefrequencytend.equals("Unknown")?"selected='selected'":""%>>Unknown</option> 	          
 			      	</select>
 			      	<br>
 					<label for="abusefrequency" class="error"></label>	
@@ -271,13 +271,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		<td colspan="4">
         		<% 
 				if(report.getDppchotline()=="no"||report.getDppchotline().equals("no")){%>
-					<label><input name="dppchotline" type="radio" value="no" checked />yes</label> 
-					<label><input name="dppchotline" type="radio" value="yes" />no</label>
+					<label><input name="dppchotline" type="radio" value="no" checked />no</label> 
+					<label><input name="dppchotline" type="radio" value="yes" />yes</label>
 					<label><input name="dppchotlinetext" id="dppchotlinetext" type="text"  style="width:70%" value="" disabled></label>
 				<%}
 				else{%>
-					<label><input name="dppchotline" type="radio" value="no" />yes</label> 
-					<label><input name="dppchotline" type="radio" value="yes" checked />no</label>	
+					<label><input name="dppchotline" type="radio" value="no" />no</label> 
+					<label><input name="dppchotline" type="radio" value="yes" checked />yes</label>	
 					<label><input name="dppchotlinetext" id="dppchotlinetext" type="text"  style="width:70%" value="<%=report.getDppchotline()%>" ></label>
 				<%}%>
 	            </td> 	
@@ -290,13 +290,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td colspan="4">
 				<% 
 				if(report.getInvestigatorrisk()=="no"||report.getInvestigatorrisk().equals("no")){%>
-					<label><input name="investigatorrisk" type="radio" value="no" checked />yes</label> 
-					<label><input name="investigatorrisk" type="radio" value="yes" />no</label>
+					<label><input name="investigatorrisk" type="radio" value="no" checked />no</label> 
+					<label><input name="investigatorrisk" type="radio" value="yes" />yes</label>
 					<label><input name="investigatorrisktext" id="investigatorrisktext" type="text"  style="width:70%" value="" disabled></label>
 				<%}
 				else{%>
-					<label><input name="investigatorrisk" type="radio" value="no" />yes</label> 
-					<label><input name="investigatorrisk" type="radio" value="yes" checked />no</label>	
+					<label><input name="investigatorrisk" type="radio" value="no" />no</label> 
+					<label><input name="investigatorrisk" type="radio" value="yes" checked />yes</label>	
 					<label><input name="investigatorrisktext" id="investigatorrisktext" type="text"  style="width:70%" value="<%=report.getInvestigatorrisk()%>" ></label>
 				<%}%>
 	            </td>	

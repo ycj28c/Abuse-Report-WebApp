@@ -220,10 +220,10 @@ public class ReportDAOImpl implements IReportDAO {
 			String sql = "select reportid,userid,username,time,abuserid,abusername,victimid," +
 					"victimname,frequency,abusetype,awareof,investigatorrisk,dppchotline," +
 					"narrativeform,risklevel,resultinginjure,witness,caregiverrelationship,groupid " +
-					"from report where reportid=? and userid =?";
+					"from report where reportid=?";
 			this.pstmt = this.conn.prepareStatement(sql);
 			this.pstmt.setInt(1, report.getReportid());
-			this.pstmt.setString(2, report.getUserid());
+			//this.pstmt.setString(2, report.getUserid());
 			ResultSet rs = this.pstmt.executeQuery();
 			if (rs.next()) {
 				report.setUsername(rs.getString("username"));

@@ -187,7 +187,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             		<select name="abusefrequencydate" id="abusefrequency"> 
             			<option></option>  
 				        <option value="Daily">Daily</option>  
-				        <option value="Weeking">Weeking</option>  
+				        <option value="Weekly">Weekly</option>  
 				        <option value="Episodic">Episodic</option> 	          
 			      	</select> 
 			      	<select name="abusefrequencytend" id="abusefrequency">  
@@ -195,7 +195,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <option value="Increasing">Increasing</option>  
 				        <option value="Decreasing">Decreasing</option>  
 				        <option value="Constant">Constant</option> 
-				        <option value="unknown">unknown</option> 	          
+				        <option value="Unknown">Unknown</option> 	          
 			      	</select>
 			      	<br>
 					<label for="abusefrequencydate" class="error"></label>

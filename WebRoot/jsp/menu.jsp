@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		if(authorityList.get(0).getPkAuthority()!=null&&!"".equals(authorityList.get(0).getPkAuthority())){ //if user has no authority
   			String roleid = authorityList.get(0).getRoleId();
   			int displaysize = authorityList.size();
-  			int maxdisplaysize = 15; //set max diplay number a menu can display
+  			int maxdisplaysize = 10; //set max diplay number a menu can display
 	  		for(int i = 0;i<authorityList.size();i++){
 	  			if(i==0){%>
 	  			<h2 style="border-style: outset"><a href="Javascript:sm(dd<%=i%>)"><%=authorityList.get(i).getRoleId()%></a></h2>
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			else{%>
 	  			</ul>
 	  			<h2 style="border-style: outset"><a href="Javascript:sm(dd<%=i%>)"><%=authorityList.get(i).getRoleId()%></a></h2>
-	  			<ul class = "fontthree" id="dd<%=i%>" <%=displaysize>maxdisplaysize?"style='display:none;'":""%>>
+	  			<ul class = "fontthree" id="dd<%=i%>" <%=i>maxdisplaysize?"style='display:none;'":""%>>
 	  				<li><a href = "<%=authorityList.get(i).getUrl()%>"><%=authorityList.get(i).getName()%></a></li>
 	  			<% 	roleid = authorityList.get(i).getRoleId();
 	  			}
