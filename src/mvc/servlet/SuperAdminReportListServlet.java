@@ -11,6 +11,8 @@ import mvc.factory.*;
 import mvc.vo.*;
 
 public class SuperAdminReportListServlet extends HttpServlet {
+	private String superAdminRoleId = "2";
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//set variable
 		HttpSession session = req.getSession();
@@ -27,7 +29,7 @@ public class SuperAdminReportListServlet extends HttpServlet {
 		//judge if the userid is really has this role
 		AuthorityMapping authorityMapping = new AuthorityMapping();
 		authorityMapping.setUserId(userid);
-		authorityMapping.setRoleId("4"); //super admin authority
+		authorityMapping.setRoleId(superAdminRoleId); //super admin authority
 		try {
 			flag = DAOFactory.getIAuthorityMappingDAOInstance().verifyUser(authorityMapping);	
 		} catch (Exception e) {

@@ -338,7 +338,7 @@ public class ReportDAOImpl implements IReportDAO {
 				Report rep = new Report();
 				rep.setReportid(rs.getInt("reportid"));
 			//	rep.setdiscript(rs.getString("discript"));
-				rep.setUsername(rs.getString("name"));
+				rep.setUsername(rs.getString("username"));
 				rep.setTime(rs.getDate("time"));
 				reportlist.add(rep);
 

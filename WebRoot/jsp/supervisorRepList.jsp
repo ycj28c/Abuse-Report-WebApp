@@ -77,7 +77,7 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 						<tr align="center">
 							<td><input type="checkbox" value='<%=report.getReportid()%>' name="num" /></td>
 							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getReportid() %>"><%=report.getReportid()%></a></td>
-							<td><%=report.getNarrativeform()%></td>
+							<td><%=report.getUsername()%></td>
 							<td><%=report.getUsername()%></td>
 							<td><%=report.getTime()%></td>
 							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getReportid() %>">View</a></td>
