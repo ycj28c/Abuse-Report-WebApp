@@ -363,12 +363,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td colspan="3">
               		<span id="spanButtonPlaceholder"></span>
 		  			<div id="divFileProgressContainer" style="width:450;display:none;"></div>
-					<div id="thumbnails">
-						<table id="infoTable" border="0" width="100%" style="border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;margin-top:8px;">
+					<div id="thumbnails"> 
+						<table id="infoTable" border="0" width="100%" style="border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;margin-top:8px;">  
+							<%for(int i = 0;i<list.size();i++){ 
+		             			Attach attach = list.get(i);%>
+		             			 	<tr id="SWFUpload_0_9<%=i%>">
+		             			 		<td style="width:150;">file name :</td>
+		             			 		<td style="width:150;"><%=attach.getOldName()%></td>
+		             			 		<td style="width:80;"><font color="green">upload file sucessfully!</font></td>
+		             			 		<td style="width:50;text-align:right"><a href="javascript:deleteFile('SWFUpload_0_9<%=i%>')">delete</a></td>
+		             			 		<td style="display:none"><%=attach.getPath()%></td>
+		             			 	</tr>
+		             		<%} %>  
 						</table>
 					</div>         		
               	</td>
-            	<td class="tdstyle" colspan="2" align = "right">
+              	<td class="tdstyle" colspan="2" align = "right">
                		<input type="submit" value="update" />
                		<input type="reset" value="reset" />
                		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/>             	
@@ -376,5 +386,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	</tr>  	      	
 		</table>
 	</form>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<%
+		request.setCharacterEncoding("utf-8");
+	%>
+	<%
+		String info = (String)request.getAttribute("info");//取得属性 
+		if (info != null) { //判断是否有内容 
+	%>
+	<h4><%=info%></h4>
+	<%
+		}
+	%>
 </body>
 </html>

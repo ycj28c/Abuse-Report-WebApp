@@ -214,17 +214,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<tr>
             	<td>attachment</td>
             	<td colspan="3">
-              		<span id="spanButtonPlaceholder"></span>
-		  			<div id="divFileProgressContainer" style="width:450;display:none;"></div>
-					<div id="thumbnails">
-						<table id="infoTable" border="0" width="100%" style="border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;margin-top:8px;">
-						</table>
-					</div>         		
-              	</td>
+	            	<div align="center">
+						<table id="showattach" border="0" width="100%" style="border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;margin-top:8px;">
+		            	<%for(int i = 0;i<list.size();i++){ 
+		             		Attach attach = list.get(i);%> 	
+		             		<tr>              		
+		             			<td><%=attach.getId()%></td>
+		             			<td><a href = "<%=attach.getPath()%>"><%=attach.getOldName()%></a></td>
+		             		</tr>
+		             	<%} %>          	
+		            	</table>		            
+	            	</div>
+            	</td>
             	<td class="tdstyle" colspan="2" align = "right">
-               		<input type="submit" value="print" />
-               		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/>             	
-           		</td>	
+               		<input type="submit" value="update" />
+               		<input type="reset" value="reset" />
+               		 <input type="button" value="cancel" onclick="gopath('firstpage.jsp')"/><br>
+           		</td>
         	</tr>  	      	
 		</table>
 	</form>
