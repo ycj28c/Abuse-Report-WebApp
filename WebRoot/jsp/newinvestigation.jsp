@@ -23,10 +23,83 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <input type="button" value="Link Abuse Report">
-    <br>
-    <table align = "left" border="1" style="border-collapse: collapse;">
-    
-    </table>
+  	<form action="LoginServlet" method="post">
+    	<table align = "left" border="1" style="border-collapse: collapse;">
+    		<tr>
+    			<td colspan="3" align = "left">
+    				Input ReportID:<input type="text" value="input report id">
+    				<input type="button" value="Link Report">
+    			</td>	
+    		</tr>
+    		<tr>
+    			<td colspan="3" align = "center">Report Detail</td> 
+    		</tr>
+    		<tr>
+    			<td colspan="3" align = "left">
+    				ReportID:<input type="text" name="reportid">
+    				Date:<input type="text" name="date">
+    				Status:<input type="text" name="status">
+    			</td> 
+    		</tr>
+    		<tr>
+    			<td colspan="3" align = "center">DISPOSITION LETTER</td> 
+    		</tr>
+    		<tr>
+    			<td>
+    				Description :			
+    			</td> 	
+    			<td colspan="2" align = "left">
+    				<textarea style="width:100%;" name="disdescription">input description</textarea>			
+    			</td> 
+			</tr>
+			<tr>
+				<td>
+					Attachment :
+				</td> 
+				<td colspan="2" align = "left">
+					<input type="text" name="disattachment">
+					<input type="button" value="choose file">
+				</td>	
+			</tr>
+			<tr>
+    			<td colspan="3" align = "center">AGENCY RESPONDS</td> 
+    		</tr>
+			<tr>
+    			<td>
+    				Respond :			
+    			</td> 	
+    			<td colspan="2" align = "left">
+    				<textarea style="width:100%;" name="respond">input respond</textarea>			
+    			</td> 
+			</tr>
+    		<tr>
+    			<td colspan="3" align = "center">DECISION LETTER</td> 
+    		</tr>
+    		<tr>
+    			<td>
+    				Description :			
+    			</td> 	
+    			<td colspan="2" align = "left">
+    				<textarea style="width:100%;" name="desdescription">input description</textarea>			
+    			</td>  	
+			</tr>
+			<tr>
+				<td>
+					Attachment :
+				</td> 
+				<td colspan="2" align = "left">
+					<input type="text" name="desattachment">
+					<input type="button" value="choose file">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" align = "right">
+					<input type="submit" value="submit">
+					<input type="reset" value="reset">
+					<input type="button" value="return">
+				</td>
+			</tr>
+    	</table>
+    </form>
   </body>
 </html>

@@ -70,9 +70,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					debug: false  //是否显示调试窗口
 				});
 			};
-			function startUploadFile(){
-				swfu.startUpload();
-			}
+			//function startUploadFile(){
+			//	swfu.startUpload();
+			//}
 	</script>
 	<script type="text/javascript">
 	$().ready(function() {
