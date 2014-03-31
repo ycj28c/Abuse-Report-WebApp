@@ -1,3 +1,9 @@
+/*
+ * 需要修改当public log number 已存在的处理
+ * 需要修改当插入执行错误，删除已经上传的无用文件
+ * 需要修改后面插入执行错误，删除前面已经插入的数据
+ * 需要修改reportid 和 investigation的关系
+ */
 package mvc.servlet;
 
 import java.io.*;

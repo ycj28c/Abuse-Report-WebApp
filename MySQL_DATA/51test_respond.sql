@@ -18,39 +18,29 @@ USE `51test`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `patient`
+-- Table structure for table `respond`
 --
 
-DROP TABLE IF EXISTS `patient`;
+DROP TABLE IF EXISTS `respond`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `patient` (
-  `PK_patient` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  `sex` varchar(45) DEFAULT NULL,
-  `telephone` varchar(45) DEFAULT NULL,
-  `DOB` varchar(45) DEFAULT NULL,
-  `mar_stat` varchar(45) DEFAULT NULL,
-  `comm_need` varchar(45) DEFAULT NULL,
-  `serv_by` varchar(45) DEFAULT NULL,
-  `serv_type` varchar(45) DEFAULT NULL,
-  `ethnicity` varchar(45) DEFAULT NULL,
-  `disability` varchar(200) DEFAULT NULL,
-  `coll_contact` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`PK_patient`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE `respond` (
+  `PK_respond` int(11) NOT NULL AUTO_INCREMENT,
+  `reportid` varchar(45) DEFAULT NULL,
+  `investigationid` varchar(45) DEFAULT NULL,
+  `content` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`PK_respond`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `patient`
+-- Dumping data for table `respond`
 --
 
-LOCK TABLES `patient` WRITE;
-/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'111','11111',1,'Female','1111','111',NULL,'TTY','Dept. of Correction','Residential','sdfsdf','Cerebral Palsy,Visual','sdfsdfsdf'),(2,'sdf','sdfsdfsd',11,'Female','11111','111',NULL,'TTY','sdfsdf','Other','cccccccccc','Multiple Sclerosis,Cerebral Palsy,Mental Illness,Head Injury','xxxcvxcvsdfsdf'),(3,'sdfsd','sdfsdfsd',0,'Male','','',NULL,'Sign Interpreter','Dept. of Mental Health','Residential','Caucasian','Mental Retardation','');
-/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
+LOCK TABLES `respond` WRITE;
+/*!40000 ALTER TABLE `respond` DISABLE KEYS */;
+INSERT INTO `respond` VALUES (1,'11','22','inputsdfsdfsdf description'),(2,'33','33','bbbbbbbbbb'),(3,'44','44','dddddddddd'),(4,'55','55','ffffff');
+/*!40000 ALTER TABLE `respond` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -62,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-30 21:48:33
+-- Dump completed on 2014-03-30 21:48:26
