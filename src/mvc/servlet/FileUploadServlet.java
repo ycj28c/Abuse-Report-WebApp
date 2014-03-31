@@ -24,7 +24,8 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
 
 /**
  * @author huangshuang
- * @version 2011-5-1
+ * @modofy chengjiao yang
+ * @version 2014-3-30
  */
 public class FileUploadServlet extends HttpServlet {
 

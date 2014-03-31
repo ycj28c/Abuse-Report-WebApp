@@ -23,11 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<form action="LoginServlet" method="post">
+  	<form action="jsp/NewInvestigationServlet" method="post" enctype="multipart/form-data">
     	<table align = "left" border="1" style="border-collapse: collapse;">
     		<tr>
     			<td colspan="3" align = "left">
-    				Input ReportID:<input type="text" value="input report id">
+    				Input ReportID:<input type="text" value="input report id" name="reportid">
     				<input type="button" value="Link Report">
     			</td>	
     		</tr>
@@ -36,9 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
     		<tr>
     			<td colspan="3" align = "left">
-    				ReportID:<input type="text" name="reportid">
-    				Date:<input type="text" name="date">
-    				Status:<input type="text" name="status">
+    				Date :<input type="text" name="date">
+    				Status :<input type="text" name="status">
     			</td> 
     		</tr>
     		<tr>
@@ -57,8 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					Attachment :
 				</td> 
 				<td colspan="2" align = "left">
-					<input type="text" name="disattachment">
-					<input type="button" value="choose file">
+					<input type="file" name="disattachment">
 				</td>	
 			</tr>
 			<tr>
@@ -66,10 +64,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
 			<tr>
     			<td>
-    				Respond :			
+    				description :			
     			</td> 	
     			<td colspan="2" align = "left">
-    				<textarea style="width:100%;" name="respond">input respond</textarea>			
+    				<textarea style="width:100%;" name="resdescription">input description</textarea>			
     			</td> 
 			</tr>
     		<tr>
@@ -88,12 +86,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					Attachment :
 				</td> 
 				<td colspan="2" align = "left">
-					<input type="text" name="desattachment">
-					<input type="button" value="choose file">
+					<input type="file" name="desattachment">
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" align = "right">
+				<td>
+					PLN :
+				</td>
+				<td>
+					<input type="text" name="publiclognumber" style="width:80%" value="input PLN">
+				</td>
+				<td align = "right">
 					<input type="submit" value="submit">
 					<input type="reset" value="reset">
 					<input type="button" value="return">
