@@ -28,4 +28,15 @@ public class DecisionDAOProxy implements IDecisionDAO {
 		return PKdecision;
 	}
 
+	public Decision getDecisionById(Decision decision) throws Exception {
+		try {
+			decision = this.dao.getDecisionById(decision);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return decision;
+	}
+
 }

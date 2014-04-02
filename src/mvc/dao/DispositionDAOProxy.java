@@ -28,4 +28,15 @@ public class DispositionDAOProxy implements IDispositionDAO {
 		return PKdecision;
 	}
 
+	public Disposition getDispositionById(Disposition disposition) throws Exception {
+		try {
+			disposition = this.dao.getDispositionById(disposition);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return disposition;
+	}
+
 }

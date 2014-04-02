@@ -58,4 +58,21 @@ public class DispositionDAOImpl implements IDispositionDAO {
 		}
 		return PKdisposition;
 	}
+
+	public Disposition getDispositionById(Disposition disposition) throws Exception {
+		String sql = "select reportid,investigationid,description,attacholdname,attachnewname,attachpath" +
+				" from disposition where PK_disposition=?";
+		this.pstmt = this.conn.prepareStatement(sql);
+		this.pstmt.setInt(1, disposition.getPkDisposition());
+		ResultSet rs = this.pstmt.executeQuery();
+		if (rs.next()) {
+			disposition.setReportid(rs.getString("reportid"));
+			disposition.setInvestigationid(rs.getString("investigationid"));
+			disposition.setDescription(rs.getString("description"));
+			disposition.setAttacholdname(rs.getString("attacholdname"));
+			disposition.setAttachnewname(rs.getString("attachnewname"));
+			disposition.setAttachpath(rs.getString("attachpath"));		
+		}
+		return disposition;
+	}
 }

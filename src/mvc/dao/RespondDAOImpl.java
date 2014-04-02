@@ -51,4 +51,17 @@ public class RespondDAOImpl implements IRespondDAO {
 		}
 		return PKrespond;
 	}
+
+	public Respond getRespondById(Respond respond) throws Exception {
+		String sql = "select reportid,investigationid,content from respond where PK_respond=?";
+		this.pstmt = this.conn.prepareStatement(sql);
+		this.pstmt.setInt(1, respond.getPkRespond());
+		ResultSet rs = this.pstmt.executeQuery();
+		if (rs.next()) {
+			respond.setReportid(rs.getString("reportid"));
+			respond.setInvestigationid(rs.getString("investigationid"));
+			respond.setContent(rs.getString("content"));		
+		}
+		return respond;
+	}
 }

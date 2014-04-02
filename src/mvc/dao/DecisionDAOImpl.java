@@ -55,4 +55,21 @@ public class DecisionDAOImpl implements IDecisionDAO {
 		}
 		return PKdecision;
 	}
+
+	public Decision getDecisionById(Decision decision) throws Exception {
+		String sql = "select reportid,investigationid,description,attacholdname,attachnewname,attachpath" +
+				" from decision where PK_decision=?";
+		this.pstmt = this.conn.prepareStatement(sql);
+		this.pstmt.setInt(1, decision.getPkDecision());
+		ResultSet rs = this.pstmt.executeQuery();
+		if (rs.next()) {
+			decision.setReportid(rs.getString("reportid"));
+			decision.setInvestigationid(rs.getString("investigationid"));
+			decision.setDescription(rs.getString("description"));
+			decision.setAttacholdname(rs.getString("attacholdname"));
+			decision.setAttachnewname(rs.getString("attachnewname"));
+			decision.setAttachpath(rs.getString("attachpath"));		
+		}
+		return decision;
+	}
 }

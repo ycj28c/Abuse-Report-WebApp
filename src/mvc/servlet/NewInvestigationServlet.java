@@ -63,45 +63,52 @@ public class NewInvestigationServlet extends HttpServlet {
                     formelements.put(name, value);
                 } else {  //是file
                     String filename = item.getName(); 
-                    //upload path is...\\WebRoot\\upload\\decision or disposition\file  
-                    String ctxDir = session.getServletContext().getRealPath(String.valueOf(File.separatorChar));
-                    String uploadDir = "upload" + File.separatorChar + File.separatorChar;
-                    String CreateDir = arrayFile.get(arraycount).getdirectionName();  //分别存在disposition 和decision文件夹里
-                    File savePath = new File(ctxDir + uploadDir + CreateDir);
-            		if (!savePath.exists()) { //is doesn't exist the Directory, make it
-            			savePath.mkdirs();
-            		} 
-            		//generate the random filename and extension type
-            		String rename = java.util.UUID.randomUUID().toString()+"."+FilenameUtils.getExtension(filename);
-            		File file = new File(savePath, rename);  
-                    file.createNewFile();  
-                      
-                    // 获得流，读取数据写入文件  
-                    InputStream in = item.getInputStream();  
-                    FileOutputStream fos = new FileOutputStream(file);  
-                      
-                    int len;  
-                    byte[] buffer = new byte[1024];  
-                    while ((len = in.read(buffer)) > 0)  
-                        fos.write(buffer, 0, len);  
-                      
-                    // 关闭资源文件操作  
-                    fos.close();  
-                    in.close();  
-                    // 删除临时文件  
-                    item.delete();  
-                    
-                    //arrayFile counter
-                    arrayFile.get(arraycount).setoldName(filename);
-            		arrayFile.get(arraycount).setnewName(rename);
-                    arrayFile.get(arraycount).setpath(uploadDir + CreateDir + File.separatorChar + rename);
+                    if(filename!=null&&!"".equals(filename)){
+	                    //upload path is...\\WebRoot\\upload\\decision or disposition\file  
+	                    String ctxDir = session.getServletContext().getRealPath(String.valueOf(File.separatorChar));
+	                    String uploadDir = "upload" + File.separatorChar + File.separatorChar;
+	                    String CreateDir = arrayFile.get(arraycount).getdirectionName();  //分别存在disposition 和decision文件夹里
+	                    File savePath = new File(ctxDir + uploadDir + CreateDir);
+	            		if (!savePath.exists()) { //is doesn't exist the Directory, make it
+	            			savePath.mkdirs();
+	            		} 
+	            		//generate the random filename and extension type
+	            		String rename = java.util.UUID.randomUUID().toString()+"."+FilenameUtils.getExtension(filename);
+	            		File file = new File(savePath, rename);  
+	                    file.createNewFile();  
+	                      
+	                    // 获得流，读取数据写入文件  
+	                    InputStream in = item.getInputStream();  
+	                    FileOutputStream fos = new FileOutputStream(file);  
+	                      
+	                    int len;  
+	                    byte[] buffer = new byte[1024];  
+	                    while ((len = in.read(buffer)) > 0)  
+	                        fos.write(buffer, 0, len);  
+	                      
+	                    // 关闭资源文件操作  
+	                    fos.close();  
+	                    in.close();  
+	                    // 删除临时文件  
+	                    item.delete();  
+	                    
+	                    //arrayFile counter
+	                    arrayFile.get(arraycount).setoldName(filename);
+	            		arrayFile.get(arraycount).setnewName(rename);
+	                    arrayFile.get(arraycount).setpath(uploadDir + CreateDir + File.separatorChar + rename);	                    
+                    }
+                    else{
+                    	arrayFile.get(arraycount).setoldName(filename);
+	            		arrayFile.get(arraycount).setnewName("");
+	                    arrayFile.get(arraycount).setpath("");	
+                    }  
                     arraycount ++;
                 }  
             }  
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
-		
+        
         //set variable
         String reportid = formelements.get("reportid").toString();
 		String disdescription = formelements.get("disdescription").toString();
@@ -113,7 +120,7 @@ public class NewInvestigationServlet extends HttpServlet {
 		//System.out.println("desdescription:"+desdescription);
 		//System.out.println("resdescription:"+resdescription);
 		//System.out.println("publiclognumber:"+publiclognumber);
-        
+		      
 		//report
         Report report = new Report();
         report.setReportid(Integer.parseInt(reportid));
@@ -157,7 +164,7 @@ public class NewInvestigationServlet extends HttpServlet {
 			e.printStackTrace();
 		}
         //investigation report
-        String status = "haha";
+        String status = "haha"; //waiting to fix
         Investigation investigation = new Investigation();
         investigation.setDecisionid(String.valueOf(decisionid));
         investigation.setDispositionid(String.valueOf(dispositionid));

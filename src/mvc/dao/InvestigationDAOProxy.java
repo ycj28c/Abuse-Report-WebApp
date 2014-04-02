@@ -29,4 +29,16 @@ public class InvestigationDAOProxy implements IInvestigationDAO {
 		return flag;
 	}
 
+	public Investigation isPublicLogNumberExist(Investigation investigation)
+			throws Exception {
+		try {
+			investigation = this.dao.isPublicLogNumberExist(investigation);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return investigation;
+	}
+
 }

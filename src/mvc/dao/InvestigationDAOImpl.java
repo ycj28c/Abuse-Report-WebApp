@@ -17,8 +17,7 @@ public class InvestigationDAOImpl implements IInvestigationDAO{
 		this.conn = conn;
 	}
 
-	public boolean addInvestigation(Investigation investigation)
-			throws Exception {
+	public boolean addInvestigation(Investigation investigation) throws Exception {
 		boolean flag = false;
 		try {
 			String sql = "INSERT INTO investigation (publiclognumber, reportid, status," +
@@ -52,6 +51,23 @@ public class InvestigationDAOImpl implements IInvestigationDAO{
 			}
 		}
 		return flag;
+	}
+
+	public Investigation isPublicLogNumberExist(Investigation investigation) throws Exception {
+		String sql = "select PK_investigation,reportid,status,dispositionid,respondid,decisionid" +
+				" from investigation where publiclognumber=?";
+		this.pstmt = this.conn.prepareStatement(sql);
+		this.pstmt.setString(1, investigation.getPubliclognumber());
+		ResultSet rs = this.pstmt.executeQuery();
+		if (rs.next()) {
+			investigation.setPkInvestigation(rs.getInt("PK_investigation"));
+			investigation.setReportid(rs.getString("reportid"));
+			investigation.setStatus(rs.getString("status"));
+			investigation.setRespondid(rs.getString("respondid"));
+			investigation.setDispositionid(rs.getString("dispositionid"));
+			investigation.setDecisionid(rs.getString("decisionid"));		
+		}
+		return investigation;
 	}
 
 }

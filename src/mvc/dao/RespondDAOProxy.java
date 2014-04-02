@@ -28,4 +28,15 @@ public class RespondDAOProxy implements IRespondDAO {
 		return PKrespond;
 	}
 
+	public Respond getRespondById(Respond respond) throws Exception {
+		try {
+			respond = this.dao.getRespondById(respond);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return respond;
+	}
+
 }
