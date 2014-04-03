@@ -88,50 +88,50 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 				<tr align="center">
 					 <th colspan="8"> 
 					 	<%if(pagex.currentPage>1){ %>
-        					<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.previousPage %>">Previous Page</a> 
+        					<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.previousPage %>">Previous Page</a> 
         				<%}else{%>
         					<a>Previous Page</a>
         				<%} %>
         				<%if(pagex.getTotalPage()<6) {
         					for(int indexx=1;indexx<=pagex.getTotalPage();indexx++){%>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
         				<% }
         				}
         				else{
         					if(pagex.currentPage<3){
 								for(int indexx=1;indexx<=3;indexx++){%>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
         				<%  	}%>
         						<a>...</a>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
         				<%	}
         					else if(pagex.currentPage==3){
 								for(int indexx=1;indexx<=4;indexx++){%>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
         				<%  	}%>
         						<a>...</a>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
         				<%	}
         					else if(pagex.currentPage>pagex.getTotalPage()-3){%>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=1">1</a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=1">1</a>
         						<a>...</a>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()-3%>"><%=pagex.getTotalPage()-3%></a>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()-2%>"><%=pagex.getTotalPage()-2%></a>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()-1%>"><%=pagex.getTotalPage()-1%></a>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()-3%>"><%=pagex.getTotalPage()-3%></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()-2%>"><%=pagex.getTotalPage()-2%></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()-1%>"><%=pagex.getTotalPage()-1%></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
         				<%	}
         					else{%>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=1">1</a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=1">1</a>
         						<a>...</a>
         				<%		for(int indexx=pagex.currentPage-1;indexx<=pagex.currentPage+1;indexx++){%>
-        							<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
+        							<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=indexx%>"><%=indexx %></a>
         				<%		}%>
         						<a>...</a>
-        						<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
+        						<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.getTotalPage()%>"><%=pagex.getTotalPage()%></a>
         				<%	}
         				}%>
         				<%if(pagex.nextPage<=pagex.getTotalPage()) {%>
-        					<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.nextPage%>">Next Page</a> 
+        					<a href="jsp/SupervisorWatingListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.nextPage%>">Next Page</a> 
         				<%}else{%>
         					<a>Next Page</a>
         				<%} %>

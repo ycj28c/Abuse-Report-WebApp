@@ -23,6 +23,7 @@ public class Report {
 	private String witness;
 	private String caregiverrelationship;
 	private String groupid;
+	private String status;
 
 	public Integer getReportid() {
 		return this.reportid;
@@ -175,5 +176,14 @@ public class Report {
 	public void setGroupid(String groupid) {
 		this.groupid = groupid;
 	}
+	
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 }

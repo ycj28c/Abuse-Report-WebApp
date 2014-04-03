@@ -325,9 +325,12 @@ public class ReportDAOImpl implements IReportDAO {
 	}
 
 	public ArrayList<Report> supervisorListReport(Page page, String roleid) throws Exception {
-		ArrayList<Report> reportlist = new ArrayList<Report>();
+		ArrayList reportlist = new ArrayList<Report>();
 		try {
-			String sql = "select reportid,username,time from report where groupid in (select groupid from role where PK_role =?)";
+			String sql = "select reportid,userid,username,time,abuserid,abusername,victimid," +
+						"victimname,frequency,abusetype,awareof,investigatorrisk,dppchotline," +
+						"narrativeform,risklevel,witness,caregiverrelationship,groupid,status from report " +
+						"where groupid in (select groupid from role where PK_role =?)";
 			this.pstmt = this.conn.prepareStatement(sql);
 			this.pstmt.setString(1, roleid);
 			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
@@ -337,20 +340,22 @@ public class ReportDAOImpl implements IReportDAO {
 			while (rs.next()) {
 				Report rep = new Report();
 				rep.setReportid(rs.getInt("reportid"));
-			//	rep.setdiscript(rs.getString("discript"));
 				rep.setUsername(rs.getString("username"));
 				rep.setTime(rs.getDate("time"));
+				rep.setUsername(rs.getString("abusername"));
+				rep.setVictimname(rs.getString("victimname"));
+				rep.setFrequency(rs.getString("frequency"));
+				rep.setAbusetype(rs.getString("abusetype"));
+				rep.setAwareof(rs.getString("awareof"));
+				rep.setInvestigatorrisk(rs.getString("investigatorrisk"));
+				rep.setDppchotline(rs.getString("dppchotline"));
+				rep.setNarrativeform(rs.getString("narrativeform"));
+				rep.setRisklevel(rs.getString("risklevel"));
+				rep.setWitness(rs.getString("witness"));
+				rep.setCaregiverrelationship(rs.getString("caregiverrelationship"));
+				rep.setStatus(rs.getString("status"));
+				
 				reportlist.add(rep);
-
-				//debug
-				/*System.out.println("rsgetreportid:"+rs.getInt("reportid"));
-				System.out.println("rsgetdiscript:"+rs.getString("discript"));
-				System.out.println("rsgetname:"+rs.getString(2));
-				System.out.println("rsgetdate:"+rs.getDate("time"));
-				System.out.println("getreportid:"+rep.getreportid());
-				System.out.println("getdiscript:"+rep.getdiscript());
-				System.out.println("getname:"+rep.getName());
-				System.out.println("getdate:"+rep.gettime());*/	
 			}
 		} catch (Exception e) {
 			throw e;
@@ -426,6 +431,150 @@ public class ReportDAOImpl implements IReportDAO {
 		try {
 			String sql = "select count(*) as total from report";
 			this.pstmt = this.conn.prepareStatement(sql);
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				amout = rs.getInt("total");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return amout;
+	}
+
+	public int getAmountSupervisorWaitingList(String roleid) throws Exception{
+		int amout = 0;
+		try {
+			String sql = "select count(*) as total from report where status ='initiated' and groupid in (select groupid from role where PK_role =?)";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, roleid);
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				amout = rs.getInt("total");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return amout;
+	}
+
+	public ArrayList<Report> supervisorWaitingListReport(Page page, String roleid) throws Exception {
+		ArrayList reportlist = new ArrayList<Report>();
+		try {
+			String sql = "select reportid,userid,username,time,abuserid,abusername,victimid," +
+						"victimname,frequency,abusetype,awareof,investigatorrisk,dppchotline," +
+						"narrativeform,risklevel,witness,caregiverrelationship,groupid,status from report " +
+						"where status ='initiated' and groupid in (select groupid from role where PK_role =?)";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, roleid);
+			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
+			ResultSet rs = this.pstmt.executeQuery();
+			rs.absolute((page.currentPage-1)*page.getPageSize());//set location to second record of each page
+			//rs.relative(-1);//back 1 position
+			while (rs.next()) {
+				Report rep = new Report();
+				rep.setReportid(rs.getInt("reportid"));
+				rep.setUsername(rs.getString("username"));
+				rep.setTime(rs.getDate("time"));
+				rep.setUsername(rs.getString("abusername"));
+				rep.setVictimname(rs.getString("victimname"));
+				rep.setFrequency(rs.getString("frequency"));
+				rep.setAbusetype(rs.getString("abusetype"));
+				rep.setAwareof(rs.getString("awareof"));
+				rep.setInvestigatorrisk(rs.getString("investigatorrisk"));
+				rep.setDppchotline(rs.getString("dppchotline"));
+				rep.setNarrativeform(rs.getString("narrativeform"));
+				rep.setRisklevel(rs.getString("risklevel"));
+				rep.setWitness(rs.getString("witness"));
+				rep.setCaregiverrelationship(rs.getString("caregiverrelationship"));
+				rep.setStatus(rs.getString("status"));
+				
+				reportlist.add(rep);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return reportlist;
+	}
+
+	public ArrayList<Report> supervisorFinishListReport(Page page, String roleid) throws Exception {
+		ArrayList reportlist = new ArrayList<Report>();
+		try {
+			String sql = "select reportid,userid,username,time,abuserid,abusername,victimid," +
+						"victimname,frequency,abusetype,awareof,investigatorrisk,dppchotline," +
+						"narrativeform,risklevel,witness,caregiverrelationship,groupid,status from report " +
+						"where status!='initiated' and status is not null and" +
+						" groupid in (select groupid from role where PK_role =?)";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, roleid);
+			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
+			ResultSet rs = this.pstmt.executeQuery();
+			rs.absolute((page.currentPage-1)*page.getPageSize());//set location to second record of each page
+			//rs.relative(-1);//back 1 position
+			while (rs.next()) {
+				Report rep = new Report();
+				rep.setReportid(rs.getInt("reportid"));
+				rep.setUsername(rs.getString("username"));
+				rep.setTime(rs.getDate("time"));
+				rep.setUsername(rs.getString("abusername"));
+				rep.setVictimname(rs.getString("victimname"));
+				rep.setFrequency(rs.getString("frequency"));
+				rep.setAbusetype(rs.getString("abusetype"));
+				rep.setAwareof(rs.getString("awareof"));
+				rep.setInvestigatorrisk(rs.getString("investigatorrisk"));
+				rep.setDppchotline(rs.getString("dppchotline"));
+				rep.setNarrativeform(rs.getString("narrativeform"));
+				rep.setRisklevel(rs.getString("risklevel"));
+				rep.setWitness(rs.getString("witness"));
+				rep.setCaregiverrelationship(rs.getString("caregiverrelationship"));
+				rep.setStatus(rs.getString("status"));
+				
+				reportlist.add(rep);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return reportlist;
+	}
+
+	public int getAmountSupervisorFinishList(String roleid) throws Exception {
+		int amout = 0;
+		try {
+			String sql = "select count(*) as total from report where status!='initiated' and status is not null" +
+					" and groupid in (select groupid from role where PK_role =?)";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, roleid);
 			ResultSet rs = this.pstmt.executeQuery();
 			if (rs.next()) {
 				amout = rs.getInt("total");

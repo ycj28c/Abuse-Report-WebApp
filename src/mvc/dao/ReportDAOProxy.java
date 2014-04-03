@@ -163,5 +163,53 @@ public class ReportDAOProxy implements IReportDAO {
 		return amount;
 	}
 
+	public int getAmountSupervisorWaitingList(String roleid) throws Exception{
+		int amount = 0;
+		try {
+			amount = this.dao.getAmountSupervisorWaitingList(roleid);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return amount;
+	}
+
+	public ArrayList<Report> supervisorWaitingListReport(Page page,String roleid) throws Exception {
+		ArrayList<Report> reportlist = new ArrayList<Report>();
+		try {
+			reportlist = this.dao.supervisorWaitingListReport(page, roleid);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return reportlist;
+	}
+
+	public ArrayList<Report> supervisorFinishListReport(Page page, String roleid) throws Exception {
+		ArrayList<Report> reportlist = new ArrayList<Report>();
+		try {
+			reportlist = this.dao.supervisorFinishListReport(page, roleid);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return reportlist;
+	}
+
+	public int getAmountSupervisorFinishList(String roleid) throws Exception {
+		int amount = 0;
+		try {
+			amount = this.dao.getAmountSupervisorFinishList(roleid);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return amount;
+	}
+
 
 }

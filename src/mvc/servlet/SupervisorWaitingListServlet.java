@@ -11,7 +11,7 @@ import structure.Page;
 import mvc.factory.*;
 import mvc.vo.*;
 
-public class SupervisorReportListServlet extends HttpServlet {
+public class SupervisorWaitingListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//set variable
 		HttpSession session = req.getSession();
@@ -22,7 +22,7 @@ public class SupervisorReportListServlet extends HttpServlet {
 		//int totalpage = 0;
 		int reportamount = 0;
 		String path = "firstpage.jsp";
-		String contentPage ="/jsp/supervisorRepList.jsp";
+		String contentPage ="/jsp/supervisorWaitingList.jsp";
 		ArrayList<Report> backinfo = new ArrayList<Report>();	
 		boolean flag = false;
 		//judge if the userid is really has this role
@@ -44,7 +44,7 @@ public class SupervisorReportListServlet extends HttpServlet {
 		report.setUserid(userid);	
 		//set page
 		try {
-			reportamount = DAOFactory.getIReportDAOInstance().getAmountSupervisor(roleid);	//get amount of records the role's group have	
+			reportamount = DAOFactory.getIReportDAOInstance().getAmountSupervisorWaitingList(roleid);	//get amount of records the role's group have	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -54,12 +54,11 @@ public class SupervisorReportListServlet extends HttpServlet {
 		
 		//set report
 		try {
-			backinfo = DAOFactory.getIReportDAOInstance().supervisorListReport(page,roleid);
+			backinfo = DAOFactory.getIReportDAOInstance().supervisorWaitingListReport(page,roleid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//jump to page
-		//System.out.println("backinfo"+backinfo.get(0).getNarrativeform());
 		req.setAttribute("backinfo", backinfo);// array report list
 		req.setAttribute("reportamount", reportamount);// total number of user's report
 		req.setAttribute("reportpage", page);// total page of user's report
