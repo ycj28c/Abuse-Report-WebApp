@@ -141,6 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							var disshow = document.createElement("a");
 							disshow.id = "disshow";
 							disshow.href = attachpath_dec;
+							disshow.target = "view_window"; //new windows
 							disshow.innerHTML = attacholdname_dec;
 							disattachment.parentNode.appendChild(disshow);
 						}
@@ -172,6 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							var decshow = document.createElement("a");
 							decshow.id = "decshow";
 							decshow.href = attachpath_dec;
+							decshow.target = "view_window"; //new windows
 							decshow.innerHTML = attacholdname_dec;
 							desattachment.parentNode.appendChild(decshow);
 						}
@@ -186,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function blockElement(){
 			var domdate = document.getElementById("publiclognumber");
-			domdate.disabled = false;
+			domdate.readOnly = false;
 			
 			var domtabletwo= document.getElementById("tabletwo");
 			domtabletwo.style.display="none";
@@ -223,7 +225,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function openElement(){
 			//var domdate = document.getElementById("publiclognumber");
-			//domdate.setAttribute("disabled", true);
+			//domdate.setAttribute("disabled", true); 
+			var domdate = document.getElementById("publiclognumber");
+			domdate.readOnly = true;
 			
 			var domtabletwo= document.getElementById("tabletwo");
 			domtabletwo.style.display="";

@@ -59,7 +59,7 @@ public class UpdateInvestigationServlet extends HttpServlet {
                     String value = item.getString();  
                     // 转换下字符集编码,it's only way to get date at "multipart/form-data" mode
                     value = new String(value.getBytes("iso-8859-1"), "utf-8");  
-                    //System.out.println(name + "=" + value); 
+                    System.out.println(name + "=" + value); 
                     formelements.put(name, value);
                 } else {  //是file
                     String filename = item.getName(); 
