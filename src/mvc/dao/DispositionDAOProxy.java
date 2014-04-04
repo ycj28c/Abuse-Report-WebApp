@@ -39,4 +39,28 @@ public class DispositionDAOProxy implements IDispositionDAO {
 		return disposition;
 	}
 
+	public boolean updateDisposition(Disposition disposition) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.updateDisposition(disposition);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
+	public boolean updateDispositionWithoutAttach(Disposition disposition) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.updateDispositionWithoutAttach(disposition);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
 }

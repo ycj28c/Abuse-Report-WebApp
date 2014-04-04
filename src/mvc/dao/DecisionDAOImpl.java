@@ -72,4 +72,62 @@ public class DecisionDAOImpl implements IDecisionDAO {
 		}
 		return decision;
 	}
+
+	public boolean updateDecision(Decision decision) throws Exception {
+		boolean flag = false;
+		try {
+			String sql = "UPDATE decision set reportid=?,investigationid=?,description=?,attacholdname=?," +
+					"attachnewname=?, attachpath=? where PK_decision=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, decision.getReportid());
+			this.pstmt.setString(2, decision.getInvestigationid());
+			this.pstmt.setString(3, decision.getDescription());
+			this.pstmt.setString(4, decision.getAttacholdname());
+			this.pstmt.setString(5, decision.getAttachnewname());
+			this.pstmt.setString(6, decision.getAttachpath());
+			this.pstmt.setInt(7, decision.getPkDecision());
+			int rs = this.pstmt.executeUpdate();
+			if (rs > 0) { // return number
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return flag;
+	}
+
+	public boolean updateDecisionWithoutAttach(Decision decision) throws Exception {
+		boolean flag = false;
+		try {
+			String sql = "UPDATE decision set reportid=?,investigationid=?,description=? where PK_decision=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, decision.getReportid());
+			this.pstmt.setString(2, decision.getInvestigationid());
+			this.pstmt.setString(3, decision.getDescription());
+			this.pstmt.setInt(4, decision.getPkDecision());
+			int rs = this.pstmt.executeUpdate();
+			if (rs > 0) { // return number
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return flag;
+	}
 }

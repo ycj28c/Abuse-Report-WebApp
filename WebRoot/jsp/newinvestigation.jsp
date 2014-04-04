@@ -40,7 +40,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					required: true,
 					digits: true
 				},
-				resdescription: "required",
 			},
 			messages: {
 				reportid: {
@@ -51,7 +50,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					required: "Please provide a publiclognumber",
 					digits: "Your publiclognumber must be digit"
 				},
-				resdescription: "Please write something",
 			}
 		});
 	});	
@@ -60,6 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var pln;
 		function checkPLN(){
 			var publiclognumber = document.getElementById("publiclognumber").value;
+			if(publiclognumber=='')
+				return false;
 			var url = "jsp/CheckPublicLogNumberServlet?publiclognumber=" + publiclognumber;
 			if(window.ActiveXObject){
 				pln = new ActiveXObject("Microsoft.XMLHttp");
@@ -88,6 +88,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						var investstatus = document.createElement("a");
 						investstatus.innerHTML = "NEW INVESTIGATION";
 						title.appendChild(investstatus);
+						//change update to submit button
+						var investigationform = document.getElementById("newinvestigation");
+						investigationform.action = "jsp/NewInvestigationServlet";
+						var submitform = document.getElementById("submitform");
+						submitform.value = "Submit";
 					}
 					else{
 						openElement();
@@ -97,6 +102,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						var investstatus = document.createElement("a");
 						investstatus.innerHTML = "UPDATE INVESTIGATION";
 						title.appendChild(investstatus);
+						//change sumbit to update button
+						var investigationform = document.getElementById("newinvestigation");
+						investigationform.action = "jsp/UpdateInvestigationServlet";
+						var submitform = document.getElementById("submitform");
+						submitform.value = "Update";
 					
 						if(xml.getElementsByTagName("report")!=null&&xml.getElementsByTagName("report")!=""){
 							var reportid = xml.getElementsByTagName("reportid")[0].childNodes[0].nodeValue;
@@ -113,9 +123,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}
 						
 						if(xml.getElementsByTagName("disposition")!=null&&xml.getElementsByTagName("disposition")!=""){
+							var dispositionid_dis = xml.getElementsByTagName("dispositionid_dis")[0].childNodes[0].nodeValue;
+							var dispositionid = document.getElementById("dispositionid");
+							dispositionid.value = dispositionid_dis;
+							
 							var description_dis = xml.getElementsByTagName("description_dis")[0].childNodes[0].nodeValue;
 							var disdescription = document.getElementById("disdescription");
-							disdescription.value = description_dis;
+							disdescription.value = description_dis;						
 							
 							var attachpath_dec = xml.getElementsByTagName("attachpath_dis")[0].childNodes[0].nodeValue;
 							var attacholdname_dec = xml.getElementsByTagName("attacholdname_dis")[0].childNodes[0].nodeValue;
@@ -131,11 +145,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							disattachment.parentNode.appendChild(disshow);
 						}
 						if(xml.getElementsByTagName("respond")!=null&&xml.getElementsByTagName("respond")!=""){
+							var respondid_res = xml.getElementsByTagName("respondid_res")[0].childNodes[0].nodeValue;
+							var respondid = document.getElementById("respondid");
+							respondid.value = respondid_res;
+						
 							var content_res = xml.getElementsByTagName("content_res")[0].childNodes[0].nodeValue;
 							var resdescription = document.getElementById("resdescription");
 							resdescription.value = content_res;
 						}
 						if(xml.getElementsByTagName("decision")!=null&&xml.getElementsByTagName("decision")!=""){
+							var decisionid_dec = xml.getElementsByTagName("decisionid_dec")[0].childNodes[0].nodeValue;
+							var decisionid = document.getElementById("decisionid");
+							decisionid.value = decisionid_dec;
+						
 							var description_dec = xml.getElementsByTagName("description_dec")[0].childNodes[0].nodeValue;
 							var desdescription = document.getElementById("desdescription");
 							desdescription.value = description_dec;
@@ -165,14 +187,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function blockElement(){
 			var domdate = document.getElementById("publiclognumber");
 			domdate.disabled = false;
-
+			
+			var domtabletwo= document.getElementById("tabletwo");
+			domtabletwo.style.display="none";
+			
+			var domsubmitform= document.getElementById("submitform");
+			domsubmitform.setAttribute("disabled", true);
+			
+			var domresetform= document.getElementById("resetform");
+			domresetform.setAttribute("disabled", true);
+			
+			var domcheckAvailable= document.getElementById("checkAvailable");
+			domcheckAvailable.disabled = false;
+			
+			var domreSearch = document.getElementById("reSearch");
+			domreSearch.setAttribute("disabled", true);
+			
 			var domstatus = document.getElementById("reportid");
-			domstatus.disabled = false;
-		
-			var domdate = document.getElementById("date");
-			domdate.setAttribute("disabled", true);
-
-			var domstatus = document.getElementById("status");
 			domstatus.setAttribute("disabled", true);
 						
 			var disdescription = document.getElementById("disdescription");
@@ -191,17 +222,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			disattachment.setAttribute("disabled", true);
 		}
 		function openElement(){
-			var domdate = document.getElementById("publiclognumber");
-			domdate.setAttribute("disabled", true);
-
+			//var domdate = document.getElementById("publiclognumber");
+			//domdate.setAttribute("disabled", true);
+			
+			var domtabletwo= document.getElementById("tabletwo");
+			domtabletwo.style.display="";
+			
+			var domsubmitform= document.getElementById("submitform");
+			domsubmitform.disabled = false;
+			
+			var domresetform= document.getElementById("resetform");
+			domresetform.disabled = false;
+			
+			var domcheckAvailable= document.getElementById("checkAvailable");
+			domcheckAvailable.setAttribute("disabled", true);
+			
+			var domreSearch = document.getElementById("reSearch");
+			domreSearch.disabled = false;
+			
 			var domstatus = document.getElementById("reportid");
-			domstatus.setAttribute("disabled", true);
-		
-			var domdate = document.getElementById("date");
-			domdate.disabled = false;
-
-			var domstatus = document.getElementById("status");
-			domstatus.disabled = false;;
+			domstatus.disabled = false;
 						
 			var disdescription = document.getElementById("disdescription");
 			disdescription.disabled = false;
@@ -263,38 +303,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	<form action="jsp/NewInvestigationServlet" method="post" enctype="multipart/form-data" id="newinvestigation">
-    	<table align = "left" border="1" style="border-collapse: collapse;">
+    	<table align = "left" border="1" id="tableone" style="border-collapse: collapse;">
     		<tr>
     			<td colspan="3" align = "center" id="title">INVESTIGATION</td>	
     		</tr>
     		<tr>
 				<td colspan="3">
-					PLN :<input type="text" name="publiclognumber" id="publiclognumber" value="">		
-    				ReportID :<input type="text" value="" name="reportid" id="reportid">
-					<input type="button" value="Connect" onclick = "checkPLN()" />
+					PLN :<input type="text" name="publiclognumber" id="publiclognumber"/>		
+					<input type="button" value="Check Available" onclick = "checkPLN()" id="checkAvailable"/>
+					<input type="button" value="Reset" onclick ="initElement()" id="reSearch" disabled/>
 					<br>
-    				<label for="publiclognumber" class="error"></label>
-    				<label for="reportid" class="error"></label>
+    				<label for="publiclognumber" class="error"></label>				
 				</td>
 			</tr>
+		</table>
+		<br><br><br><br>
+		<table align = "left" border="1" id="tabletwo" style="border-collapse: collapse;display:none;">
     		<tr>
     			<td colspan="3" align = "center">Report</td> 
     		</tr>
     		<tr>
     			<td colspan="3" align = "left">
+    			   	ReportID :<input type="text" value="" name="reportid" id="reportid" disabled>
     				Date :<input type="text" name="date" id="date" disabled>
     				Status :<input type="text" name="status" id="status" disabled>
+    				<br>
+    				<label for="reportid" class="error"></label>
     			</td> 
     		</tr>
     		<tr>
     			<td colspan="3" align = "center">DISPOSITION LETTER</td> 
+    		</tr>
+    		<tr style="display:none">
+    			<td>
+					DispositionID :
+				</td> 
+				<td colspan="2" align = "left">
+					<input type="text" value="" name="dispositionid" id="dispositionid">
+				</td> 
     		</tr>
     		<tr>
     			<td>
     				Description :			
     			</td> 	
     			<td colspan="2" align = "left">
-    				<textarea style="width:100%;" name="disdescription" id="disdescription" disabled></textarea>			
+    				<textarea style="width:100%;" name="disdescription" id="disdescription"></textarea>			
     			</td> 
 			</tr>
 			<tr>
@@ -308,6 +361,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr>
     			<td colspan="3" align = "center">AGENCY RESPONDS</td> 
     		</tr>
+    		<tr style="display:none">
+    			<td>
+					RespondID :
+				</td> 
+				<td colspan="2" align = "left">
+					<input type="text" value="" name="respondid" id="respondid">
+				</td> 
+    		</tr>
 			<tr>
     			<td>
     				Description :			
@@ -320,6 +381,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
     		<tr>
     			<td colspan="3" align = "center">DECISION LETTER</td> 
+    		</tr>
+    		<tr style="display:none">
+    			<td>
+					DecisionID :
+				</td> 
+				<td colspan="2" align = "left">
+					<input type="text" value="" name="decisionid" id="decisionid">
+				</td> 
     		</tr>
     		<tr>
     			<td>
@@ -339,9 +408,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td colspan="3" align = "right">
-					<input type="submit" value="submit" />
-               		<input type="reset" value="reset" onclick ="initElement()"/>
-               		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/>   
+					<input type="submit" value="Submit" id="submitform" disabled/>
+               		<input type="reset" value="Reset" id="resetform" onclick ="initElement()" disabled/>
+               		<input type="button" value="Return" onclick="gopath('firstpage.jsp')"/>   
 				</td>
 			</tr>
     	</table>

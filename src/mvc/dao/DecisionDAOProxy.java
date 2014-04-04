@@ -39,4 +39,28 @@ public class DecisionDAOProxy implements IDecisionDAO {
 		return decision;
 	}
 
+	public boolean updateDecision(Decision decision) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.updateDecision(decision);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
+	public boolean updateDecisionWithoutAttach(Decision decision) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.updateDecisionWithoutAttach(decision);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
 }

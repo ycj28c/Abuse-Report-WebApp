@@ -64,4 +64,31 @@ public class RespondDAOImpl implements IRespondDAO {
 		}
 		return respond;
 	}
+
+	public boolean updateRespond(Respond respond) throws Exception {
+		boolean flag = false;
+		try {
+			String sql = "UPDATE respond set reportid=?,investigationid=?,content=? where PK_respond=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, respond.getReportid());
+			this.pstmt.setString(2, respond.getInvestigationid());
+			this.pstmt.setString(3, respond.getContent());
+			this.pstmt.setInt(4, respond.getPkRespond());
+			int rs = this.pstmt.executeUpdate();
+			if (rs > 0) { // return number
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return flag;
+	}
 }

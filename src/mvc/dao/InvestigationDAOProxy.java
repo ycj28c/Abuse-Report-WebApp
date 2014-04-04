@@ -16,8 +16,7 @@ public class InvestigationDAOProxy implements IInvestigationDAO {
 		this.dao = new InvestigationDAOImpl(this.dbc.getConnection());
 	}
 	
-	public boolean addInvestigation(Investigation investigation)
-			throws Exception {
+	public boolean addInvestigation(Investigation investigation) throws Exception {
 		boolean flag = false;
 		try {
 			flag = this.dao.addInvestigation(investigation);// 调用真实主题
@@ -29,8 +28,7 @@ public class InvestigationDAOProxy implements IInvestigationDAO {
 		return flag;
 	}
 
-	public Investigation isPublicLogNumberExist(Investigation investigation)
-			throws Exception {
+	public Investigation isPublicLogNumberExist(Investigation investigation) throws Exception {
 		try {
 			investigation = this.dao.isPublicLogNumberExist(investigation);// 调用真实主题
 		} catch (Exception e) {
@@ -39,6 +37,18 @@ public class InvestigationDAOProxy implements IInvestigationDAO {
 			this.dbc.close();
 		}
 		return investigation;
+	}
+
+	public boolean updateInvestigationID(Investigation investigation) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.updateInvestigationID(investigation);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
 	}
 
 }

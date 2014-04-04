@@ -95,6 +95,10 @@ public class CheckPublicLogNumberServlet extends HttpServlet {
 					Element Eldate = doc.createElement("date");
 					Eldate.appendChild(doc.createTextNode(String.valueOf(report.getTime())));
 					Elreport.appendChild(Eldate);
+					
+					Element Elstatus = doc.createElement("status");
+					Elstatus.appendChild(doc.createTextNode(String.valueOf(report.getStatus())));
+					Elreport.appendChild(Elstatus);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -106,7 +110,11 @@ public class CheckPublicLogNumberServlet extends HttpServlet {
 					disposition = DAOFactory.getIDispositionDAOInstance().getDispositionById(disposition);
 					Element Eldisposition = doc.createElement("disposition");
 					root.appendChild(Eldisposition);
-
+					
+					Element ELdispositionid = doc.createElement("dispositionid_dis");
+					ELdispositionid.appendChild(doc.createTextNode(String.valueOf(disposition.getPkDisposition())));
+					Eldisposition.appendChild(ELdispositionid);
+					
 					Element ELreportid = doc.createElement("reportid_dis");
 					ELreportid.appendChild(doc.createTextNode(disposition.getReportid()));
 					Eldisposition.appendChild(ELreportid);
@@ -142,7 +150,11 @@ public class CheckPublicLogNumberServlet extends HttpServlet {
 					respond = DAOFactory.getIRespondDAOInstance().getRespondById(respond);
 					Element Elrespond = doc.createElement("respond");
 					root.appendChild(Elrespond);
-
+					
+					Element ELrespondid = doc.createElement("respondid_res");
+					ELrespondid.appendChild(doc.createTextNode(String.valueOf(respond.getPkRespond())));
+					Elrespond.appendChild(ELrespondid);
+					
 					Element ELreportid = doc.createElement("reportid_res");
 					ELreportid.appendChild(doc.createTextNode(respond.getReportid()));
 					Elrespond.appendChild(ELreportid);
@@ -165,7 +177,11 @@ public class CheckPublicLogNumberServlet extends HttpServlet {
 					decision = DAOFactory.getIDecisionDAOInstance().getDecisionById(decision);
 					Element Eldicision = doc.createElement("decision");
 					root.appendChild(Eldicision);
-
+					
+					Element ELdecisionid = doc.createElement("decisionid_dec");
+					ELdecisionid.appendChild(doc.createTextNode(String.valueOf(decision.getPkDecision())));
+					Eldicision.appendChild(ELdecisionid);
+					
 					Element ELreportid = doc.createElement("reportid_dec");
 					ELreportid.appendChild(doc.createTextNode(decision.getReportid()));
 					Eldicision.appendChild(ELreportid);

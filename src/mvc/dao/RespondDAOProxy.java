@@ -39,4 +39,16 @@ public class RespondDAOProxy implements IRespondDAO {
 		return respond;
 	}
 
+	public boolean updateRespond(Respond respond) throws Exception {
+		boolean flag = false;
+		try {
+			flag = this.dao.updateRespond(respond);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return flag;
+	}
+
 }

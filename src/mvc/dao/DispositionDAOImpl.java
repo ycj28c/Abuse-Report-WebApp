@@ -75,4 +75,62 @@ public class DispositionDAOImpl implements IDispositionDAO {
 		}
 		return disposition;
 	}
+
+	public boolean updateDisposition(Disposition disposition) throws Exception {
+		boolean flag = false;
+		try {
+			String sql = "UPDATE disposition set reportid=?,investigationid=?,description=?,attacholdname=?," +
+					"attachnewname=?, attachpath=? where PK_disposition=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, disposition.getReportid());
+			this.pstmt.setString(2, disposition.getInvestigationid());
+			this.pstmt.setString(3, disposition.getDescription());
+			this.pstmt.setString(4, disposition.getAttacholdname());
+			this.pstmt.setString(5, disposition.getAttachnewname());
+			this.pstmt.setString(6, disposition.getAttachpath());
+			this.pstmt.setInt(7, disposition.getPkDisposition());
+			int rs = this.pstmt.executeUpdate();
+			if (rs > 0) { // return number
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return flag;
+	}
+
+	public boolean updateDispositionWithoutAttach(Disposition disposition) throws Exception {
+		boolean flag = false;
+		try {
+			String sql = "UPDATE disposition set reportid=?,investigationid=?,description=? where PK_disposition=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, disposition.getReportid());
+			this.pstmt.setString(2, disposition.getInvestigationid());
+			this.pstmt.setString(3, disposition.getDescription());
+			this.pstmt.setInt(4, disposition.getPkDisposition());
+			int rs = this.pstmt.executeUpdate();
+			if (rs > 0) { // return number
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return flag;
+	}
 }

@@ -70,4 +70,29 @@ public class InvestigationDAOImpl implements IInvestigationDAO{
 		return investigation;
 	}
 
+	public boolean updateInvestigationID(Investigation investigation) throws Exception {
+		boolean flag = false;
+		try {
+			String sql = "UPDATE investigation set reportid=? where publiclognumber=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, investigation.getReportid());
+			this.pstmt.setString(2, investigation.getPubliclognumber());
+			int rs = this.pstmt.executeUpdate();
+			if (rs > 0) { // return number
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return flag;
+	}
+
 }
