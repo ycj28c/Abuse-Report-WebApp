@@ -152,7 +152,7 @@ public class AbuseReportPDF implements LetterInterface{
 			String isNonMandated= (mandate=="yes"||mandate.equals("yes"))?" ":"*";
 			c1 = new PdfPCell(
 					new Paragraph( 30f,
-							"Name:" + report.getUsername()
+							"Name: fakename"
 								+ "\nAddress:"+ reporter.getAddress()
 								+ "\n" 
 								+ "\nDaytime telephone:("+ reporter.getTelephone()+")"
