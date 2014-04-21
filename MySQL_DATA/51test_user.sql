@@ -28,6 +28,12 @@ CREATE TABLE `user` (
   `userid` varchar(30) NOT NULL,
   `name` varchar(30) DEFAULT NULL,
   `password` varchar(32) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `telephone` varchar(45) DEFAULT NULL,
+  `mandated` varchar(45) DEFAULT NULL,
+  `SSN` varchar(45) DEFAULT NULL,
+  `DOB` varchar(45) DEFAULT NULL,
+  `groupid` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +44,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('1','yang','123'),('11111','wenxin','11111'),('14555','Maha','12345'),('22222','ahah','22222'),('qwert','lin2','12345'),('张三','张三丰','123');
+INSERT INTO `user` VALUES ('1','yang','123','111 main street apt333, worcester, ma 01608','11111111','yes','234234','10/20/2000','1'),('11111','wenxin','11111','222 main street apt333, worcester, ma 01608','22222222','no','354234','11/20/2000','1'),('14555','Maha','12345','333 main street apt333, worcester, ma 01608','227777222','yes','345345','12/20/2000','2'),('22222','ahah','22222','444 main street apt333, worcester, ma 01608','33333333','yes','643564','10/22/2000','2'),('qwert','lin2','12345','555 main street apt333, worcester, ma 01608','44444444','no','345345','10/23/2000','1'),('张三','张三丰','123','666 main street apt333, worcester, ma 01608','55555555','yes','854566','10/24/2000','2');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-01 23:51:08
+-- Dump completed on 2014-04-21 19:33:49

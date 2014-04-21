@@ -49,7 +49,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'111','11111',1,'Female','1111','111',NULL,'TTY','Dept. of Correction','Residential','sdfsdf','Cerebral Palsy,Visual','sdfsdfsdf'),(2,'sdf','sdfsdfsd',11,'Female','11111','111',NULL,'TTY','sdfsdf','Other','cccccccccc','Multiple Sclerosis,Cerebral Palsy,Mental Illness,Head Injury','xxxcvxcvsdfsdf'),(3,'sdfsd','sdfsdfsd',0,'Male','','',NULL,'Sign Interpreter','Dept. of Mental Health','Residential','Caucasian','Mental Retardation','');
+INSERT INTO `patient` VALUES (1,'111','11111',1,'Female','1111','111','married','TTY','Dept. of Correction','Residential','Caucasian','Cerebral Palsy,Visual','sdfsdfsdf'),(2,'sdf','sdfsdfsd',11,'Female','11111','111','deverse','TTY','Mass Comm./Blind','Residential','Hispanic','Multiple Sclerosis,Cerebral Palsy,Mental Illness,Head Injury','xxxcvxcvsdfsdf'),(3,'sdfsd','sdfsdfsd',0,'Male','23423234','10/10/2011','married','Sign Interpreter','Dept. of Mental Health','Residential','Asian','Mental Retardation','fdfsdfsdf');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-01 23:51:07
+-- Dump completed on 2014-04-21 19:33:49

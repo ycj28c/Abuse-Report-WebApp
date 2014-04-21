@@ -34,7 +34,7 @@ CREATE TABLE `investigation` (
   `decisionid` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`PK_investigation`),
   UNIQUE KEY `publiclognumber_UNIQUE` (`publiclognumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `investigation` (
 
 LOCK TABLES `investigation` WRITE;
 /*!40000 ALTER TABLE `investigation` DISABLE KEYS */;
-INSERT INTO `investigation` VALUES (1,'44','44','haha','3','3','3'),(2,'55','55','haha','4','4','4'),(3,'66','66','haha','5','5','5'),(5,'77','77','haha','7','7','7'),(6,'22','11','haha','8','8','8'),(7,'42','23','haha','9','9','9'),(8,'32','11','haha','10','10','10'),(9,'25','11','haha','11','11','11'),(10,'24','22','haha','12','12','12'),(12,'123','355','haha','14','14','14'),(13,'554','34','haha','15','15','15'),(14,'433','111','haha','16','16','16'),(16,'321','2','haha','18','18','18');
+INSERT INTO `investigation` VALUES (1,'44','44','haha','3','3','3'),(2,'55','55','haha','4','4','4'),(3,'66','66','haha','5','5','5'),(5,'77','77','haha','7','7','7'),(6,'22','11','haha','8','8','8'),(7,'42','23','haha','9','9','9'),(8,'32','11','haha','10','10','10'),(9,'25','11','haha','11','11','11'),(10,'24','22','haha','12','12','12'),(12,'123','355','haha','14','14','14'),(13,'554','34','haha','15','15','15'),(14,'433','111','haha','16','16','16'),(16,'321','2','haha','18','18','18'),(19,'1232','2','haha','21','21','21'),(20,'432','2','haha','22','22','22'),(21,'3214','2','haha','23','23','23'),(22,'2123','2','haha','24','24','24'),(23,'5342','3','haha','25','25','25'),(24,'232','2','haha','26','26','26');
 /*!40000 ALTER TABLE `investigation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-01 23:51:03
+-- Dump completed on 2014-04-21 19:33:47
