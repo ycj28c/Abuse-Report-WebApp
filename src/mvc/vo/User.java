@@ -10,6 +10,7 @@ public class User {
 	private String mandated;
 	private String SSN;
 	private String DOB;
+	private String groupid;
 
 	public String getUserid() {
 		return userid;
@@ -73,5 +74,13 @@ public class User {
 
 	public void setDOB(String DOB) {
 		this.DOB = DOB;
+	}
+	
+	public String getGroupid() {
+		return groupid;
+	}
+
+	public void setGroupid(String groupid) {
+		this.groupid = groupid;
 	}
 }

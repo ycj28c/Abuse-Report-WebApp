@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 if(session.getAttribute("userid")==null){
 	session.setAttribute("userid", request.getAttribute("userid"));
 	session.setAttribute("username", request.getAttribute("username"));
+	session.setAttribute("groupid", request.getAttribute("groupid"));
 	session.setAttribute("authorityList", request.getAttribute("authorityList"));
 }
 %>

@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
 					//jump to page
 					req.setAttribute("userid", user.getUserid());
 					req.setAttribute("username", user.getName());
+					req.setAttribute("groupid", user.getGroupid());
 					req.setAttribute("authorityList", authorityList);
 					req.getRequestDispatcher(succ_path).forward(req, resp);
 				} else {

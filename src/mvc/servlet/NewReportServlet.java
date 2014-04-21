@@ -16,6 +16,7 @@ public class NewReportServlet extends HttpServlet {
 		//set variable
 		HttpSession session = req.getSession();
 		String userid = session.getAttribute("userid").toString();
+		String groupid = session.getAttribute("groupid").toString();
 		boolean flag = false;
 		//String info = new String();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -84,6 +85,8 @@ public class NewReportServlet extends HttpServlet {
 		report.setResultinginjure(resultinginjure);
 		report.setWitness(witness);
 		report.setCaregiverrelationship(caregiverrelationship);
+		report.setStatus("initiated");
+		report.setGroupid(groupid);
 		try {
 			reportid = DAOFactory.getIReportDAOInstance().addreport(report);
 		} catch (Exception e) {
