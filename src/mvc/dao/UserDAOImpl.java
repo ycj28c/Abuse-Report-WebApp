@@ -3,6 +3,7 @@
 package mvc.dao;
 
 import java.sql.*;
+
 import mvc.dao.IUserDAO;
 import mvc.vo.User;
 
@@ -38,5 +39,35 @@ public class UserDAOImpl implements IUserDAO {
 			}
 		}
 		return flag;
+	}
+
+	public User getInfo(User reporter) throws Exception {
+		try {
+			String sql = "select userid,name,password,address,telephone,mandated," +
+					"SSN, DOB from user where userid=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, reporter.getUserid());
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				reporter.setName(rs.getString("name"));
+				reporter.setPassword(rs.getString("password"));
+				reporter.setAddress(rs.getString("address"));
+				reporter.setTelephone(rs.getString("telephone"));
+				reporter.setMandated(rs.getString("mandated"));
+				reporter.setSSN(rs.getString("SSN"));
+				reporter.setDOB(rs.getString("DOB"));
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return reporter;
 	}
 }

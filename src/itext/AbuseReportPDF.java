@@ -4,7 +4,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
+import mvc.factory.DAOFactory;
+import mvc.vo.Patient;
 import mvc.vo.Report;
+import mvc.vo.User;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -137,14 +140,24 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f);
 			t1.addCell(c1);
 			// 第3行第1-5列
+			User reporter = new User();
+			reporter.setUserid(report.getUserid()); // test data
+			try {
+				reporter = DAOFactory.getIUserDAOInstance().getInfo(reporter);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String mandate = reporter.getMandated();
+			String isMandated= (mandate=="yes"||mandate.equals("yes"))?"*":" ";
+			String isNonMandated= (mandate=="yes"||mandate.equals("yes"))?" ":"*";
 			c1 = new PdfPCell(
 					new Paragraph( 30f,
 							"Name:" + report.getUsername()
-								+ "\nAddress" 
+								+ "\nAddress:"+ reporter.getAddress()
 								+ "\n" 
-								+ "\nDaytime telephone:()"
-								+ "\n()Mandated" 
-								+ "\n()Non-Mandated",
+								+ "\nDaytime telephone:("+ reporter.getTelephone()+")"
+								+ "\n("+isMandated+")Mandated" 
+								+ "\n("+isNonMandated+")Non-Mandated",
 							font0));
 			//c1.setPadding(20); //设置首行缩进
 			//c1.setMinimumHeight(200f); //设置单元格的高度
@@ -158,14 +171,24 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);// 加入到table
 			// 第3行第6-11列
+			Patient victim = new Patient();
+			victim.setPkPatient(report.getVictimid()); // test data
+			try {
+				victim = DAOFactory.getIPatientDAOInstance().getinfo(victim);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String victimsex = victim.getSex();
+			String isMale= (victimsex=="Male"||victimsex.equals("Male"))?"*":" ";
+			String isFemale= (victimsex=="Female"||victimsex.equals("Female"))?"*":" ";
 			c1 = new PdfPCell(
 					new Paragraph(
-							"Name:" +report.getVictimname()
-							+"\nAddress"
+							"Name: fakename"
+							+"\nAddress:" + victim.getAddress()
 							+"\n"
-							+"\nTelephone:()"
-							+"\nSex:()Male ()Female     DOB:"
-							+"\nAge:		Marital Status:",
+							+"\nTelephone:("+victim.getTelephone()+")"
+							+"\nSex:("+isMale+")Male ("+isFemale+")Female     DOB:"+victim.getDob()
+							+"\nAge:"+victim.getAge()+"		"+"Marital Status:"+victim.getMarStat(),
 					font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占1列
@@ -186,6 +209,34 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			// 第4行第6-11列
+			HashMap<String, String> hashDisability = new HashMap<String, String>();
+			String[] arrayDisability = victim.getDisability().split(",");
+			for(int i=0;i<arrayDisability.length;i++){
+				if(arrayDisability[i]=="Mental Retardation"||"Mental Retardation".equals(arrayDisability[i])
+					||arrayDisability[i]=="Mental Illness"||"Mental Illness".equals(arrayDisability[i])
+					||arrayDisability[i]=="Mobility"||"Mobility".equals(arrayDisability[i])
+					||arrayDisability[i]=="Visual"||"Visual".equals(arrayDisability[i])
+					||arrayDisability[i]=="Head Injury"||"Head Injury".equals(arrayDisability[i])
+					||arrayDisability[i]=="Deaf/Hard of Hearing"||"Deaf/Hard of Hearing".equals(arrayDisability[i])
+					||arrayDisability[i]=="Cerebral Palsy"||"Cerebral Palsy".equals(arrayDisability[i])
+					||arrayDisability[i]=="Multiple Sclerosis"||"Multiple Sclerosis".equals(arrayDisability[i])
+					||arrayDisability[i]=="Seizures"||"Seizures".equals(arrayDisability[i]))
+					hashDisability.put(arrayDisability[i], arrayDisability[i]);
+				else{
+					hashDisability.put("Other", arrayDisability[i]);
+				}
+			}
+			String isMentalRetardation = hashDisability.containsKey("Mental Retardation")?"*":" ";
+			String isMentalIllness = hashDisability.containsKey("Mental Illness")?"*":" ";
+			String isMobility = hashDisability.containsKey("Mobility")?"*":" ";
+			String isVisual = hashDisability.containsKey("Visual")?"*":" ";
+			String isHeadInjury = hashDisability.containsKey("Head Injury")?"*":" ";
+			String isDeaf = hashDisability.containsKey("Deaf/Hard of Hearing")?"*":" ";
+			String isCerebralPalsy = hashDisability.containsKey("Cerebral Palsy")?"*":" ";
+			String isMultipleSclerosis = hashDisability.containsKey("Multiple Sclerosis")?"*":" ";
+			String isSeizures = hashDisability.containsKey("Seizures")?"*":" ";
+			String isDisOther = hashDisability.containsKey("Other")?"*":" ";
+			String otherDisSpecify = hashDisability.containsKey("Other")?hashDisability.get("Other").toString():"";
 			c1 = new PdfPCell(new Paragraph("Disability: (check as apply)",font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占1列
@@ -202,7 +253,7 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			// 第5行第6-11列
-			c1 = new PdfPCell(new Paragraph("( ) Mental Retardation ( ) Mental Illness",font0));// 字体
+			c1 = new PdfPCell(new Paragraph("("+isMentalRetardation+") Mental Retardation ("+isMentalIllness+") Mental Illness",font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占6列
 			c1.setHorizontalAlignment(Element.ALIGN_LEFT);// 设置对齐方式
@@ -211,10 +262,17 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			// 第6行第1-5列
+			User abuser = new User();
+			abuser.setUserid(report.getAbuserid().toString()); // test data
+			try {
+				abuser = DAOFactory.getIUserDAOInstance().getInfo(abuser);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			c1 = new PdfPCell(
 					new Paragraph(
-							"Name(s):" + report.getAbusername()
-							+"\nHome address:"
+							"Name(s): fakename"
+							+"\nHome address:"+abuser.getAddress()
 							+"\n"
 							+"\nRelationship to victim:",
 					font0));// 字体
@@ -228,10 +286,10 @@ public class AbuseReportPDF implements LetterInterface{
 			//第6行第6-11列
 			c1 = new PdfPCell(
 					new Paragraph(
-							"( ) Mobility ( ) Head Injury"
-							+"\n( ) Visual ( ) Deaf / Hard of Hearing"
-							+"\n( ) Cerebral Palsy ( ) Multiple Sclerosis"
-							+"\n( ) Seizures ( ) Other (Specify: _____________)",
+							"("+isMobility+") Mobility ("+isHeadInjury+") Head Injury"
+							+"\n("+isVisual+") Visual ("+isDeaf+") Deaf / Hard of Hearing"
+							+"\n("+isCerebralPalsy+") Cerebral Palsy ("+isMultipleSclerosis+") Multiple Sclerosis"
+							+"\n("+isSeizures+") Seizures ("+isDisOther+") Other (Specify:"+otherDisSpecify+")",
 					font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占6列
@@ -241,7 +299,8 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			// 第7行第1-5列
-			c1 = new PdfPCell(new Paragraph( "\nSoc. Security #:		DOB:",font0));// 字体
+			c1 = new PdfPCell(new Paragraph( "\nSoc. Security #:"+abuser.getSSN()+"		"
+					+"DOB:"+abuser.getDOB(),font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(5);// 占5列
 			c1.setHorizontalAlignment(Element.ALIGN_LEFT);// 设置对齐方式
@@ -259,7 +318,7 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			// 第8行第1-5列
-			c1 = new PdfPCell(new Paragraph("Telephone: ( )",font0));// 字体
+			c1 = new PdfPCell(new Paragraph("Telephone: ("+abuser.getTelephone()+")",font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(5);// 占5列
 			c1.setHorizontalAlignment(Element.ALIGN_LEFT);// 设置对齐方式
@@ -269,8 +328,23 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			// 第8行第6-11列
+			HashMap<String, String> hashCommNeed = new HashMap<String, String>();
+			String[] arrayCommNeed = victim.getDisability().split(",");
+			for(int i=0;i<arrayCommNeed.length;i++){
+				if(arrayCommNeed[i]=="TTY"||"TTY".equals(arrayCommNeed[i])
+					||arrayCommNeed[i]=="Sign Interpreter"||"Sign Interpreter".equals(arrayCommNeed[i]))
+					hashCommNeed.put(arrayCommNeed[i], arrayCommNeed[i]);
+				else{
+					hashCommNeed.put("Other", arrayCommNeed[i]);
+				}
+			}
+			String isTTY = hashCommNeed.containsKey("TTY")?"*":" ";
+			String isSignInterpreter = hashCommNeed.containsKey("Sign Interpreter")?"*":" ";
+			String isCommOther = hashCommNeed.containsKey("Other")?"*":" ";
+			String otherCommSpecify = hashCommNeed.containsKey("Other")?hashCommNeed.get("Other").toString():"";
 			c1 = new PdfPCell(
-					new Paragraph("( ) TTY ( ) Sign Interpreter ( ) Other (Specify: _____________)",font0));// 字体
+					new Paragraph("("+isTTY+") TTY ("+isSignInterpreter+") " +
+							"Sign Interpreter ("+isCommOther+") Other (Specify:"+otherCommSpecify+")",font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占6列
 			c1.setHorizontalAlignment(Element.ALIGN_LEFT);// 设置对齐方式
@@ -311,13 +385,24 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			//第10行第6-11列
+			String servby = victim.getServBy();
+			String isMentalHealth= (servby=="Dept. of Mental Health"||servby.equals("Dept. of Mental Health"))?"*":" ";
+			String isMassCommBlind= (servby=="Mass Comm./Blind"||servby.equals("Mass Comm./Blind"))?"*":" ";
+			String isDevelopmentalSvcs= (servby=="Dept. of Developmental Svcs."||servby.equals("Dept. of Developmental Svcs."))?"*":" ";
+			String isMassCommDeaf= (servby=="Mass. Comm./Deaf/HH"||servby.equals("Mass. Comm./Deaf/HH"))?"*":" ";
+			String isRehab= (servby=="Mass. Rehab. Comm."||servby.equals("Mass. Rehab. Comm."))?"*":" ";
+			String isUnknown= (servby=="Unknown"||servby.equals("Unknown"))?"*":" ";
+			String isCorrection= (servby=="Dept. of Correction"||servby.equals("Dept. of Correction"))?"*":" ";
+			String isPublicHealth= (servby=="Dept. of Public Health"||servby.equals("Dept. of Public Health"))?"*":" ";
+			String isNone= (servby=="None"||servby.equals("None"))?"*":" ";
+			String isServByOther= (servby=="Other"||servby.equals("Other"))?"*":" ";
 			c1 = new PdfPCell(
 					new Paragraph(
-							"( ) Dept. of Mental Health ( ) Mass Comm./Blind"
-							+"\n( ) Dept. of Developmental Svcs. ( ) Mass. Comm./Deaf/HH"
-							+"\n( ) Mass. Rehab. Comm. ( ) Unknown"
-							+"\n( ) Dept. of Correction ( ) Other (Specify:_____________)"
-							+"\n( ) Dept. of Public Health ( ) None",
+							"("+isMentalHealth+") Dept. of Mental Health ("+isMassCommBlind+") Mass Comm./Blind"
+							+"\n("+isDevelopmentalSvcs+") Dept. of Developmental Svcs. ("+isMassCommDeaf+") Mass. Comm./Deaf/HH"
+							+"\n("+isRehab+") Mass. Rehab. Comm. ("+isUnknown+") Unknown"
+							+"\n("+isCorrection+") Dept. of Correction ("+isServByOther+") Other (Specify:_____________)"
+							+"\n("+isPublicHealth+") Dept. of Public Health ("+isNone+") None",
 					font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占6列
@@ -354,7 +439,15 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			//第12行第6-11列
-			c1 = new PdfPCell(new Paragraph("( ) Institutional ( ) Service Coordination",font0));// 字体
+			String servtype = victim.getServType();
+			String isInstitutional= (servtype=="Institutional"||servtype.equals("Institutional"))?"*":" ";
+			String isServiceCoordination= (servtype=="Service Coordination"||servtype.equals("Service Coordination"))?"*":" ";
+			String isResidential= (servtype=="Residential"||servtype.equals("Residential"))?"*":" ";
+			String isHomeCare= (servtype=="Foster / Spec. Home Care"||servtype.equals("Foster / Spec. Home Care"))?"*":" ";
+			String isDayProgram= (servtype=="Day Program"||servtype.equals("Day Program"))?"*":" ";
+			String isRespite= (servtype=="Respite"||servtype.equals("Respite"))?"*":" ";
+			String isCaseManagement= (servtype=="Case Management"||servtype.equals("Case Management"))?"*":" ";
+			c1 = new PdfPCell(new Paragraph("("+isInstitutional+") Institutional ("+isServiceCoordination+") Service Coordination",font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占6列
 			c1.setHorizontalAlignment(Element.ALIGN_LEFT);// 设置对齐方式
@@ -365,7 +458,7 @@ public class AbuseReportPDF implements LetterInterface{
 			//第13行第1-5列
 			c1 = new PdfPCell(
 					new Paragraph(
-							"\n"
+							"\n"+victim.getCollContact()
 							+"\n"
 							+"\n",
 					font0));// 字体
@@ -379,9 +472,9 @@ public class AbuseReportPDF implements LetterInterface{
 			//第13行第6-11列
 			c1 = new PdfPCell(
 					new Paragraph(
-							"( ) Residential ( ) Foster / Spec. Home Care"
-							+"\n( ) Day Program ( ) Respite"
-							+"\n( ) Case Management ( ) Other (Specify:_____________)",
+							"("+isResidential+") Residential ("+isHomeCare+") Foster / Spec. Home Care"
+							+"\n("+isDayProgram+") Day Program ("+isRespite+") Respite"
+							+"\n("+isCaseManagement+") Case Management ( ) Other (Specify:_____________)",
 					font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占6列
@@ -423,11 +516,18 @@ public class AbuseReportPDF implements LetterInterface{
 			c1.setBorderWidth(2f); //边框宽度
 			t1.addCell(c1);
 			//第15行第6-11列
+			String ethnicity = victim.getEthnicity();
+			String isCaucasian= (ethnicity=="Caucasian"||ethnicity.equals("Caucasian"))?"*":" ";		
+			String isHispanic= (ethnicity=="Hispanic"||ethnicity.equals("Hispanic"))?"*":" ";	
+			String isAsian= (ethnicity=="Asian"||ethnicity.equals("Asian"))?"*":" ";	
+			String isAfricanAmerican= (ethnicity=="African American"||ethnicity.equals("African American"))?"*":" ";	
+			String isNativeAmerican= (ethnicity=="Native American"||ethnicity.equals("Native American"))?"*":" ";	
+			String isEthOther= (ethnicity=="Other"||ethnicity.equals("Other"))?"*":" ";	
 			c1 = new PdfPCell(
 					new Paragraph(
-							"( ) Caucasian ( ) Hispanic ( )Asian"
-							+"\n( ) African American ( ) Native American"
-							+"\n( ) Other (Specify:______________)",
+							"("+isCaucasian+") Caucasian ("+isHispanic+") Hispanic ("+isAsian+")Asian"
+							+"\n("+isAfricanAmerican+") African American ("+isNativeAmerican+") Native American"
+							+"\n("+isEthOther+") Other (Specify:______________)",
 					font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距
 			c1.setColspan(6);// 占6列
@@ -460,7 +560,7 @@ public class AbuseReportPDF implements LetterInterface{
 			String isIncreasing = (frequencyTend=="Increasing"||frequencyTend.equals("Increasing"))?"*":"";
 			String isDecreasing = (frequencyTend=="Decreasing"||frequencyTend.equals("Decreasing"))?"*":"";
 			String isConstant = (frequencyTend=="Constant"||frequencyTend.equals("Constant"))?"*":"";
-			String isUnknown = (frequencyTend=="Unknown"||frequencyTend.equals("Unknown"))?"*":"";
+			String isFreqUnknown = (frequencyTend=="Unknown"||frequencyTend.equals("Unknown"))?"*":"";
 			c1 = new PdfPCell(new Paragraph(
 					"("+isDaily+") Daily ("+isIncreasing+") Increasing",
 					font0));// 字体
@@ -507,7 +607,7 @@ public class AbuseReportPDF implements LetterInterface{
 			c1 = new PdfPCell(
 					new Paragraph(
 							"("+isEpisodic+") Episodic ("+isConstant+") Constant"
-							+"\n			 ("+isUnknown+") Unknown"
+							+"\n			 ("+isFreqUnknown+") Unknown"
 							+"\nDate of last incident:"+report.getTime(),
 					font0));// 字体
 			c1.setLeading(4f, 1.0f); //设置表格内行间距

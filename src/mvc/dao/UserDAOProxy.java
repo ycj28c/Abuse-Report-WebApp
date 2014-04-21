@@ -28,4 +28,15 @@ public class UserDAOProxy implements IUserDAO {
 		}
 		return flag;
 	}
+
+	public User getInfo(User reporter) throws Exception {
+		try {
+			reporter = this.dao.getInfo(reporter);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return reporter;
+	}
 }

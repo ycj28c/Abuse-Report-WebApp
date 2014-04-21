@@ -227,9 +227,12 @@ public class ReportDAOImpl implements IReportDAO {
 			ResultSet rs = this.pstmt.executeQuery();
 			if (rs.next()) {
 				report.setUsername(rs.getString("username"));
+				report.setUserid(rs.getString("userid"));
 				report.setTime(rs.getDate("time"));
 				report.setAbusername(rs.getString("abusername"));
+				report.setAbuserid(rs.getInt("abuserid"));
 				report.setVictimname(rs.getString("victimname"));
+				report.setVictimid(rs.getInt("victimid"));
 				report.setFrequency(rs.getString("frequency"));
 				report.setAbusetype(rs.getString("abusetype"));
 				report.setAwareof(rs.getString("awareof"));

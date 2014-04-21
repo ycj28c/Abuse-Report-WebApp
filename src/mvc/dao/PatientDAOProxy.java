@@ -28,4 +28,15 @@ public class PatientDAOProxy implements IPatientDAO {
 		return patientid;
 	}
 
+	public Patient getinfo(Patient victim) throws Exception {
+		try {
+			victim = this.dao.getinfo(victim);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return victim;
+	}
+
 }
