@@ -39,4 +39,15 @@ public class UserDAOProxy implements IUserDAO {
 		}
 		return reporter;
 	}
+
+	public User getInfoByName(User abuser) throws Exception {
+		try {
+			abuser = this.dao.getInfoByName(abuser);// 调用真实主题
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return abuser;
+	}
 }

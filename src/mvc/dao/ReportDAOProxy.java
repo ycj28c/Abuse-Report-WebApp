@@ -211,5 +211,15 @@ public class ReportDAOProxy implements IReportDAO {
 		return amount;
 	}
 
+	public void updateStatus(Report report) throws Exception {
+		try {
+			this.dao.updateStatus(report);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}		
+	}
+
 
 }

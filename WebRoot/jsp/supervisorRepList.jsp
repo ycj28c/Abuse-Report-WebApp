@@ -50,7 +50,6 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 					<td><input type="button" class="myButton" value="ClickAll" onclick="ClickAll()"/></td>
 					<td><input type="button" class="myButton" value="UnClickAll" onclick="UnClickAll()"/></td>
 					<td><input type="button" class="myButton" value="InvertClick" onclick="InvertClick()"/></td>
-					<td><input type="submit" class="myButton" value="MutiDelete" /></td>
 					<td><input type="text" class="myInput" value="input your text here"/></td>
 					<td><input type="button" class="myButton" value="Search"/></td>
 				</tr>
@@ -69,7 +68,7 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 						<th>Narrativeform</th>
 						<th>Status</th>
 						<th>Time</th>
-						<th colspan="3">Operation</th>
+						<th>Operation</th>
 					</tr>
 				<% 	for (int i = 0; i < list.size(); i++) {
 						Report report = list.get(i);
@@ -81,12 +80,10 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 							<td><%=report.getStatus()%></td>
 							<td><%=report.getTime()%></td>
 							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getReportid() %>">View</a></td>
-							<td><a href="jsp/DeleteReportServlet?reportid=<%=report.getReportid() %>">Delete</a></td>
-							<td><a href="jsp/GoUpdateReportServlet?reportid=<%=report.getReportid() %>">Edit</a></td>
 						</tr>
 				<% } %>
 				<tr align="center">
-					 <th colspan="8"> 
+					 <th colspan="6"> 
 					 	<%if(pagex.currentPage>1){ %>
         					<a href="jsp/SupervisorReportListServlet?roleid=<%=request.getAttribute("roleid")%>&pageindex=<%=pagex.previousPage %>">Previous Page</a> 
         				<%}else{%>

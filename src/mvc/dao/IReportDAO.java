@@ -24,4 +24,5 @@ public interface IReportDAO {
 	public int getAmountSuperAdmin() throws Exception;
 	public int getAmountSupervisorWaitingList(String roleid) throws Exception;	
 	public int getAmountSupervisorFinishList(String roleid) throws Exception;
+	public void updateStatus(Report report) throws Exception;
 }

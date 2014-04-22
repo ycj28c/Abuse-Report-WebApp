@@ -27,6 +27,9 @@ public class PrintReportServlet extends HttpServlet {
 		//report.setUserid(userid);
 		try {
 			DAOFactory.getIReportDAOInstance().readReportById(report);
+			//after send report change the status
+			report.setStatus("created");
+			DAOFactory.getIReportDAOInstance().updateStatus(report);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

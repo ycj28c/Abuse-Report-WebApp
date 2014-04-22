@@ -172,7 +172,12 @@ public class AbuseReportPDF implements LetterInterface{
 			t1.addCell(c1);// 加入到table
 			// 第3行第6-11列
 			Patient victim = new Patient();
-			victim.setPkPatient(report.getVictimid()); // test data
+			if(report.getVictimid().toString()==null||"".equals(report.getVictimid().toString())){
+				victim.setPkPatient(2);
+			}
+			else{
+				victim.setPkPatient(report.getVictimid()); // test data
+			}	
 			try {
 				victim = DAOFactory.getIPatientDAOInstance().getinfo(victim);
 			} catch (Exception e) {
@@ -263,7 +268,12 @@ public class AbuseReportPDF implements LetterInterface{
 			t1.addCell(c1);
 			// 第6行第1-5列
 			User abuser = new User();
-			abuser.setUserid(report.getAbuserid().toString()); // test data
+			if(report.getAbuserid().toString()==null||"".equals(report.getAbuserid().toString())){
+				abuser.setUserid("11111");
+			}
+			else{
+				abuser.setUserid(report.getAbuserid().toString()); // test data
+			}
 			try {
 				abuser = DAOFactory.getIUserDAOInstance().getInfo(abuser);
 			} catch (Exception e) {

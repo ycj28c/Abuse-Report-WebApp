@@ -115,8 +115,9 @@ public class ReportDAOImpl implements IReportDAO {
 			//java.sql.Date trans_time = new java.sql.Date(report.gettime().getTime()); // 將java.util.Date 轉換为 java.sql.Date
 			String sql = "INSERT INTO report (userid, time, abusername, victimname, " +
 					"frequency, abusetype, awareof, investigatorrisk, dppchotline, " +
-					"narrativeform, risklevel, resultinginjure, witness, caregiverrelationship,status,groupid) " +
-					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					"narrativeform, risklevel, resultinginjure, witness, caregiverrelationship," +
+					"status,groupid,abuserid,victimid,username) " +
+					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			/*
 			 * System.out.println("report.getdiscript():"+report.getdiscript());
 			 * System.out.println("report.getName():"+report.getName());
@@ -139,6 +140,9 @@ public class ReportDAOImpl implements IReportDAO {
 			this.pstmt.setString(14, report.getCaregiverrelationship());
 			this.pstmt.setString(15, report.getStatus());
 			this.pstmt.setString(16, report.getGroupid());
+			this.pstmt.setInt(17, report.getAbuserid());
+			this.pstmt.setInt(18, report.getVictimid());
+			this.pstmt.setString(19, report.getUsername());
 			// ResultSet rs = this.pstmt.executeQuery();// 取得查询结果
 			this.pstmt.executeUpdate();
 			ResultSet rs = this.pstmt.getGeneratedKeys(); 
@@ -600,6 +604,31 @@ public class ReportDAOImpl implements IReportDAO {
 			}
 		}
 		return amout;
+	}
+
+	public void updateStatus(Report report) throws Exception {
+		try {
+			String sql = "UPDATE report set status=? where reportid=? and userid =?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, report.getStatus());
+			this.pstmt.setInt(2, report.getReportid());
+			this.pstmt.setString(3, report.getUserid());
+			int rs = this.pstmt.executeUpdate();
+			if (rs > 0) { // return number
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		
 	}
 
 }

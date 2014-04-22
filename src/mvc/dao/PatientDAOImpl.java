@@ -94,5 +94,40 @@ public class PatientDAOImpl implements IPatientDAO {
 		}
 		return victim;
 	}
+	public Patient getinfoByName(Patient victim) throws Exception {
+		try {
+			String sql = "select PK_patient,name,address,age,sex,telephone,DOB,mar_stat,comm_need,serv_by," +
+					"serv_type,ethnicity,disability,coll_contact from patient where name=?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, victim.getName());
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				victim.setPkPatient(rs.getInt("PK_patient"));
+				victim.setAddress(rs.getString("address"));
+				victim.setAge(rs.getInt("age"));
+				victim.setSex(rs.getString("sex"));
+				victim.setTelephone(rs.getString("telephone"));
+				victim.setDob(rs.getString("DOB"));
+				victim.setMarStat(rs.getString("mar_stat"));
+				victim.setCommNeed(rs.getString("comm_need"));
+				victim.setServBy(rs.getString("serv_by"));
+				victim.setServType(rs.getString("serv_type"));
+				victim.setEthnicity(rs.getString("ethnicity"));
+				victim.setDisability(rs.getString("disability"));
+				victim.setCollContact(rs.getString("coll_contact"));
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return victim;
+	}
 
 }

@@ -14,4 +14,5 @@ public interface IUserDAO {
 	 */
 	public boolean findLogin(User user) throws Exception;
 	public User getInfo(User reporter) throws Exception;
+	public User getInfoByName(User abuser) throws Exception;
 }

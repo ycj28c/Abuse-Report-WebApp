@@ -16,6 +16,7 @@ public class NewReportServlet extends HttpServlet {
 		//set variable
 		HttpSession session = req.getSession();
 		String userid = session.getAttribute("userid").toString();
+		String username = session.getAttribute("username").toString();
 		String groupid = session.getAttribute("groupid").toString();
 		boolean flag = false;
 		//String info = new String();
@@ -87,6 +88,36 @@ public class NewReportServlet extends HttpServlet {
 		report.setCaregiverrelationship(caregiverrelationship);
 		report.setStatus("initiated");
 		report.setGroupid(groupid);
+		report.setUsername(username);
+		//set abuser id
+		User abuser = new User();
+		abuser.setName(allegedabuser);
+		try {
+			abuser = DAOFactory.getIUserDAOInstance().getInfoByName(abuser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(abuser.getUserid()==null||"".equals(abuser.getUserid())){
+			report.setAbuserid(11111);
+		}
+		else{
+			report.setAbuserid(Integer.parseInt(abuser.getUserid()));
+		}
+		//set victim id
+		Patient victim = new Patient();
+		victim.setName(allegedvictim);
+		try {
+			victim = DAOFactory.getIPatientDAOInstance().getinfoByName(victim);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(victim.getPkPatient()==null){
+			report.setVictimid(2);
+		}
+		else{
+			report.setVictimid(victim.getPkPatient());
+		}
+		
 		try {
 			reportid = DAOFactory.getIReportDAOInstance().addreport(report);
 		} catch (Exception e) {
