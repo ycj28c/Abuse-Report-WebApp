@@ -306,6 +306,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  	welcome to xxx system <%=session.getAttribute("username")%>. 
+    <input type="button" value="logout" onclick="gopath('login.jsp')"/>
+    <input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
+    ==================================================================<br>
   	<form action="jsp/NewInvestigationServlet" method="post" enctype="multipart/form-data" id="newinvestigation">
     	<table align = "left" border="1" id="tableone" style="border-collapse: collapse;">
     		<tr>

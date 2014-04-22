@@ -66,8 +66,11 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 					<tr align="center">
 						<th>box</th>
 						<th>Reportid</th>
-						<th>Description</th>
-						<th>Name</th>
+						<th>Narrativeform</th>
+						<th>ReportName</th>
+						<th>AbuserName</th>
+						<th>VictimName</th>
+						<th>Status</th>
 						<th>Time</th>
 						<th colspan="3">Operation</th>
 					</tr>
@@ -79,6 +82,9 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getReportid() %>"><%=report.getReportid()%></a></td>
 							<td><%=report.getNarrativeform()%></td>
 							<td><%=report.getUsername()%></td>
+							<td><%=report.getAbusername()%></td>
+							<td><%=report.getVictimname()%></td>
+							<td><%=report.getStatus()%></td>
 							<td><%=report.getTime()%></td>
 							<td><a href="jsp/ViewReportServlet?reportid=<%=report.getReportid() %>">View</a></td>
 							<td><a href="jsp/DeleteReportServlet?reportid=<%=report.getReportid() %>">Delete</a></td>
@@ -86,7 +92,7 @@ String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + r
 						</tr>
 				<% } %>
 				<tr align="center">
-					 <th colspan="8"> 
+					 <th colspan="11"> 
 					 	<%if(pagex.currentPage>1){ %>
         					<a href="jsp/SuperAdminReportListServlet?pageindex=<%=pagex.previousPage %>">Previous Page</a> 
         				<%}else{%>

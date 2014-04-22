@@ -166,7 +166,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   ArrayList<Attach> list = (ArrayList<Attach>)(request.getAttribute("attachlist"));
 	%>
 	welcome to xxx system <%=session.getAttribute("username")%>. 
-    <input type="button" value="logout" onclick="gopath('login.jsp')"/><br>
+    <input type="button" value="logout" onclick="gopath('login.jsp')"/>
+    <input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
     ==================================================================<br>
 	<form action="jsp/UpdateReportServlet?reportid=<%=report.getReportid()%>" method="post">
 		<table align = "left" border="1" style="border-collapse: collapse;">

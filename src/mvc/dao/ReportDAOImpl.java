@@ -403,7 +403,7 @@ public class ReportDAOImpl implements IReportDAO {
 	public ArrayList<Report> superAdminListReport(Page page) throws Exception {
 		ArrayList<Report> reportlist = new ArrayList<Report>();
 		try {
-			String sql = "select reportid,username,time from report";
+			String sql = "select reportid,username,time,abusername,victimname,narrativeform,status from report";
 			this.pstmt = this.conn.prepareStatement(sql);
 			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
 			ResultSet rs = this.pstmt.executeQuery();
@@ -415,6 +415,10 @@ public class ReportDAOImpl implements IReportDAO {
 				//rep.setdiscript(rs.getString("discript"));
 				rep.setUsername(rs.getString("username"));
 				rep.setTime(rs.getDate("time"));
+				rep.setAbusername(rs.getString("abusername"));
+				rep.setVictimname(rs.getString("victimname"));
+				rep.setNarrativeform(rs.getString("narrativeform"));
+				rep.setStatus(rs.getString("status"));
 				reportlist.add(rep);
 			}
 		} catch (Exception e) {
