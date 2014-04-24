@@ -197,6 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td colspan="5" align = "center">NEW REPORT</td>
             	<td class="tdstyle" align ="right" colspan="1">
                		<input type="submit" value="submit" />
+               		<input type="submit" value="save" />
                		<input type="reset" value="reset" />
                		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/><br>
            		</td>
@@ -348,6 +349,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               	</td>
             	<td class="tdstyle" colspan="2" align = "right">
                		<input type="submit" value="submit" />
+               		<input type="submit" value="save" />
                		<input type="reset" value="reset" />
                		<input type="button" value="return" onclick="gopath('firstpage.jsp')"/>             	
            		</td>	
