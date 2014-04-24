@@ -14,6 +14,7 @@ public interface IReportDAO {
 	public ArrayList<Report> supervisorWaitingListReport(Page page, String roleid) throws Exception;
 	public ArrayList<Report> supervisorFinishListReport(Page page, String roleid) throws Exception;
 	public ArrayList<Report> superAdminListReport(Page page) throws Exception;
+	public ArrayList<Report> HRCListReport(Page page) throws Exception;
 	public int addreport(Report report) throws Exception;
 	public boolean delReportById(Report report) throws Exception;
 	public boolean mutiDelReport(String[] reportid,Report report) throws Exception;
@@ -25,4 +26,6 @@ public interface IReportDAO {
 	public int getAmountSupervisorWaitingList(String roleid) throws Exception;	
 	public int getAmountSupervisorFinishList(String roleid) throws Exception;
 	public void updateStatus(Report report) throws Exception;
+	public int getAmountHRC() throws Exception;
+	
 }

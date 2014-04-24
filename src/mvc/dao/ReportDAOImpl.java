@@ -631,4 +631,62 @@ public class ReportDAOImpl implements IReportDAO {
 		
 	}
 
+	public int getAmountHRC() throws Exception {
+		int amout = 0;
+		try {
+			String sql = "select count(*) as total from report_init";
+			this.pstmt = this.conn.prepareStatement(sql);
+			ResultSet rs = this.pstmt.executeQuery();
+			if (rs.next()) {
+				amout = rs.getInt("total");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return amout;
+	}
+
+	public ArrayList<Report> HRCListReport(Page page) throws Exception {
+		ArrayList<Report> reportlist = new ArrayList<Report>();
+		try {
+			String sql = "select reportid,username,time,abusername,victimname,narrativeform,status from report_init";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setMaxRows(page.currentPage*page.getPageSize());//max row of display
+			ResultSet rs = this.pstmt.executeQuery();
+			rs.absolute((page.currentPage-1)*page.getPageSize());//set location to second record of each page
+			//rs.relative(-1);//back 1 position
+			while (rs.next()) {
+				Report rep = new Report();
+				rep.setReportid(rs.getInt("reportid"));
+				//rep.setdiscript(rs.getString("discript"));
+				rep.setUsername(rs.getString("username"));
+				rep.setTime(rs.getDate("time"));
+				rep.setAbusername(rs.getString("abusername"));
+				rep.setVictimname(rs.getString("victimname"));
+				rep.setNarrativeform(rs.getString("narrativeform"));
+				rep.setStatus(rs.getString("status"));
+				reportlist.add(rep);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (this.pstmt != null) {
+				try {
+					this.pstmt.close();
+				} catch (Exception e) {
+					throw e;
+				}
+			}
+		}
+		return reportlist;
+	}
+
 }

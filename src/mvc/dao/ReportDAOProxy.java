@@ -221,5 +221,29 @@ public class ReportDAOProxy implements IReportDAO {
 		}		
 	}
 
+	public int getAmountHRC() throws Exception {
+		int amount = 0;
+		try {
+			amount = this.dao.getAmountHRC();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return amount;
+	}
+
+	public ArrayList<Report> HRCListReport(Page page) throws Exception {
+		ArrayList<Report> reportlist = new ArrayList<Report>();
+		try {
+			reportlist = this.dao.HRCListReport(page);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+		return reportlist;
+	}
+
 
 }
