@@ -31,7 +31,7 @@ CREATE TABLE `authority` (
   `url` varchar(200) DEFAULT NULL,
   `role_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`PK_authority`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `authority` (
 
 LOCK TABLES `authority` WRITE;
 /*!40000 ALTER TABLE `authority` DISABLE KEYS */;
-INSERT INTO `authority` VALUES (1,'New Report','8','jsp/PrepareNewReport','staff-gp1'),(2,'Report List(person)','8','jsp/ReportListServlet?pageindex=1','staff-gp1'),(3,'Report List(group)','9','jsp/SupervisorReportListServlet?roleid=9&pageindex=1','supervior-gp1'),(4,'Waiting List','9','jsp/SupervisorWaitingListServlet?roleid=9&pageindex=1','supervior-gp1'),(5,'Finish List','9','jsp/SupervisorFinishListServlet?roleid=9&pageindex=1','supervior-gp1'),(6,'Track Investn(group)','9','jsp/newinvestigation.jsp','supervior-gp1'),(8,'Manage Patient','1','jsp/newpatient.jsp','administrator'),(9,'Manage User','1','javascript:void(0)','administrator'),(10,'Report List(all)','2','jsp/SuperAdminReportListServlet?pageindex=1','super admin'),(11,'Set Authority','2','javascript:void(0)','super admin'),(12,'Set Group','2','javascript:void(0)','super admin'),(13,'Access Control','2','javascript:void(0)','super admin'),(14,'Investigation List(all)','2','javascript:void(0)','super admin'),(15,'List Report(all initial)','3','javascript:void(0)','HRC-chairman'),(16,'List Investigation(all)','3','javascript:void(0)','HRC-chairman'),(17,'New appeal','3','javascript:void(0)','HRC-chairman'),(18,'Calender Display','3','javascript:void(0)','HRC-chairman'),(19,'New Investigation','6','jsp/newinvestigation.jsp','investigator'),(20,'List Investigation(all)','6','javascript:void(0)','investigator'),(21,'Report List(group)','7','jsp/SupervisorReportListServlet?roleid=7&pageindex=1','human-resource-gp2'),(22,'Waiting List','7','jsp/SupervisorWaitingListServlet?roleid=7&pageindex=1','human-resource-gp2'),(23,'Finish List','7','jsp/SupervisorFinishListServlet?roleid=7&pageindex=1','human-resource-gp2'),(24,'Track Investn(group)','7','jsp/newinvestigation.jsp','human-resource-gp2');
+INSERT INTO `authority` VALUES (1,'New Report','8','jsp/PrepareNewReport','staff-gp1'),(2,'Report List(person)','8','jsp/ReportListServlet?pageindex=1','staff-gp1'),(3,'Report List(group)','9','jsp/SupervisorReportListServlet?roleid=9&pageindex=1','supervior-gp1'),(4,'Waiting List','9','jsp/SupervisorWaitingListServlet?roleid=9&pageindex=1','supervior-gp1'),(5,'Finish List','9','jsp/SupervisorFinishListServlet?roleid=9&pageindex=1','supervior-gp1'),(6,'Track Investn(group)','9','jsp/newinvestigation.jsp','supervior-gp1'),(8,'Manage Patient','1','jsp/newpatient.jsp','administrator'),(9,'Manage User','1','javascript:void(0)','administrator'),(10,'Report List(all)','2','jsp/SuperAdminReportListServlet?pageindex=1','super admin'),(11,'Set Authority','2','javascript:void(0)','super admin'),(12,'Set Group','2','javascript:void(0)','super admin'),(13,'Access Control','2','javascript:void(0)','super admin'),(14,'Investigation List(all)','2','javascript:void(0)','super admin'),(15,'List Report(all initial)','3','javascript:void(0)','HRC-chairman'),(16,'List Investigation(all)','3','javascript:void(0)','HRC-chairman'),(17,'New appeal','3','javascript:void(0)','HRC-chairman'),(18,'Calender Display','3','/fullcalendar/demos/default.html','HRC-chairman'),(19,'New Investigation','6','jsp/newinvestigation.jsp','investigator'),(20,'List Investigation(all)','6','javascript:void(0)','investigator'),(21,'Report List(group)','7','jsp/SupervisorReportListServlet?roleid=7&pageindex=1','human-resource-gp2'),(22,'Waiting List','7','jsp/SupervisorWaitingListServlet?roleid=7&pageindex=1','human-resource-gp2'),(23,'Finish List','7','jsp/SupervisorFinishListServlet?roleid=7&pageindex=1','human-resource-gp2'),(24,'Track Investn(group)','7','jsp/newinvestigation.jsp','human-resource-gp2'),(25,'New Report','10','jsp/PrepareNewReport','staff-gp2'),(26,'Report List(person)','10','jsp/ReportListServlet?pageindex=1','staff-gp2');
 /*!40000 ALTER TABLE `authority` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-21 19:33:46
+-- Dump completed on 2014-04-24 16:03:26

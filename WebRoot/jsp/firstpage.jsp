@@ -52,7 +52,7 @@ if(session.getAttribute("userid")==null){
 				<jsp:include  page="<%=contentPage%>"/>
 		<%	}%>
 		</div>
-		<div id="footer">Welcome to xxx system. CS509-Team2</div>
+		<div id="footer">Welcome to xxx system. CS509-Team2<%@ include file="/fullcalendar/demos/default.html" %></div>
 	</div>
   </body>
 </html>

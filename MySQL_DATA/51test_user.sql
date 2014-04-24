@@ -44,7 +44,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('1','yang','123','111 main street apt333, worcester, ma 01608','11111111','yes','234234','10/20/2000','1'),('11111','wenxin','11111','222 main street apt333, worcester, ma 01608','22222222','no','354234','11/20/2000','1'),('14555','Maha','12345','333 main street apt333, worcester, ma 01608','227777222','yes','345345','12/20/2000','2'),('22222','ahah','22222','444 main street apt333, worcester, ma 01608','33333333','yes','643564','10/22/2000','2'),('qwert','lin2','12345','555 main street apt333, worcester, ma 01608','44444444','no','345345','10/23/2000','1'),('张三','张三丰','123','666 main street apt333, worcester, ma 01608','55555555','yes','854566','10/24/2000','2');
+INSERT INTO `user` VALUES ('11111','Wenxin Zhao','11111','222 main street apt333, worcester, ma 01608','22222222','no','354234','11/20/2000','1'),('22222','Yichen Lin','22222','444 main street apt333, worcester, ma 01608','33333333','yes','643564','10/22/2000','2'),('33333','Mohammed Ayub','33333','333 main street apt333, worcester, ma 01608','227777222','yes','345345','12/20/2000','2'),('44444','Qiukun Lin','44444','555 main street apt333, worcester, ma 01608','44444444','no','345345','10/23/2000','1'),('55555','Rundong Yu','55555','666 main street apt333, worcester, ma 01608','55555555','yes','854566','10/24/2000','2'),('66666','Chengjiao Yang','66666','111 main street apt333, worcester, ma 01608','11111111','yes','234234','10/20/2000','1'),('77777','Rui Jin','77777','666 main street apt333, worcester, ma 01608','77777777','yes','345234','10/24/2000','2');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-21 19:33:49
+-- Dump completed on 2014-04-24 16:03:30

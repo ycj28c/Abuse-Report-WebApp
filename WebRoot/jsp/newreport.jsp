@@ -156,6 +156,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 	});
 	</script>
+	<script type="text/javascript">
+	var aa;
+	function searchAbuser(){
+		alert("dd");
+		var allegedabuser = document.getElementById("allegedabuser").value;
+		if(allegedabuser=='')
+			return false;
+		var url = "jsp/CheckPublicLogNumberServlet?publiclognumber=" + 321;
+		if(window.ActiveXObject){
+			aa = new ActiveXObject("Microsoft.XMLHttp");
+		}
+		else if(window.XMLHttpRequest){
+			aa = new XMLHttpRequest();
+		}
+		aa.onreadystatechange = processAA;
+		aa.open("GET",url,true);
+		aa.setRequestHeader("If-Modified-Since","0");
+		aa.setRequestHeader("Cache-Control","no-cache");
+		aa.send(null);
+	}
+	function processAA(){
+			if(pln.readyState == 4){
+				if(pln.status == 200){
+					var xml = aa.responseXML;
+					alert("request success, receive text:"+aa.responseText);
+				}
+				else{
+					alert("request fail, status code:"+pln.status);
+				}
+			}
+		}
+	</script>
 	
 </head>
 <body>
@@ -171,7 +203,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
 			<tr>
             	<td>Alleged Abuser:</td>    
-            	<td colspan="2"><input type ="text" name = "allegedabuser" style="width:100%"></td> 
+            	<td colspan="2"><input type ="text" name = "allegedabuser" id="allegedabuser" oninput="searchAbuser()" style="width:100%"></td> 
             	<td>Date of last incident:</td>
             	<script type="text/javascript" src="javascript/calendar.js"></script>
               	<td colspan="2"><input name="time" type="text" id="en_date" onclick="new Calendar(null, null, 1).show(this);" size="10" maxlength="10" readonly="readonly">

@@ -98,7 +98,7 @@ public class NewReportServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(abuser.getUserid()==null||"".equals(abuser.getUserid())){
-			report.setAbuserid(11111);
+			report.setAbuserid(11111); //set default value
 		}
 		else{
 			report.setAbuserid(Integer.parseInt(abuser.getUserid()));
@@ -111,8 +111,8 @@ public class NewReportServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(victim.getPkPatient()==null){
-			report.setVictimid(2);
+		if(victim.getPkPatient()==null){ 
+			report.setVictimid(2); //set default value
 		}
 		else{
 			report.setVictimid(victim.getPkPatient());
