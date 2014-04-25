@@ -159,22 +159,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 	var aa;
 	function searchAbuser(){
-		alert("dd");
-		var allegedabuser = document.getElementById("allegedabuser").value;
-		if(allegedabuser=='')
-			return false;
-		var url = "jsp/CheckPublicLogNumberServlet?publiclognumber=" + 321;
-		if(window.ActiveXObject){
-			aa = new ActiveXObject("Microsoft.XMLHttp");
-		}
-		else if(window.XMLHttpRequest){
-			aa = new XMLHttpRequest();
-		}
-		aa.onreadystatechange = processAA;
-		aa.open("GET",url,true);
-		aa.setRequestHeader("If-Modified-Since","0");
-		aa.setRequestHeader("Cache-Control","no-cache");
-		aa.send(null);
+		//alert("dd");
+		//var allegedabuser = document.getElementById("allegedabuser").value;
+		//if(allegedabuser=='')
+		//	return false;
+		//var url = "jsp/CheckPublicLogNumberServlet?publiclognumber=" + 321;
+		//if(window.ActiveXObject){
+		//	aa = new ActiveXObject("Microsoft.XMLHttp");
+		//}
+		//else if(window.XMLHttpRequest){
+		//	aa = new XMLHttpRequest();
+		//}
+		//aa.onreadystatechange = processAA;
+		//aa.open("GET",url,true);
+		////aa.setRequestHeader("If-Modified-Since","0");
+		//aa.setRequestHeader("Cache-Control","no-cache");
+		//aa.send(null);
 	}
 	function processAA(){
 			if(pln.readyState == 4){
