@@ -33,6 +33,7 @@ if(session.getAttribute("userid")==null){
   </head>
   
   <body>
+  <div id = "haha">
     <div id="container">	
 		<div id="header">
 			<h1 class="fontone">DESIGN OF SOFTWARE SYSTEM</h1>
@@ -54,5 +55,6 @@ if(session.getAttribute("userid")==null){
 		</div>
 		<div id="footer">Copyright © 2014, by WPI CS509-Team2. All rights reserved.</div>
 	</div>
+  </div>
   </body>
 </html>
