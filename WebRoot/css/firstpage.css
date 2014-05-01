@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-div#container{width:1024px}
+div#container{margin:0 auto; width:1024px;}
 div#header {background-color:#99bbbb;height:80px;}
 div#menu {background-color:#ffff99;height:600px;width:150px;float:left;}
 div#content {background-color:#EEEEEE;height:600px;width:874px;float:left;}

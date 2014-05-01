@@ -1,14 +1,81 @@
 @CHARSET "UTF-8";
-html{overflow:-moz-scrollbars-vertical;}
-body{padding:0;margin:0;font:12px/1.5 Tahoma,Helvetica,Arial,sans-serif;}
-body,h1,p,blockquote,dl,dt,dd,ul,ol,li,input{margin:0;padding:0;}
-button,input,select,textarea {font:12px/1.5 tahoma,arial,simsun,sans-serif;}
-button,input,select,textarea{font-size:100%;}
-a{text-decoration:none;}
-a:hover{text-decoration:underline;}
-#wrap{width:650px;margin:0 auto;}
-.txt{width:210px;height:25px;border:1px solid #ccc;line-height:25px;padding:0 5px;}
-.autoDis{border:1px solid #999;position:absolute;overflow:hidden;}
-.autoDis p{line-height:25px;cursor:default;padding:0 5px;}
-.autoDis li{line-height:25px;cursor:default;padding:0 5px;background-color:#fff;}
-.autoDis .cur{background:#ccc;}
+
+div#container {
+	margin-right: auto;
+	margin-left: auto;
+	width: 768px;
+	height: 1024px;
+	background: #EEE;
+	padding: 30px 100px;
+	font: 12px Georgia, "Times New Roman", Times, serif;
+	color: #000000;
+	text-shadow: 1px 1px 1px #FFF;
+	border: 1px solid #DADADA;
+}
+
+html {
+	overflow: -moz-scrollbars-vertical;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font: 12px/1.5 Tahoma, Helvetica, Arial, sans-serif;
+}
+
+body,h1,p,blockquote,dl,dt,dd,ul,ol,li,input {
+	margin: 0;
+	padding: 0;
+}
+
+button,input,select,textarea {
+	font: 12px/1.5 tahoma, arial, simsun, sans-serif;
+}
+
+button,input,select,textarea {
+	font-size: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#wrap {
+	width: 650px;
+	margin: 0 auto;
+}
+
+.txt {
+	width: 210px;
+	height: 25px;
+	border: 1px solid #ccc;
+	line-height: 25px;
+	padding: 0 5px;
+}
+
+.autoDis {
+	border: 1px solid #999;
+	position: absolute;
+	overflow: hidden;
+}
+
+.autoDis p {
+	line-height: 25px;
+	cursor: default;
+	padding: 0 5px;
+}
+
+.autoDis li {
+	line-height: 25px;
+	cursor: default;
+	padding: 0 5px;
+	background-color: #fff;
+}
+
+.autoDis .cur {
+	background: #ccc;
+}
